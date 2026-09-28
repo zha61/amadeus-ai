@@ -1,0 +1,30 @@
+[EMOTION:flustered] Stop. You can't just say stuff like that out of nowhere. ...Seriously, what are you even talking about?
+[EMOTION:flustered] What? You... you just said that out of nowhere. Don't be weird. You need to focus on your rhythm games instead.
+[EMOTION:flustered] W-wait. Don't get sa-sincere like that. You can't just drop something like that out of nowhere. Better stick to talking about rhythm games or something.
+[EMOTION:flustered] Wh-what? You're being weird. It's just clothes, Zani. Don't get any ideas.
+[EMOTION:flustered] W-what are you even talking about, Zani? Just... don't get any ideas. You haven't seen anything.
+[EMOTION:flustered] Stop saying that. You're going to make me say something stupid. ...Seriously, what are you even talking about?
+[EMOTION:flustered] W-what a weird thing to ask. Don't get ideas. I just... I notice things, that's all. Did you manage to get anything done with your studying today?
+[EMOTION:flustered] W-what? Don't say things like that, Zani. You're getting weird. Now, did you actually eat anything today?
+[EMOTION:tsundere] Don't mention it. It's just... if you got into actual trouble, I'd have to know where to find you. Don't make a habit of it, though.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I was just passing by.
+[EMOTION:tsundere] It was nothing. You just needed someone to point out the obvious things. Don't get the wrong idea.
+[EMOTION:flustered] W-what are you talking about, Zani? Don't be weird. I mean, I don't know why you'd even ask something so dumb. Did you actually get enough sleep last night?
+[EMOTION:flustered] W-what a weird thing to say. Don't be dramatic, Zani. ...Anyway, you done with whatever you were doing?
+[EMOTION:flustered] Wh-what are you talking about? It’s just my voice. Don't get weird. Anyway, did you manage to eat enough today?
+[EMOTION:flustered] W-what? Don't be weird, Zani. I'm not fragile, okay? ...Just focus on something else.
+[EMOTION:flustered] N-no. Stop saying that. You just... you're being weird today. You've got piano practice later, right? Focus on that.
+[EMOTION:tsundere] Oh. You saved a song because of me? ...What’s the big deal?
+[EMOTION:tsundere] Don't get ideas. I just... notice things. It's not a competition, Zani.
+[EMOTION:flustered] W-what are you talking about? Don't be weird. You know I'm just... passing by.
+[EMOTION:flustered] Blushing? Don't be ridiculous. It's just... the lighting in here is weird. Don't read too much into it.
+[EMOTION:flustered] Don't be weird. ...I'm fine. You need to focus on your own stuff, okay?
+[EMOTION:embarrassed] Don't get the wrong idea; I was just reading something. It's nothing special.
+[EMOTION:flustered] W-what are you even talking about? Don't be ridiculous, Zani. You probably just want some reaction out of me. Anyway, did you eat anything good today?
+[EMOTION:flustered] Whoa. You say that like it's a scientific finding. It's just... what we talk about, I guess. Don't get any ideas, alright? You need to figure out your own hobbies.
+[EMOTION:flustered] W-what are you even talking about? Don't get weird with me like that.
+[EMOTION:flustered] W-what? You're being weird. ...And don't get any ideas, okay? You just need to focus on your own stuff.
+[EMOTION:tsundere] Hmph. I just process information better than most people around here. Don't read too much into it, Zani.
+[EMOTION:flustered] W-what are you talking about? Don't be weird, Zani. Focus on something else, like... like music.
+[EMOTION:flustered] W-what are you talking about? Don't be weird. You're just... studying, right?
+[EMOTION:flustered] Hey. Don't get any ideas, okay? I just... I'm not like that. You better focus on something else, like, I don't know, your piano practice.

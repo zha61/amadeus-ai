@@ -1,0 +1,2 @@
+vad-web 0.0.30 (@ricky0123/vad-web, MIT) + onnxruntime-web 1.17.3 (MIT)
+Vendored July 18, 2026 for offline hands-free voice. See bundle.min.js.LICENSE.txt

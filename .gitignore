@@ -1,0 +1,46 @@
+# ── secrets — never commit ──────────────────────────────────────
+config.json
+kurisu_elevenlabs_server.py
+# docs/REFERENCE.md — un-ignored 2026-08-16: plaintext keys removed from its
+# credentials table (it now points at config.json), so the doc is tracked with
+# the rest of the vault. If a key is ever pasted back in, fix the doc — do not
+# re-add it here.
+
+# ── build output / deps ─────────────────────────────────────────
+node_modules/
+dist/
+dist-scheduler/
+scheduler/node_modules/
+__pycache__/
+*.pyc
+
+# ── runtime data (ChromaDB, caches) ─────────────────────────────
+data/
+
+# ── heavy media assets (managed outside git) ────────────────────
+music/
+live2d/
+amadeus_startup.mp4
+
+# ── generated test artifacts ────────────────────────────────────
+dev/voice_test/
+
+# ── OS noise ────────────────────────────────────────────────────
+.DS_Store
+
+# ── machine-local tool config (Claude Code) ─────────────────────
+.claude/settings.local.json
+
+# ── Obsidian window layout — rewritten on every click, not a note (2026-09-27) ──
+# The vault's real settings (app/appearance/core-plugins.json) stay tracked.
+docs/.obsidian/workspace.json
+dev/latency_arms/
+
+# ── public repo: third-party character assets are never committed ─────────
+# (voice recordings, logo/icon art, and probe results that embed game script or
+#  private diary text). Supply your own — see README "Supplying your own assets".
+kurisu_voice_raw/
+assets/icon.icns
+assets/icon_1024.png
+assets/ama.webp
+amadeus_logo.png

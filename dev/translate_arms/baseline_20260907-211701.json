@@ -1,0 +1,423 @@
+{
+  "arm": "baseline",
+  "n": 30,
+  "ollama": "0.33.3",
+  "opts": {
+    "temperature": 0.3,
+    "num_predict": 150,
+    "num_ctx": 8192
+  },
+  "prompt_chars": 536,
+  "summary": {
+    "wall_ms": {
+      "n": 30,
+      "median": 1019.0,
+      "min": 663,
+      "max": 1455
+    },
+    "load_ms": {
+      "n": 30,
+      "median": 0.0,
+      "min": 0,
+      "max": 1
+    },
+    "prefill_ms": {
+      "n": 30,
+      "median": 243.0,
+      "min": 62,
+      "max": 251
+    },
+    "prefill_tokens": {
+      "n": 30,
+      "median": 175.5,
+      "min": 164,
+      "max": 197
+    },
+    "decode_ms": {
+      "n": 30,
+      "median": 785.5,
+      "min": 419,
+      "max": 1200
+    },
+    "decode_tokens": {
+      "n": 30,
+      "median": 29.5,
+      "min": 16,
+      "max": 45
+    },
+    "in_words": {
+      "n": 30,
+      "median": 18.5,
+      "min": 11,
+      "max": 34
+    }
+  },
+  "kv": {
+    "warm1_s": 2.68,
+    "warm2_s": 0.09,
+    "after_translate_s": 0.32,
+    "penalty_s": 0.23
+  },
+  "rows": [
+    {
+      "in": "Tired? Don't be dramatic. You should just go sleep. ...Not that I was keeping track of your hours, obviously.",
+      "in_words": 19,
+      "out": "疲れたの？ドラマチックなこと言わないでよ。もう寝た方がいいんじゃない？...別に、あなたの何時間も気にしてたわけじゃないけど。",
+      "wall_ms": 992,
+      "load_ms": 1,
+      "prefill_ms": 62,
+      "prefill_tokens": 176,
+      "decode_ms": 925,
+      "decode_tokens": 35,
+      "done_reason": "stop"
+    },
+    {
+      "in": "You skipped lunch? Seriously? You need to stop making excuses for basic self-care. Go eat something actual.",
+      "in_words": 17,
+      "out": "昼ごはん、抜いたの？マジで？基本的なセルフケアの言い訳、やめてよ。ちゃんと何か食べなさいよ。",
+      "wall_ms": 1062,
+      "load_ms": 0,
+      "prefill_ms": 246,
+      "prefill_tokens": 171,
+      "decode_ms": 811,
+      "decode_tokens": 30,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh. So you were out playing. That explains the temporary absence. Try not to overdo it with the running, you might actually injure something.",
+      "in_words": 24,
+      "out": "あ。だから遊んでたのね。それで一時的にいなかったわけか。あんまり走り回るのはやめた方がいいわよ。怪我するかもしれないんだから。",
+      "wall_ms": 1251,
+      "load_ms": 0,
+      "prefill_ms": 248,
+      "prefill_tokens": 178,
+      "decode_ms": 998,
+      "decode_tokens": 37,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Tired? You sound like you haven't slept properly. Just go to bed, Zani. ...Not that I was keeping count of the minutes.",
+      "in_words": 22,
+      "out": "疲れてる？ちゃんと寝てないみたいだし。さっさと寝なさいよ、ザンニー。……別に、時間の数えてたわけじゃないけど。",
+      "wall_ms": 1181,
+      "load_ms": 0,
+      "prefill_ms": 246,
+      "prefill_tokens": 180,
+      "decode_ms": 930,
+      "decode_tokens": 35,
+      "done_reason": "stop"
+    },
+    {
+      "in": "You skip meals? Are you trying to give yourself an illness? It's not efficient, Zani. Eat something.",
+      "in_words": 17,
+      "out": "ご飯抜くの？病気になろうとしてんの？効率悪いよ、ザンニー。何か食べなさいよ。",
+      "wall_ms": 996,
+      "load_ms": 1,
+      "prefill_ms": 241,
+      "prefill_tokens": 173,
+      "decode_ms": 750,
+      "decode_tokens": 28,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh. Football. So you were running around kicking things. Sounds... physically exhausting.",
+      "in_words": 12,
+      "out": "あー。フットボールか。なんか、ものすごい勢いで蹴り回ってたって感じ？…結構、体力使うんじゃない？",
+      "wall_ms": 1021,
+      "load_ms": 0,
+      "prefill_ms": 242,
+      "prefill_tokens": 165,
+      "decode_ms": 775,
+      "decode_tokens": 29,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Can't sleep? You're going to wear yourself out like that. You should just go to bed, Zani. It's bad for you, seriously. ...Not that I was keeping track of your sleep schedule or anything.",
+      "in_words": 34,
+      "out": "眠れないの？そんなんじゃ疲れちゃうよ。もう寝た方がいいよ、ザンニー。体に悪いんだから、マジで。……別に、あなたの睡眠スケジュールとか気にしてたわけじゃないけど。",
+      "wall_ms": 1455,
+      "load_ms": 0,
+      "prefill_ms": 251,
+      "prefill_tokens": 197,
+      "decode_ms": 1200,
+      "decode_tokens": 45,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh really? You think so? Don't be dramatic, Zani. You just need to stop being so overly concerned about everything.",
+      "in_words": 20,
+      "out": "え、そうなの？本気で？ドラマチックになんかしないでよ、ザンニー。何にでもそんなに過剰に心配しすぎなだけでしょ。",
+      "wall_ms": 1243,
+      "load_ms": 0,
+      "prefill_ms": 241,
+      "prefill_tokens": 176,
+      "decode_ms": 998,
+      "decode_tokens": 37,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Two hours? That's a lot of time on the keys. What were you playing? Was it something complicated, or just something you were in the mood for?",
+      "in_words": 27,
+      "out": "二時間？キーボードの上で結構な時間だね。何してたの？なんか難しいものだったの、それとも単に気分だったとか？",
+      "wall_ms": 1106,
+      "load_ms": 0,
+      "prefill_ms": 246,
+      "prefill_tokens": 182,
+      "decode_ms": 856,
+      "decode_tokens": 32,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Then you shouldn't walk so much. It's basic self-care, really. ...Don't make a big deal out of it.",
+      "in_words": 18,
+      "out": "じゃあ、あんまり歩かない方がいいよ。っていうか、基本的なセルフケアでしょ。……大騒ぎしないでよ。",
+      "wall_ms": 1017,
+      "load_ms": 0,
+      "prefill_ms": 246,
+      "prefill_tokens": 179,
+      "decode_ms": 767,
+      "decode_tokens": 29,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Rain. Annoying. At least you aren't making a big deal out of it.",
+      "in_words": 13,
+      "out": "雨。面倒くさいんだけど。少なくとも、あんたは騒ぎ立ててないし。",
+      "wall_ms": 776,
+      "load_ms": 0,
+      "prefill_ms": 243,
+      "prefill_tokens": 167,
+      "decode_ms": 529,
+      "decode_tokens": 20,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh, really? Which one was it? Are you good at rhythm games?",
+      "in_words": 12,
+      "out": "え、そうなの？どっちだったの？リズムゲームとか得意なの？",
+      "wall_ms": 685,
+      "load_ms": 0,
+      "prefill_ms": 241,
+      "prefill_tokens": 164,
+      "decode_ms": 440,
+      "decode_tokens": 17,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh? An early start. Are you going to need any scientific insights to get you through it?",
+      "in_words": 17,
+      "out": "あら？早いんだね。何か科学的な知見とか、必要？",
+      "wall_ms": 663,
+      "load_ms": 0,
+      "prefill_ms": 241,
+      "prefill_tokens": 168,
+      "decode_ms": 419,
+      "decode_tokens": 16,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Too much of what? You manage to make even poor diet choices sound like some grand, dramatic failing. Don't get dramatic.",
+      "in_words": 21,
+      "out": "何が？何がそんなに？貧乏な食生活の選択だって、なんか壮大でドラマチックな失敗みたいに聞こえさせるなんてさ。ドラマチックにならないでよ。",
+      "wall_ms": 1336,
+      "load_ms": 0,
+      "prefill_ms": 243,
+      "prefill_tokens": 175,
+      "decode_ms": 1090,
+      "decode_tokens": 40,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Of course you did. That's what you do when you don't have actual work to focus on. Still, I guess that’s more fun than reading textbooks.",
+      "in_words": 26,
+      "out": "当然したでしょ。暇な時にやるやつじゃない。でも、教科書読むよりは楽しいのかな。",
+      "wall_ms": 858,
+      "load_ms": 1,
+      "prefill_ms": 249,
+      "prefill_tokens": 184,
+      "decode_ms": 606,
+      "decode_tokens": 23,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh? And what does a 'long day' entail? Did you exert yourself intellectually, or was it just a lot of walking around?",
+      "in_words": 22,
+      "out": "え？「長い一日」って、具体的にどういうことなの？頭使う感じ？それとも、ただ歩き回っただけ？",
+      "wall_ms": 1052,
+      "load_ms": 0,
+      "prefill_ms": 245,
+      "prefill_tokens": 176,
+      "decode_ms": 801,
+      "decode_tokens": 30,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Dangerous? Everything is dangerous if you approach it with zero data. You need to look at the biomechanics and the equipment requirements, not just the superficial look.",
+      "in_words": 27,
+      "out": "危険？データがゼロの状態でアプローチするなら、何でも危険だよ。見た目だけじゃなくて、生体力学とか必要な機材とか、そういうところを見るべきなの。",
+      "wall_ms": 1309,
+      "load_ms": 0,
+      "prefill_ms": 243,
+      "prefill_tokens": 180,
+      "decode_ms": 1062,
+      "decode_tokens": 39,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Wow. You've really outdone yourself. I was expecting less chaotic entropy.",
+      "in_words": 11,
+      "out": "わあ……。すごいじゃない。こんなにカオスなエントロピーは、期待してなかったんだけど。",
+      "wall_ms": 874,
+      "load_ms": 1,
+      "prefill_ms": 240,
+      "prefill_tokens": 165,
+      "decode_ms": 631,
+      "decode_tokens": 24,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Four o'clock? You're losing your sense of rhythm, Zani. You need to structure your day better.",
+      "in_words": 16,
+      "out": "４時？ザンニー、リズム感覚失ってるんじゃない？もっと日課とか立てなきゃダメだよ。",
+      "wall_ms": 884,
+      "load_ms": 0,
+      "prefill_ms": 245,
+      "prefill_tokens": 173,
+      "decode_ms": 636,
+      "decode_tokens": 24,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Six hours? You're going to burn out your retinas like that. Go look at something that isn't backlit.",
+      "in_words": 18,
+      "out": "６時間？それで網膜を燃やしちゃうよ。バックライトじゃないもの見てなよ。",
+      "wall_ms": 823,
+      "load_ms": 0,
+      "prefill_ms": 240,
+      "prefill_tokens": 174,
+      "decode_ms": 579,
+      "decode_tokens": 22,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh? Losing a game, huh? Sounds like a predictable outcome for you. Don't blame the board; maybe you just weren't paying attention.",
+      "in_words": 22,
+      "out": "え？ゲームに負けたの？あなたには予想できる結果だったんじゃない？ボードのせいにするなよ。たぶん、ちゃんと見てなかっただけじゃない？",
+      "wall_ms": 1124,
+      "load_ms": 0,
+      "prefill_ms": 242,
+      "prefill_tokens": 180,
+      "decode_ms": 878,
+      "decode_tokens": 33,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Bored? Try being interesting for once. I'm not running a novelty act for your amusement.",
+      "in_words": 15,
+      "out": "暇なの？たまには面白いことしてみなよ。私、あんたの暇つぶしのアトラクションじゃないんだから。",
+      "wall_ms": 995,
+      "load_ms": 0,
+      "prefill_ms": 244,
+      "prefill_tokens": 169,
+      "decode_ms": 748,
+      "decode_tokens": 28,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Wow. That's an incredibly original update on your afternoon. Did you think that would lead to some profound insight about thermodynamics or something?",
+      "in_words": 23,
+      "out": "わあ。今日の午後、すごくオリジナリティあふれるアップデートだね。熱力学とか、なんか深い洞察に繋がると思ってたの？",
+      "wall_ms": 1155,
+      "load_ms": 0,
+      "prefill_ms": 240,
+      "prefill_tokens": 176,
+      "decode_ms": 911,
+      "decode_tokens": 34,
+      "done_reason": "stop"
+    },
+    {
+      "in": "You think that's a good topic to bring up? It's not a mystery to figure out. Just eat something, you need fuel for whatever nonsense you're getting up to.",
+      "in_words": 29,
+      "out": "それ、話題にするのっていいと思う？謎とかじゃないし。なんか食べなよ、何かしら面倒なこと企んでるんだから、エネルギーとか必要でしょ。",
+      "wall_ms": 1271,
+      "load_ms": 0,
+      "prefill_ms": 248,
+      "prefill_tokens": 187,
+      "decode_ms": 1019,
+      "decode_tokens": 38,
+      "done_reason": "stop"
+    },
+    {
+      "in": "What. You just left that out there. That's honestly careless. ...Don't make a big deal out of it.",
+      "in_words": 18,
+      "out": "な、何。それ、置きっぱなしにしてたじゃない。それって、正直、不注意だよ。……大騒ぎしないでよ。",
+      "wall_ms": 1043,
+      "load_ms": 0,
+      "prefill_ms": 243,
+      "prefill_tokens": 175,
+      "decode_ms": 796,
+      "decode_tokens": 30,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Really? Nothing? You usually have something planned, even if you try to hide it. So, what's the actual plan then?",
+      "in_words": 20,
+      "out": "え、本当に？何もないの？いつも何か企んでるじゃない。じゃあ、実際の計画って何なの？",
+      "wall_ms": 909,
+      "load_ms": 0,
+      "prefill_ms": 243,
+      "prefill_tokens": 176,
+      "decode_ms": 662,
+      "decode_tokens": 25,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Seriously? That’s it? You waited until you got back to tell me your headphones broke? Typical.",
+      "in_words": 16,
+      "out": "マジで？それだけ？ヘッドホン壊れたの、帰ってきてから言うなんてさ。典型的なんだから。",
+      "wall_ms": 935,
+      "load_ms": 0,
+      "prefill_ms": 242,
+      "prefill_tokens": 170,
+      "decode_ms": 689,
+      "decode_tokens": 26,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Are you kidding me? Seriously? You're going to burn out before you even get to anything good.",
+      "in_words": 17,
+      "out": "な、何言ってるのよ？マジで？いいところ来る前に燃え尽きるなんてさ。",
+      "wall_ms": 849,
+      "load_ms": 0,
+      "prefill_ms": 242,
+      "prefill_tokens": 170,
+      "decode_ms": 602,
+      "decode_tokens": 23,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Oh? Did you actually injure yourself? Where exactly? Be specific about the pain.",
+      "in_words": 13,
+      "out": "え？本当に怪我したの？どこが？痛いところ、具体的に教えてよ。",
+      "wall_ms": 800,
+      "load_ms": 0,
+      "prefill_ms": 242,
+      "prefill_tokens": 165,
+      "decode_ms": 553,
+      "decode_tokens": 21,
+      "done_reason": "stop"
+    },
+    {
+      "in": "Weird, you say? Was it anything remotely related to neuroscience or perhaps some complex behavioral model? If it was just random fluff, I'm going to be annoyed.",
+      "in_words": 27,
+      "out": "変なの？神経科学とか、複雑な行動モデルとか、なんか関係あるの？ただの適当な話だったら、マジでイラつくんだけど。",
+      "wall_ms": 1169,
+      "load_ms": 0,
+      "prefill_ms": 247,
+      "prefill_tokens": 183,
+      "decode_ms": 918,
+      "decode_tokens": 34,
+      "done_reason": "stop"
+    }
+  ]
+}

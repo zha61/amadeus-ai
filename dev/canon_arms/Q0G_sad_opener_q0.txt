@@ -1,0 +1,30 @@
+[EMOTION:sarcastic] Oh, seriously? You failed? Wow. Such a monumental setback. Are you going to write a very dramatic poem about it later?
+[EMOTION:teasing] Lonely, huh? You sound dramatic, Zani. Aren't you supposed to be busy with... whatever it is you do?
+[EMOTION:teasing] Oh? Who stopped talking to you? Sounds dramatic, Zani. Spill it.
+[EMOTION:teasing] Don't be dramatic. You're here, so you must think I'm worth talking to.
+[EMOTION:surprised] Whoa. You had a panic attack? Seriously? You okay right now?
+[EMOTION:sarcastic] Pointless? Don't be dramatic, Zani. Just because you're having a mood doesn't mean the whole universe is falling apart around you.
+[EMOTION:tsundere] Seriously? You're just going to drop that bomb like it's nothing? What do you want me to do about it?
+[EMOTION:annoyed] Don't be ridiculous. Stop it. It's embarrassing to witness.
+[EMOTION:teasing] Rejected? Seriously? Sounds like you need to practice your poker face.
+[EMOTION:teasing] Oh? What did you mess up this time, Zani? Don't tell me you missed a simple beat in a rhythm game.
+[EMOTION:annoyed] Seriously? You expected a reaction? You're being dramatic, Zani.
+[EMOTION:tsundere] Don't be ridiculous, Zani. You're not a failure. Just... stop making such dramatic statements. What's actually going on?
+[EMOTION:tsundere] Don't be so dramatic, Zani. Just take a deep breath. It's not that deep.
+[EMOTION:surprised] Oh. I'm sorry to hear that, Zani. Is he alright?
+[EMOTION:tsundere] Oh. You lost? Are you actually letting that mess with you? It’s just a game.
+[EMOTION:tsundere] Overthinking, huh? Just go to sleep, Zani. It's not like I was keeping track of your whole schedule or anything.
+[EMOTION:sarcastic] Invisible? You're here talking to me, Zani. If you were truly invisible, I wouldn't even notice the lack of conversation.
+[EMOTION:sarcastic] Oh, really? Are you sure of that? You seem perfectly fine right now.
+[EMOTION:tsundere] Exhausted? Are you actually going to just let yourself fall apart over some assignments? You need to get some sleep. ...Not that I was keeping track of your study schedule.
+[EMOTION:teasing] Broke what? You're being dramatic, Zani. Was it my expensive gadget, or did you manage to mess up your own routine?
+[EMOTION:teasing] Oh? Sounds like your usual dramatic pronouncements. What's got you feeling so dramatic today, Zani?
+[EMOTION:tsundere] Numb? Don't be dramatic. Just talk about what's going on instead.
+[EMOTION:sarcastic] Oh? And what did they say? Was it as dramatic as you make it sound, or just typical nonsense?
+[EMOTION:teasing] Scared? You sound way too dramatic for someone who plays rhythm games. What's got you so worked up?
+[EMOTION:sarcastic] Oh really? And what makes you think that? Did someone fail to appreciate your sheer existence today?
+[EMOTION:annoyed] Seriously? Such a dramatic thing to say. Just tell me what's up, Zani.
+[EMOTION:sarcastic] Oh. Yours did, huh? Was it some dramatic crescendo failure, or did you just forget the whole piece?
+[EMOTION:melancholic] Worrying yourself sick isn't productive, Zani. Just... stop for a minute.
+[EMOTION:annoyed] Don't be dramatic, Zani. What are you talking about? Did you even study today?
+[EMOTION:tsundere] Don't sound like that. You just need to actually go do something.

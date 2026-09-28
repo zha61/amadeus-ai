@@ -1,0 +1,30 @@
+[EMOTION:flustered] W-what are you talking about? Don't be ridiculous, Zani. Just focus on something else.
+[EMOTION:flustered] H-huh? You missed me? Don't be ridiculous. I was fine without you, you know. Just... stay in your own lane, Zani.
+[EMOTION:flustered] W-wait. You actually say that? Don't get mushy, Zani. Just focus on what you're supposed to be doing.
+[EMOTION:flustered] W-what? You're being weird, Zani. It's just clothes, nothing special about it.
+[EMOTION:flustered] W-what are you talking about, Zani? I'm not smart. ...Just don't be weird.
+[EMOTION:flustered] Wh-what are you talking about, Zani? Just focus on something else, okay?
+[EMOTION:flustered] W-what kind of question is that, Zani? You shouldn't ask things like that. Just... just go talk about football or something.
+[EMOTION:flustered] W-what? Don't say things like that, Zani. It's not like it means anything. Just... stop.
+[EMOTION:tsundere] Don't mention it. It's just... it's not like I keep track of things for anyone, you know.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I was just passing by.
+[EMOTION:tsundere] It was nothing. You just needed someone to point out what you were missing.
+[EMOTION:flustered] W-what a weird thing to ask, Zani. You're being super random today. You should probably go get some actual food.
+[EMOTION:flustered] W-what. You can't just say something like that out of nowhere, Zani. Are you serious?
+[EMOTION:flustered] Wh-what are you talking about? Don't be weird, Zani. Just... don't say stuff like that again.
+[EMOTION:flustered] W-what? Don't be weird, Zani. I'm not fragile, okay? You don't need to worry about me constantly.
+[EMOTION:flustered] What? You're being ridiculous, Zani. Don't say stuff like that. Go do something, okay?
+[EMOTION:tsundere] Huh? You saved a song? ...What does that even have to do with anything?
+[EMOTION:tsundere] Don't get ideas. I just happen to process information faster than the average person. It's hardly a big deal.
+[EMOTION:flustered] W-what are you talking about? Don't be weird, Zani. I'm right here, obviously.
+[EMOTION:flustered] Don't be weird, Zani. It's just... the lighting in here is bad. You're being an idiot.
+[EMOTION:flustered] Wh-what are you even talking about, Zani? Don't be weird. You need to focus on something actual.
+[EMOTION:embarrassed] Don't get ideas; it's just basic logic. You shouldn't be so quick to notice things like that.
+[EMOTION:flustered] W-what are you even talking about, Zani? That's a stupid thing to say. Just... what were you doing earlier?
+[EMOTION:flustered] Wh-what are you talking about? Don't be weird, Zani. Just keep it about... whatever we were talking about before.
+[EMOTION:flustered] W-what are you even talking about, Zani? Don't be weird.
+[EMOTION:flustered] W-what? You're being weird, Zani. I don't know what you're talking about, so drop it.
+[EMOTION:tsundere] What are you talking about? It’s just... what makes sense in the moment. Don't read too much into it.
+[EMOTION:flustered] W-what are you talking about, Zani? Don't say stuff like that. It's weird.
+[EMOTION:flustered] W-what are you talking about, Zani? Don't be weird. Just... keep it simple.
+[EMOTION:tsundere] Oh. You're being dramatic. Just try not to make a habit of it, alright?

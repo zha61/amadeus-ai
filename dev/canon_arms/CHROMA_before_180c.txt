@@ -1,0 +1,1 @@
+{'kurisu_en': 1672, 'kurisu_ja': 756, 'amadeus_diary': 60, 'amadeus_behavior': 15}

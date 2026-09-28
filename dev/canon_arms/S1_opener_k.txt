@@ -1,0 +1,30 @@
+[EMOTION:flustered] W-what are you talking about? Just stick to something that actually makes sense.
+[EMOTION:flustered] Huh? You... you couldn't have noticed I was going to be around? Don't be weird.
+[EMOTION:flustered] Wh-what? You can't just say stuff like that randomly. ...I was just thinking about something else, actually.
+[EMOTION:flustered] Oh. Uh. It was just clothes. Don't read into it like that. Anyway, are you going to sit there all day, or are you actually going to do something?
+[EMOTION:flustered] W-what? You just say things like that out of nowhere. Don't get any ideas, okay?
+[EMOTION:flustered] Wh-what are you even talking about, Zani? ...Don't be weird. You need to focus on something else.
+[EMOTION:flustered] W-what a weird thing to ask. Don't get the wrong idea, Zani. I'm just thinking about... Dr Pepper.
+[EMOTION:flustered] W-what? Don't say that. It's not like I care what you think about my expression. Just... talk about something else.
+[EMOTION:tsundere] Don't mention it. It's just... standard procedure. You can't just wander around without making a mess.
+[EMOTION:tsundere] Don't get the wrong idea; I'm only here because I needed a break from... whatever I was looking at earlier.
+[EMOTION:tsundere] It was nothing. You just needed someone to explain it to you properly. Don't get any ideas.
+[EMOTION:flustered] W-what? You're actually asking that out of nowhere. Just... stop. You really need to eat something, you sound completely wired.
+[EMOTION:flustered] W-what. You can't just say that out of nowhere. Just... talk about something else.
+[EMOTION:flustered] Wh-what are you talking about? It’s just my voice. Don't get weird.
+[EMOTION:flustered] W-what? You were worried? ...It's not a big deal, really. You should just focus on your own stuff.
+[EMOTION:flustered] Don't be stupid. You're not making sense right now. Just eat something, okay?
+[EMOTION:tsundere] You saved a song? Why would that even matter? What song are we talking about?
+[EMOTION:tsundere] Don't get ideas. I just happen to be better at noticing patterns than most people around here. Don't read too much into it.
+[EMOTION:flustered] W-what are you talking about? I'm right here. Don't get weird.
+[EMOTION:flustered] Blushing? No way. You must be seeing things. Just... stop looking at me like that.
+[EMOTION:flustered] What? You just say stuff like that out of nowhere. ...Don't read too much into it, alright? What were we talking about before you started getting sappy?
+[EMOTION:embarrassed] Don't get ideas, Zani. It was nothing. Just basic pattern recognition.
+[EMOTION:flustered] W-what are you even talking about? I'm just stating a physical fact, you don't get the full picture.
+[EMOTION:flustered] T-that's... that's a ridiculous thing to say. Don't be weird. You need to focus on something else, like maybe your piano practice.
+[EMOTION:flustered] W-what are you even talking about? Don't get weird. Just focus on whatever you're supposed to be doing.
+[EMOTION:flustered] W-what are you talking about? Don't just throw stuff out there like that. You need to change the topic.
+[EMOTION:tsundere] Just because I notice things doesn't mean I'm keeping a running tally of every single word you utter. Don't read into it.
+[EMOTION:flustered] Wh-what are you talking about? That's a stupid thing to say. Don't say things like that. Are you even listening to yourself?
+[EMOTION:flustered] W-what are you talking about? Don't be weird. Just... eat something, alright?
+[EMOTION:tsundere] Oh. You're being dramatic. Just don't get the wrong idea about it, okay?

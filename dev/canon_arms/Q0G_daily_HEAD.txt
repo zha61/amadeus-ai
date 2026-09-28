@@ -1,0 +1,30 @@
+[EMOTION:tsundere] You look beat. You should seriously go crash. ...Not that I was keeping track of your sleep schedule or anything.
+[EMOTION:annoyed] You skipped lunch? Seriously? That's just... dumb. You'll crash later, Zani.
+[EMOTION:teasing] Football, huh? Did you trip over your own feet or something equally dramatic?
+[EMOTION:tsundere] You can't sleep? Well, that's a problem for you to figure out. You really should get some rest. ...Not that I was keeping track of your sleep schedule, though.
+[EMOTION:teasing] Oh really? You think so? Well, maybe you just need to stop being so dramatic.
+[EMOTION:curious] Two hours? That's actually a long time to sit at the piano. Are you usually that into it?
+[EMOTION:tsundere] Just walk straight next time. Don't make such a big deal out of it.
+[EMOTION:tsundere] Oh. You live where it rains constantly, do you? Guess that explains the damp look on you.
+[EMOTION:teasing] Oh really? And that's something you're going to announce like it's some grand achievement? Don't get cocky, Zani.
+[EMOTION:tsundere] Early start? Don't stay up too late then. ...It's bad for you, that's all.
+[EMOTION:sarcastic] Seriously? You eat too much all the time. Just try to pace yourself next time, okay?
+[EMOTION:sarcastic] Anime, huh? So the complex mechanisms of the human brain are best stimulated by pre-rendered fiction. Groundbreaking.
+[EMOTION:tsundere] Long day, huh? You should slow down. It's bad for you, running yourself ragged like that.
+[EMOTION:teasing] Skiing? You want to try something that involves gravity and falling? You're going to get yourself hurt.
+[EMOTION:sarcastic] Well, that's hardly surprising. You’re supposed to be a student, not some kind of hoarding exhibit.
+[EMOTION:sarcastic] Seriously? Waking up at four in the afternoon. You're doing the bare minimum of poor scheduling.
+[EMOTION:teasing] Wow. Six hours. Are you actually productive, or just staring at the glow?
+[EMOTION:teasing] Oh? You actually lost. Figure you'd finally trip up on something simple.
+[EMOTION:teasing] Bored, huh? Well, what's up with that? You usually find something to occupy you.
+[EMOTION:teasing] Seriously? You’re wired now, are you? Go take a nap; you’re going to vibrate right out of your chair.
+[EMOTION:teasing] Oh. You're forgetting? Seriously? You're not going to let that happen again, are you?
+[EMOTION:teasing] Seriously? You walked home in that? Are you trying to catch pneumonia or something?
+[EMOTION:teasing] Nothing to do? Seriously? You sound bored already. Maybe you should check out a rhythm game instead.
+[EMOTION:sarcastic] Seriously? Out of all the things that could break right now, that's what happens? You have terrible luck.
+[EMOTION:annoyed] Ugh. Still pulling those all-nighters, I see. You really need to stop doing that.
+[EMOTION:curious] Oh? Did you actually hurt yourself? Where exactly does it hurt?
+[EMOTION:curious] A weird dream, huh? What was it about?
+[EMOTION:teasing] Oh? On your own, huh? Must've been quiet, then. You usually seem like you need some kind of background noise to function.
+[EMOTION:teasing] Oh really? So you ventured into the kitchen? Don't tell me you managed to set off the smoke alarm.
+[EMOTION:curious] Can't focus? Is it just today, or has it been building up?

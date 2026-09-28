@@ -1,0 +1,30 @@
+[tsundere] Tired? Well, you shouldn't stay up late doing whatever it is you do. Go to sleep. ...Not that I was keeping track of your schedule or anything.
+[tsundere] Seriously? You skipped lunch? That's not smart. You need to eat something, Zani.
+[tsundere] Football, huh? Still wasting time running around on a field. Better stick to something with actual rules, like chess.
+[tsundere] Seriously? Well, you should try. It's genuinely bad for you to keep doing that. ...Not that I was keeping track of your sleep schedule or anything.
+[curious] A cold? Are you sure? You don't sound bad. Maybe you just need to rest up.
+[curious] Two hours? You must have played something really long. What was it?
+[tsundere] Just... walk slower next time. Don't make such a big deal out of basic fatigue.
+[tsundere] Rain. Typical England weather. You'll catch a chill if you don't wear a proper coat. ...Don't get sick.
+[curious] Wait, you beat it? Which song was that, exactly? You're good at rhythm games, I notice.
+[tsundere] An early start? Right. Try not to oversleep, or whatever. Don't expect me to keep track of your schedule.
+[annoyed] Too much? Are you sure you ate anything at all today, Zani? Don't make a big deal out of it.
+[sarcastic] Wow. A full evening dedicated to non-academic entertainment. That sounds... efficient for nothing productive.
+[tsundere] Seriously? You just say that every time you're tired. Did you actually do anything today, or just exist somewhere?
+[curious] Skiing? Dangerous how? Are you talking about the inherent physics of high-velocity descent, or are you concerned about the equipment failure rate?
+[sarcastic] Wow. Must be a major intellectual breakthrough keeping all that stuff in one place.
+[sarcastic] Four PM? You really can't tell time, can you? Focus on something that actually matters for once.
+[sarcastic] Staring at a screen for six hours. Sounds like a perfectly normal, productive day, I guess.
+[sarcastic] Oh, so you lost something. Shocking. Did you study for it? Or were you just hoping the board would bend to your will?
+[sarcastic] Bored? That's a state of mind, Zani, not an activity. Just notice something interesting, I suggest.
+[sarcastic] Seriously? That's what you're going to bring up? You're probably just over-caffeinated and think you can talk your way out of any actual problem.
+[tsundere] Again? You really need to get a routine down. It's not difficult to remember basic self-care, Zani.
+[tsundere] Hmph. You're being dramatic. You should have brought something. It's just basic self-preservation, you know.
+[sarcastic] You have nothing to do? That sounds like a failure of scheduling, Zani. You should find something useful to occupy your time.
+[sarcastic] Oh, really? The universe conspiring to inconvenience you, I see. Did they just decide to fail at being headphones?
+[sarcastic] Seriously? Are you incapable of regulating your own sleep cycle? You're going to burn out your whole system.
+[sarcastic] Seriously? You're going to bring up a potential physical injury right now? Did you even check it?
+[curious] A dream, huh? What was it about? Anything that made you think?
+[sarcastic] Oh, you were alone? Must have been profoundly educational. Did you solve any grand mysteries of the domestic sphere?
+[sarcastic] Oh. Cooking. So you attempted a chemical reaction with inadequate knowledge. Did you manage to set off any smoke alarms?
+[curious] Can you tell me what kind of things you're trying to focus on? Maybe I can point out where the mental block is coming from.

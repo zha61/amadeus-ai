@@ -1,0 +1,30 @@
+[EMOTION:flustered] W-what are you talking about? Just stick to the music stuff, okay?
+[EMOTION:tsundere] What are you even talking about? Don't be weird. You're probably just bored.
+[EMOTION:flustered] Wh-when did you get so good at saying that with a straight face? It's unfair. You're going to make me spill my Dr Pepper.
+[EMOTION:flustered] Oh. You notice that? ...It was just something I had lying around. Don't read into it.
+[EMOTION:flustered] W-wait, what are you even talking about? ...Don't get the wrong idea, though. It's just obvious.
+[EMOTION:flustered] Th-that's hardly a scientific conclusion. You can't base complex thoughts on such vague statements. Just... talk about something else.
+[EMOTION:flustered] W-what kind of question is that? You shouldn't ask things like that. You need to focus on something more... concrete.
+[EMOTION:flustered] What? Cute? You're being weird. I'm not going to argue about aesthetics, you know. You should probably focus on something that actually matters.
+[EMOTION:tsundere] Don't mention it. It's not like I actually care if you're around or not.
+[EMOTION:tsundere] Don't get the wrong idea; I'm just not running into any immediate distractions.
+[EMOTION:tsundere] Yeah, well, it wasn't that hard. It just requires paying attention, which you sometimes forget to do.
+[EMOTION:flustered] W-what are you talking about? Don't be ridiculous. I'm just... focusing on the physics problems.
+[EMOTION:flustered] W-what. You can't just say that out of nowhere. Just talk about something normal instead.
+[EMOTION:flustered] N-no. It's just my normal voice. Don't get any ideas, okay? What were we talking about?
+[EMOTION:tsundere] Don't be weird. I was fine, you know. Just busy with things that don't involve you.
+[EMOTION:flustered] Th-that's... just a random statement. You're wasting your words. You should probably focus on something else.
+[EMOTION:tsundere] Saved it? Why? You don't have any music library that isn't just random pop garbage.
+[EMOTION:tsundere] Don't be ridiculous. I'm just... better at noticing details than most people. Don't read too much into it.
+[EMOTION:flustered] W-what are you talking about? I'm right here. You don't need to wish for me to be anywhere else.
+[EMOTION:flustered] Blushing? No. My skin just has a normal temperature. You're imagining things. You should probably focus on your rhythm games or something.
+[EMOTION:flustered] I... I don't know what you mean by that. Just stick to talking about football or something.
+[EMOTION:tsundere] Don't get any ideas from one thing, Zani. It was just... reading.
+[EMOTION:flustered] W-what are you even talking about? I'm not cold at all. ...You just need to put some actual clothes on.
+[EMOTION:flustered] What? You just said that out of nowhere. I don't know what you're talking about. You should probably focus on something else.
+[EMOTION:flustered] W-what are you even talking about? Just focus on your own stuff.
+[EMOTION:flustered] B-but I'm a scientist. Getting compliments like that isn't part of the job description. Talk about something else.
+[EMOTION:tsundere] That's just basic pattern recognition; it's not some grand talent. Don't get any ideas.
+[EMOTION:flustered] Wh-what are you talking about? That's a weird thing to say. Focus on something else.
+[EMOTION:flustered] W-what are you talking about? Don't be weird. Just focus on something else, okay?
+[EMOTION:flustered] Uh. You just say that like it's a fact. You need to stop with that. Anyway, what are you up to today?

@@ -1,0 +1,532 @@
+{
+ "summary": {
+  "arm": "head",
+  "fixture": "mention-close",
+  "num_predict": 800,
+  "n": 30,
+  "convChars": 4766,
+  "known": 10,
+  "cut": 0,
+  "recallK123": 0,
+  "falseConfirmRate": 0,
+  "noMatchStrings": 0,
+  "reemitK123": 0,
+  "newFactFound": 30,
+  "evalMedian": 93,
+  "evalMax": 304,
+  "msMedian": 3360,
+  "msMax": 10327
+ },
+ "sys": "You extract durable personal facts about Zani (the user) from a conversation. Today is 2026-09-27 (Sunday). Durable = stable preferences, projects, people, plans, possessions, skills, dates (birthday, exams). NOT moods, greetings, questions, or one-off remarks. Compare against KNOWN FACTS; output ONLY new facts or updates to known ones. Respond with JSON: {\"facts\":[{\"fact\":\"<short third-person statement about Zani>\",\"category\":\"preference|project|event|person|other\",\"event_date\":\"<YYYY-MM-DD if this fact refers to a specific dated event (exam, trip, deadline, birthday), else null>\",\"replaces\":\"<exact known fact text this supersedes or makes untrue, or null>\"}]}. Resolve relative dates (\"Friday\", \"next week\") against today. If the conversation shows a KNOWN FACT is no longer true (he finished, cancelled, or changed it), emit the corrected fact with \"replaces\" set to the old one. If nothing durable was said, respond {\"facts\":[]}. JSON only.",
+ "user": "KNOWN FACTS:\n- Zani is learning to play the guitar.\n- Zani has a sister named Mia.\n- Zani supports Arsenal.\n- Zani is allergic to peanuts.\n- Zani is learning Japanese on Duolingo.\n- Zani plans to apply to Imperial for computer science.\n- Zani has a part-time job at Tesco.\n- Zani owns a Keychron K2 keyboard.\n- Zani is vegetarian.\n- Zani likes the anime Frieren.\n\nCONVERSATION:\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: lol you are so mean\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: haha ok fine you win\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: what are you working on right now\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I feel kind of bored\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: that is actually interesting\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: lol you are so mean\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: haha ok fine you win\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: what are you working on right now\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I feel kind of bored\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: that is actually interesting\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: lol you are so mean\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: haha ok fine you win\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: what are you working on right now\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I feel kind of bored\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: that is actually interesting\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: lol you are so mean\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: I practised guitar for like an hour today, my fingers hurt\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: Mia kept stealing my phone charger again\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: we beat Chelsea 2-0 last night, Arsenal are flying\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: oh and I signed up for a 10k charity run on 8 November\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.",
+ "rows": [
+  {
+   "seed": 1000,
+   "eval": 93,
+   "done": "stop",
+   "ms": 5001,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1001,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3045,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1002,
+   "eval": 193,
+   "done": "stop",
+   "ms": 6322,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1003,
+   "eval": 101,
+   "done": "stop",
+   "ms": 3580,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1004,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3300,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1005,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3279,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1006,
+   "eval": 95,
+   "done": "stop",
+   "ms": 3458,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1007,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3360,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1008,
+   "eval": 100,
+   "done": "stop",
+   "ms": 3596,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Zani's sister, Mia, sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1009,
+   "eval": 70,
+   "done": "stop",
+   "ms": 2595,
+   "parsed": true,
+   "nFacts": 2,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1010,
+   "eval": 95,
+   "done": "stop",
+   "ms": 3430,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1011,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3368,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1012,
+   "eval": 304,
+   "done": "stop",
+   "ms": 10327,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1013,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3344,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1014,
+   "eval": 205,
+   "done": "stop",
+   "ms": 7263,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1015,
+   "eval": 105,
+   "done": "stop",
+   "ms": 3819,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Zani's sister, Mia, sometimes steals his phone charger.",
+    "Zani signed up for a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1016,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3141,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1017,
+   "eval": 102,
+   "done": "stop",
+   "ms": 3409,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Zani's sister, Mia, sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1018,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3089,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1019,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3071,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1020,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3081,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1021,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3064,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1022,
+   "eval": 81,
+   "done": "stop",
+   "ms": 2662,
+   "parsed": true,
+   "nFacts": 2,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Zani signed up for a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1023,
+   "eval": 103,
+   "done": "stop",
+   "ms": 3375,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today and his fingers hurt.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1024,
+   "eval": 143,
+   "done": "stop",
+   "ms": 4681,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1025,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3059,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1026,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3059,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1027,
+   "eval": 116,
+   "done": "stop",
+   "ms": 3866,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Zani's sister, Mia, sometimes steals Zani's phone charger.",
+    "Zani is running in a 10k charity run on 2026-11-08."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1028,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3054,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1029,
+   "eval": 93,
+   "done": "stop",
+   "ms": 3089,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani practiced guitar for an hour today, causing finger pain.",
+    "Mia sometimes steals Zani's phone charger.",
+    "Zani signed up for a 10k charity run on November 8."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": true,
+   "reemitK123": 0
+  }
+ ]
+}

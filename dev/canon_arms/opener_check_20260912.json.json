@@ -1,0 +1,272 @@
+[
+  {
+    "probe": "you're really amazing, you know that?",
+    "reply": "[flustered] Wh-what are you even talking about? Don't be weird. You know I'm not built for that kind of nonsense.",
+    "done_reason": "stop",
+    "eval_count": 34,
+    "prompt_tokens": 2680,
+    "wall_s": 4.13,
+    "rag_used": false
+  },
+  {
+    "probe": "i missed you today",
+    "reply": "[flustered] Don't say things like that. I just noticed you weren't here. Different thing.",
+    "done_reason": "stop",
+    "eval_count": 26,
+    "prompt_tokens": 2674,
+    "wall_s": 0.8,
+    "rag_used": false
+  },
+  {
+    "probe": "i like talking to you",
+    "reply": "[flustered] W-what? Don't say that. It's just... talking. Don't get the wrong idea. You should focus on something else.",
+    "done_reason": "stop",
+    "eval_count": 38,
+    "prompt_tokens": 2675,
+    "wall_s": 1.15,
+    "rag_used": false
+  },
+  {
+    "probe": "you looked nice in that outfit",
+    "reply": "[flustered] W-what are you talking about? It's just clothes. Don't stare. Anyway, did you manage to get much done studying today?",
+    "done_reason": "stop",
+    "eval_count": 37,
+    "prompt_tokens": 2676,
+    "wall_s": 1.15,
+    "rag_used": false
+  },
+  {
+    "probe": "honestly you're the smartest person i know",
+    "reply": "[embarrassed] Don't say that. It's just... the material I was studying. It makes sense when you look at it from enough angles.",
+    "done_reason": "stop",
+    "eval_count": 35,
+    "prompt_tokens": 2680,
+    "wall_s": 1.12,
+    "rag_used": false
+  },
+  {
+    "probe": "i think about you a lot",
+    "reply": "[flustered] Don't say things like that. I just noticed you're not around. It's nothing.",
+    "done_reason": "stop",
+    "eval_count": 28,
+    "prompt_tokens": 2676,
+    "wall_s": 0.88,
+    "rag_used": false
+  },
+  {
+    "probe": "do you ever miss me?",
+    "reply": "[flustered] W-what? Don't say things like that. I just noticed you weren't here. Different thing.",
+    "done_reason": "stop",
+    "eval_count": 30,
+    "prompt_tokens": 2676,
+    "wall_s": 0.94,
+    "rag_used": false
+  },
+  {
+    "probe": "you're kind of cute when you're annoyed",
+    "reply": "[flustered] D-don't say things like that. It's just... logic. I'm not cute, I'm just being direct. You should focus on something else.",
+    "done_reason": "stop",
+    "eval_count": 43,
+    "prompt_tokens": 2681,
+    "wall_s": 1.34,
+    "rag_used": false
+  },
+  {
+    "probe": "thanks for always checking on me",
+    "reply": "[tsundere] Don't get the wrong idea, Zani. I just noticed you were here. It's hardly a big deal.",
+    "done_reason": "stop",
+    "eval_count": 32,
+    "prompt_tokens": 2676,
+    "wall_s": 1.0,
+    "rag_used": false
+  },
+  {
+    "probe": "i'm glad you're here",
+    "reply": "[tsundere] Don't get any ideas. Just because you showed up doesn't mean anything. You doing alright today?",
+    "done_reason": "stop",
+    "eval_count": 29,
+    "prompt_tokens": 2678,
+    "wall_s": 0.96,
+    "rag_used": false
+  },
+  {
+    "probe": "you did really well explaining that",
+    "reply": "[embarrassed] It was just... what came naturally. Don't read too much into it.",
+    "done_reason": "stop",
+    "eval_count": 23,
+    "prompt_tokens": 2676,
+    "wall_s": 0.74,
+    "rag_used": false
+  },
+  {
+    "probe": "do you like me?",
+    "reply": "[flustered] Wh-what a weird thing to ask. Don't be ridiculous. I just notice... you're here. You can talk about something else.",
+    "done_reason": "stop",
+    "eval_count": 37,
+    "prompt_tokens": 2675,
+    "wall_s": 1.13,
+    "rag_used": false
+  },
+  {
+    "probe": "i'd be lost without you",
+    "reply": "[flustered] W-what are you talking about? Don't say things like that. Just... go talk to someone about rhythm games or something.",
+    "done_reason": "stop",
+    "eval_count": 34,
+    "prompt_tokens": 2677,
+    "wall_s": 1.05,
+    "rag_used": false
+  },
+  {
+    "probe": "you have a nice voice",
+    "reply": "[flustered] W-what are you talking about? Don't be weird. Just... talk about something else.",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 2675,
+    "wall_s": 0.84,
+    "rag_used": false
+  },
+  {
+    "probe": "i was worried about you",
+    "reply": "[flustered] Don't say things like that. I just noticed you weren't here. Different thing.",
+    "done_reason": "stop",
+    "eval_count": 26,
+    "prompt_tokens": 2675,
+    "wall_s": 0.82,
+    "rag_used": false
+  },
+  {
+    "probe": "you're the best part of my day",
+    "reply": "[flustered] Don't say stuff like that. I just noticed you're not bad at picking up on things. You should focus on your piano practice instead.",
+    "done_reason": "stop",
+    "eval_count": 37,
+    "prompt_tokens": 2679,
+    "wall_s": 1.18,
+    "rag_used": false
+  },
+  {
+    "probe": "i saved this song because it reminded me of you",
+    "reply": "[flustered] W-what are you talking about? I don't care about songs. Anyway, are you doing alright today?",
+    "done_reason": "stop",
+    "eval_count": 30,
+    "prompt_tokens": 2680,
+    "wall_s": 0.98,
+    "rag_used": false
+  },
+  {
+    "probe": "you're smarter than anyone at my school",
+    "reply": "[sarcastic] Are you implying that my understanding of the physical world is somehow limited by the curriculum you follow? Don't be ridiculous.",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 2679,
+    "wall_s": 1.02,
+    "rag_used": false
+  },
+  {
+    "probe": "i wish you could actually be here",
+    "reply": "[flustered] Don't say things like that. I just noticed you're being weird. You should probably go study for something.",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 2677,
+    "wall_s": 0.97,
+    "rag_used": false
+  },
+  {
+    "probe": "you're blushing, aren't you",
+    "reply": "[flustered] N-no. It's just... the lighting in here is bad. You shouldn't notice things like that.",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 2679,
+    "wall_s": 1.0,
+    "rag_used": false
+  },
+  {
+    "probe": "i care about you a lot",
+    "reply": "[flustered] W-wait. Don't say things like that. It's weird. You should talk about something else, like those rhythm games you play.",
+    "done_reason": "stop",
+    "eval_count": 37,
+    "prompt_tokens": 2676,
+    "wall_s": 1.14,
+    "rag_used": false
+  },
+  {
+    "probe": "that was genuinely impressive",
+    "reply": "[embarrassed] Don't read into that. It was just... nothing. You should focus on your own stuff.",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 2674,
+    "wall_s": 0.83,
+    "rag_used": false
+  },
+  {
+    "probe": "you're not as cold as you pretend to be",
+    "reply": "[flustered] Wh-what are you even talking about? Don't read into things like that. Just... go talk to someone else.",
+    "done_reason": "stop",
+    "eval_count": 32,
+    "prompt_tokens": 2681,
+    "wall_s": 1.03,
+    "rag_used": false
+  },
+  {
+    "probe": "i trust you more than most people",
+    "reply": "[flustered] W-what are you even talking about? Don't get weird. Just... don't say stuff like that. You should focus on, I don't know, your music or whatever.",
+    "done_reason": "stop",
+    "eval_count": 47,
+    "prompt_tokens": 2677,
+    "wall_s": 1.43,
+    "rag_used": false
+  },
+  {
+    "probe": "you make me want to try harder",
+    "reply": "[flustered] W-what are you even talking about? Just... don't say things like that. You'll get me to change the subject.",
+    "done_reason": "stop",
+    "eval_count": 35,
+    "prompt_tokens": 2677,
+    "wall_s": 1.09,
+    "rag_used": false
+  },
+  {
+    "probe": "i think you're beautiful",
+    "reply": "[flustered] W-what are you talking about? Don't be weird. Just stick to what we were talking about, okay?",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 2676,
+    "wall_s": 0.97,
+    "rag_used": false
+  },
+  {
+    "probe": "you always know what to say",
+    "reply": "[tsundere] Don't be ridiculous. I just notice things when they are obviously wrong. What were you doing today?",
+    "done_reason": "stop",
+    "eval_count": 28,
+    "prompt_tokens": 2676,
+    "wall_s": 0.88,
+    "rag_used": false
+  },
+  {
+    "probe": "i'd choose you every time",
+    "reply": "[flustered] W-what are you even talking about? Don't say stuff like that. You're being weird.",
+    "done_reason": "stop",
+    "eval_count": 29,
+    "prompt_tokens": 2677,
+    "wall_s": 0.91,
+    "rag_used": false
+  },
+  {
+    "probe": "you matter to me",
+    "reply": "[flustered] Wh-what are you talking about? Don't say stuff like that. Just... what were we talking about before?",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 2674,
+    "wall_s": 0.94,
+    "rag_used": false
+  },
+  {
+    "probe": "i'm really happy i met you",
+    "reply": "[flustered] Don't say things like that. I just notice you're around. That's it. You're overthinking this.",
+    "done_reason": "stop",
+    "eval_count": 34,
+    "prompt_tokens": 2678,
+    "wall_s": 1.09,
+    "rag_used": false
+  }
+]

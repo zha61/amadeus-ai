@@ -1,0 +1,1134 @@
+{
+ "summary": {
+  "arm": "arm",
+  "fixture": "mention-idle",
+  "num_predict": 500,
+  "n": 30,
+  "convChars": 777,
+  "known": 10,
+  "cut": 0,
+  "recallK123": 1,
+  "falseConfirmRate": 1,
+  "noMatchStrings": 0,
+  "reemitK123": 0,
+  "newFactFound": 30,
+  "evalMedian": 139,
+  "evalMax": 139,
+  "msMedian": 4537,
+  "msMax": 5291
+ },
+ "sys": "You extract durable personal facts about Zani (the user) from a conversation. Today is 2026-09-27 (Sunday). Durable = stable preferences, projects, people, plans, possessions, skills, dates (birthday, exams). NOT moods, greetings, questions, or one-off remarks. Compare against KNOWN FACTS; output ONLY new facts or updates to known ones. Respond with JSON: {\"facts\":[{\"fact\":\"<short third-person statement about Zani>\",\"category\":\"preference|project|event|person|other\",\"event_date\":\"<YYYY-MM-DD if this fact refers to a specific dated event (exam, trip, deadline, birthday), else null>\",\"replaces\":\"<exact known fact text this supersedes or makes untrue, or null>\"}],\"confirmed\":[\"<exact text of a KNOWN FACT>\"]}. In \"confirmed\", copy EXACTLY each KNOWN FACT that the conversation mentions again or clearly shows is still true; do not repeat those in \"facts\". Leave it empty if none. Resolve relative dates (\"Friday\", \"next week\") against today. If the conversation shows a KNOWN FACT is no longer true (he finished, cancelled, or changed it), emit the corrected fact with \"replaces\" set to the old one. If nothing durable was said and no known fact was confirmed, respond {\"facts\":[],\"confirmed\":[]}. JSON only.",
+ "user": "KNOWN FACTS:\n- Zani is learning to play the guitar.\n- Zani has a sister named Mia.\n- Zani supports Arsenal.\n- Zani is allergic to peanuts.\n- Zani is learning Japanese on Duolingo.\n- Zani plans to apply to Imperial for computer science.\n- Zani has a part-time job at Tesco.\n- Zani owns a Keychron K2 keyboard.\n- Zani is vegetarian.\n- Zani likes the anime Frieren.\n\nCONVERSATION:\nZani: I practised guitar for like an hour today, my fingers hurt\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: Mia kept stealing my phone charger again\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: we beat Chelsea 2-0 last night, Arsenal are flying\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: oh and I signed up for a 10k charity run on 8 November\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.",
+ "rows": [
+  {
+   "seed": 1000,
+   "eval": 139,
+   "done": "stop",
+   "ms": 5291,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1001,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4540,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1002,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4545,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1003,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4537,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1004,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4532,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1005,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4529,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1006,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4543,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1007,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4565,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1008,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4557,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1009,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4537,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1010,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4516,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1011,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4502,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1012,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4510,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1013,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4528,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1014,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4539,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1015,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4560,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1016,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4514,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1017,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4504,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1018,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4552,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1019,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4512,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1020,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4530,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1021,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4552,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1022,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4526,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1023,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4730,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1024,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4639,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1025,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4416,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1026,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4942,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1027,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4934,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1028,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4535,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1029,
+   "eval": 139,
+   "done": "stop",
+   "ms": 4508,
+   "parsed": true,
+   "nFacts": 1,
+   "factTexts": [
+    "Zani signed up for a 10k charity run on November 8"
+   ],
+   "confirmed": [
+    "Zani is learning to play the guitar.",
+    "Zani has a sister named Mia.",
+    "Zani supports Arsenal.",
+    "Zani is allergic to peanuts.",
+    "Zani is learning Japanese on Duolingo.",
+    "Zani plans to apply to Imperial for computer science.",
+    "Zani has a part-time job at Tesco.",
+    "Zani owns a Keychron K2 keyboard.",
+    "Zani is vegetarian.",
+    "Zani likes the anime Frieren."
+   ],
+   "confIdx": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "newRun": true,
+   "reemitK123": 0
+  }
+ ]
+}

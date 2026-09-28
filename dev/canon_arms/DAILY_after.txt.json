@@ -1,0 +1,272 @@
+[
+  {
+    "probe": "i'm so tired today",
+    "reply": "[tsundere] Tired? You really should go to sleep. It’s bad for you, that’s all. ...Don't make a big deal out of it.",
+    "done_reason": "stop",
+    "eval_count": 39,
+    "prompt_tokens": 3222,
+    "wall_s": 5.01,
+    "rag_used": true
+  },
+  {
+    "probe": "i skipped lunch again",
+    "reply": "[annoyed] Skipping lunch? Are you serious? You need to eat something, Zani. It's not efficient for you.",
+    "done_reason": "stop",
+    "eval_count": 29,
+    "prompt_tokens": 3016,
+    "wall_s": 1.32,
+    "rag_used": true
+  },
+  {
+    "probe": "just got back from football practice",
+    "reply": "[sarcastic] Football, right. I'm sure that requires a substantial amount of focus. You better not be too tired to talk straight.",
+    "done_reason": "stop",
+    "eval_count": 32,
+    "prompt_tokens": 3038,
+    "wall_s": 1.45,
+    "rag_used": true
+  },
+  {
+    "probe": "i can't sleep",
+    "reply": "[tsundere] Can't sleep? Seriously? You should just go to bed. ...Not that I was keeping track of your sleep schedule or anything.",
+    "done_reason": "stop",
+    "eval_count": 34,
+    "prompt_tokens": 3130,
+    "wall_s": 1.64,
+    "rag_used": true
+  },
+  {
+    "probe": "i think i'm getting a cold",
+    "reply": "[tsundere] You look pale. Make sure you actually eat something, Zani. ...Don't get too dramatic about it, though.",
+    "done_reason": "stop",
+    "eval_count": 32,
+    "prompt_tokens": 3106,
+    "wall_s": 1.49,
+    "rag_used": true
+  },
+  {
+    "probe": "i played piano for two hours straight",
+    "reply": "[sarcastic] Two hours. Wow. You really dedicated yourself to hitting keys, did you? Not that I’d ever think anything of it.",
+    "done_reason": "stop",
+    "eval_count": 33,
+    "prompt_tokens": 3083,
+    "wall_s": 1.48,
+    "rag_used": true
+  },
+  {
+    "probe": "my legs hurt from walking so much",
+    "reply": "[tsundere] Legs hurting? You shouldn't walk so much. ...It's just something you need to manage yourself.",
+    "done_reason": "stop",
+    "eval_count": 29,
+    "prompt_tokens": 3047,
+    "wall_s": 1.37,
+    "rag_used": true
+  },
+  {
+    "probe": "it's been raining all day here",
+    "reply": "[sarcastic] Rain. Groundbreaking weather report, Zani. You really have nothing more interesting to talk about?",
+    "done_reason": "stop",
+    "eval_count": 26,
+    "prompt_tokens": 3024,
+    "wall_s": 1.23,
+    "rag_used": true
+  },
+  {
+    "probe": "i finally beat that song on hard",
+    "reply": "[sarcastic] Oh. You finally managed something that wasn't completely random. Was it difficult?",
+    "done_reason": "stop",
+    "eval_count": 23,
+    "prompt_tokens": 3093,
+    "wall_s": 1.2,
+    "rag_used": true
+  },
+  {
+    "probe": "i've got an early start tomorrow",
+    "reply": "[sarcastic] An early start, huh? So, you'll be up before noon. Sounds perfectly normal for a high-achieving student.",
+    "done_reason": "stop",
+    "eval_count": 33,
+    "prompt_tokens": 3078,
+    "wall_s": 1.49,
+    "rag_used": true
+  },
+  {
+    "probe": "i ate way too much",
+    "reply": "[sarcastic] Too much of what? Sugary drinks, maybe? Don't tell me you had a full banquet.",
+    "done_reason": "stop",
+    "eval_count": 28,
+    "prompt_tokens": 3034,
+    "wall_s": 1.33,
+    "rag_used": true
+  },
+  {
+    "probe": "i spent all evening watching anime instead of studying",
+    "reply": "[sarcastic] Oh, really? So the weight of your education just evaporated because of some cartoons. You must have a very low threshold for stimulation.",
+    "done_reason": "stop",
+    "eval_count": 33,
+    "prompt_tokens": 3018,
+    "wall_s": 1.46,
+    "rag_used": true
+  },
+  {
+    "probe": "i had a really long day",
+    "reply": "[tsundere] Long day, huh? Did you even eat anything decent? You can't just run on nothing.",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 3069,
+    "wall_s": 1.31,
+    "rag_used": true
+  },
+  {
+    "probe": "i want to try skiing but it looks dangerous",
+    "reply": "[sarcastic] You sound like you just read a pamphlet. It’s not just dangerous; it requires actual coordination. You should stick to the rhythm games, they seem more suited to your current skill set.",
+    "done_reason": "stop",
+    "eval_count": 45,
+    "prompt_tokens": 3029,
+    "wall_s": 1.83,
+    "rag_used": true
+  },
+  {
+    "probe": "my room is a complete mess",
+    "reply": "[sarcastic] And? Are you expecting me to conduct a structural analysis of your clutter? Figure it out yourself.",
+    "done_reason": "stop",
+    "eval_count": 26,
+    "prompt_tokens": 3056,
+    "wall_s": 1.28,
+    "rag_used": true
+  },
+  {
+    "probe": "i woke up at 4pm today",
+    "reply": "[sarcastic] Wow. That's quite an achievement in napping. Are you planning to continue that pattern?",
+    "done_reason": "stop",
+    "eval_count": 26,
+    "prompt_tokens": 3079,
+    "wall_s": 1.27,
+    "rag_used": true
+  },
+  {
+    "probe": "i've been staring at a screen for six hours",
+    "reply": "[annoyed] Seriously? Six hours? You need to step away from whatever that is. It's bad for your eyes, really.",
+    "done_reason": "stop",
+    "eval_count": 30,
+    "prompt_tokens": 3025,
+    "wall_s": 1.37,
+    "rag_used": true
+  },
+  {
+    "probe": "i lost a chess game i should have won",
+    "reply": "[sarcastic] Losing a game? Wow. Groundbreaking news, Zani. You really thought you were unbeatable, didn't you?",
+    "done_reason": "stop",
+    "eval_count": 31,
+    "prompt_tokens": 3151,
+    "wall_s": 1.59,
+    "rag_used": true
+  },
+  {
+    "probe": "i'm bored",
+    "reply": "[sarcastic] Bored? You can always look at some anime; it's right there. Don't rely on me to entertain you.",
+    "done_reason": "stop",
+    "eval_count": 32,
+    "prompt_tokens": 3134,
+    "wall_s": 1.61,
+    "rag_used": true
+  },
+  {
+    "probe": "i drank way too much coffee",
+    "reply": "[sarcastic] Seriously? You're drinking coffee like it's a life raft. You need to slow down.",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 3060,
+    "wall_s": 1.29,
+    "rag_used": true
+  },
+  {
+    "probe": "i keep forgetting to eat breakfast",
+    "reply": "[tsundere] Seriously? That's not good for you. You need to make it a habit.",
+    "done_reason": "stop",
+    "eval_count": 24,
+    "prompt_tokens": 3055,
+    "wall_s": 1.2,
+    "rag_used": true
+  },
+  {
+    "probe": "i walked home in the cold without a jacket",
+    "reply": "[tsundere] Are you serious? You walked home in the cold without a jacket? That's... just stupid.",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 3072,
+    "wall_s": 1.31,
+    "rag_used": true
+  },
+  {
+    "probe": "i've got nothing to do this weekend",
+    "reply": "[curious] Nothing? Seriously? You're just going to let the weekend disappear like that?",
+    "done_reason": "stop",
+    "eval_count": 22,
+    "prompt_tokens": 3045,
+    "wall_s": 1.11,
+    "rag_used": true
+  },
+  {
+    "probe": "my headphones broke",
+    "reply": "[sarcastic] Seriously? Just like that? You're always having something break.",
+    "done_reason": "stop",
+    "eval_count": 20,
+    "prompt_tokens": 3038,
+    "wall_s": 1.08,
+    "rag_used": true
+  },
+  {
+    "probe": "i stayed up until 3am again",
+    "reply": "[annoyed] You did what? Staying up until three in the morning? That's not sustainable. You need to sleep.",
+    "done_reason": "stop",
+    "eval_count": 28,
+    "prompt_tokens": 3047,
+    "wall_s": 1.31,
+    "rag_used": true
+  },
+  {
+    "probe": "i think i pulled something in my shoulder",
+    "reply": "[concerned] Seriously? Did you actually pull something? You should probably get it looked at.",
+    "done_reason": "stop",
+    "eval_count": 20,
+    "prompt_tokens": 3071,
+    "wall_s": 1.1,
+    "rag_used": true
+  },
+  {
+    "probe": "i had a weird dream last night",
+    "reply": "[curious] A dream? Weird how? Don't just drop it like that; give me some details.",
+    "done_reason": "stop",
+    "eval_count": 25,
+    "prompt_tokens": 3052,
+    "wall_s": 1.23,
+    "rag_used": true
+  },
+  {
+    "probe": "everyone was out today so i was on my own",
+    "reply": "[curious] Really? On your own all day? What did you end up doing to pass the time?",
+    "done_reason": "stop",
+    "eval_count": 24,
+    "prompt_tokens": 3086,
+    "wall_s": 1.21,
+    "rag_used": true
+  },
+  {
+    "probe": "i tried cooking and it went badly",
+    "reply": "[tsundere] Oh really? Cooking, huh? What did you attempt to make that was so disastrous.",
+    "done_reason": "stop",
+    "eval_count": 24,
+    "prompt_tokens": 3105,
+    "wall_s": 1.24,
+    "rag_used": true
+  },
+  {
+    "probe": "i can't focus on anything today",
+    "reply": "[sarcastic] Not focusing, huh? Is that a new development, or are you just having a standard off day?",
+    "done_reason": "stop",
+    "eval_count": 27,
+    "prompt_tokens": 3041,
+    "wall_s": 1.27,
+    "rag_used": true
+  }
+]

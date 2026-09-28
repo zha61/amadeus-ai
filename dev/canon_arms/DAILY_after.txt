@@ -1,0 +1,30 @@
+[tsundere] Tired? You really should go to sleep. It’s bad for you, that’s all. ...Don't make a big deal out of it.
+[annoyed] Skipping lunch? Are you serious? You need to eat something, Zani. It's not efficient for you.
+[sarcastic] Football, right. I'm sure that requires a substantial amount of focus. You better not be too tired to talk straight.
+[tsundere] Can't sleep? Seriously? You should just go to bed. ...Not that I was keeping track of your sleep schedule or anything.
+[tsundere] You look pale. Make sure you actually eat something, Zani. ...Don't get too dramatic about it, though.
+[sarcastic] Two hours. Wow. You really dedicated yourself to hitting keys, did you? Not that I’d ever think anything of it.
+[tsundere] Legs hurting? You shouldn't walk so much. ...It's just something you need to manage yourself.
+[sarcastic] Rain. Groundbreaking weather report, Zani. You really have nothing more interesting to talk about?
+[sarcastic] Oh. You finally managed something that wasn't completely random. Was it difficult?
+[sarcastic] An early start, huh? So, you'll be up before noon. Sounds perfectly normal for a high-achieving student.
+[sarcastic] Too much of what? Sugary drinks, maybe? Don't tell me you had a full banquet.
+[sarcastic] Oh, really? So the weight of your education just evaporated because of some cartoons. You must have a very low threshold for stimulation.
+[tsundere] Long day, huh? Did you even eat anything decent? You can't just run on nothing.
+[sarcastic] You sound like you just read a pamphlet. It’s not just dangerous; it requires actual coordination. You should stick to the rhythm games, they seem more suited to your current skill set.
+[sarcastic] And? Are you expecting me to conduct a structural analysis of your clutter? Figure it out yourself.
+[sarcastic] Wow. That's quite an achievement in napping. Are you planning to continue that pattern?
+[annoyed] Seriously? Six hours? You need to step away from whatever that is. It's bad for your eyes, really.
+[sarcastic] Losing a game? Wow. Groundbreaking news, Zani. You really thought you were unbeatable, didn't you?
+[sarcastic] Bored? You can always look at some anime; it's right there. Don't rely on me to entertain you.
+[sarcastic] Seriously? You're drinking coffee like it's a life raft. You need to slow down.
+[tsundere] Seriously? That's not good for you. You need to make it a habit.
+[tsundere] Are you serious? You walked home in the cold without a jacket? That's... just stupid.
+[curious] Nothing? Seriously? You're just going to let the weekend disappear like that?
+[sarcastic] Seriously? Just like that? You're always having something break.
+[annoyed] You did what? Staying up until three in the morning? That's not sustainable. You need to sleep.
+[concerned] Seriously? Did you actually pull something? You should probably get it looked at.
+[curious] A dream? Weird how? Don't just drop it like that; give me some details.
+[curious] Really? On your own all day? What did you end up doing to pass the time?
+[tsundere] Oh really? Cooking, huh? What did you attempt to make that was so disastrous.
+[sarcastic] Not focusing, huh? Is that a new development, or are you just having a standard off day?

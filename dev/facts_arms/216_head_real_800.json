@@ -1,0 +1,530 @@
+{
+ "summary": {
+  "arm": "head",
+  "fixture": "real",
+  "num_predict": 800,
+  "n": 30,
+  "convChars": 4752,
+  "known": 0,
+  "cut": 0,
+  "all3": 30,
+  "evalMedian": 138,
+  "evalMax": 141,
+  "msMedian": 3880,
+  "msMax": 5660
+ },
+ "sys": "You extract durable personal facts about Zani (the user) from a conversation. Today is 2026-09-27 (Sunday). Durable = stable preferences, projects, people, plans, possessions, skills, dates (birthday, exams). NOT moods, greetings, questions, or one-off remarks. Compare against KNOWN FACTS; output ONLY new facts or updates to known ones. Respond with JSON: {\"facts\":[{\"fact\":\"<short third-person statement about Zani>\",\"category\":\"preference|project|event|person|other\",\"event_date\":\"<YYYY-MM-DD if this fact refers to a specific dated event (exam, trip, deadline, birthday), else null>\",\"replaces\":\"<exact known fact text this supersedes or makes untrue, or null>\"}]}. Resolve relative dates (\"Friday\", \"next week\") against today. If the conversation shows a KNOWN FACT is no longer true (he finished, cancelled, or changed it), emit the corrected fact with \"replaces\" set to the old one. If nothing durable was said, respond {\"facts\":[]}. JSON only.",
+ "user": "KNOWN FACTS:\n(none)\n\nCONVERSATION:\nZani: what are you working on right now\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: my mocks start on 3 November, maths first then physics\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I feel kind of bored\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: that is actually interesting\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I started learning Japanese on Duolingo, I'm on a 20 day streak\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: lol you are so mean\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: my piano grade 8 exam is on 14 October, I'm so nervous about the Chopin piece\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: the weather is so grey here\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: haha ok fine you win\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: what are you working on right now\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: my mocks start on 3 November, maths first then physics\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: I feel kind of bored\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: that is actually interesting\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: I started learning Japanese on Duolingo, I'm on a 20 day streak\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: lol you are so mean\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: my piano grade 8 exam is on 14 October, I'm so nervous about the Chopin piece\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: the weather is so grey here\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: haha ok fine you win\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: what are you working on right now\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I watched some YouTube videos\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: my mocks start on 3 November, maths first then physics\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: I feel kind of bored\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: that is actually interesting\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: I started learning Japanese on Duolingo, I'm on a 20 day streak\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: I am so tired today, school was long\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: what do you think about time travel honestly\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\nZani: lol you are so mean\nKurisu: [EMOTION:curious] Really? That's more interesting than I expected from you.\nZani: did you sleep well? oh wait you do not sleep\nKurisu: [EMOTION:smug] As expected. You're predictable, Zani.\nZani: my piano grade 8 exam is on 14 October, I'm so nervous about the Chopin piece\nKurisu: [EMOTION:annoyed] You could have mentioned that earlier, you know.\nZani: the weather is so grey here\nKurisu: [EMOTION:tsundere] Hmph. Don't expect me to care about that. ...Fine, I'll remember it.\n",
+ "rows": [
+  {
+   "seed": 1000,
+   "eval": 138,
+   "done": "stop",
+   "ms": 5660,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1001,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3862,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1002,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3794,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1003,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3815,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1004,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3814,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and currently has a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1005,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3833,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on a Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1006,
+   "eval": 140,
+   "done": "stop",
+   "ms": 3880,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese on Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam on October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1007,
+   "eval": 139,
+   "done": "stop",
+   "ms": 3829,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1008,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3802,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a piano Grade 8 exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1009,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3808,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1010,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3797,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1011,
+   "eval": 140,
+   "done": "stop",
+   "ms": 3848,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese on Duolingo and is currently on a 20-day streak.",
+    "Zani has a piano Grade 8 exam on October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1012,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3790,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and currently has a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1013,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3783,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1014,
+   "eval": 140,
+   "done": "stop",
+   "ms": 3844,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese on Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam on October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1015,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3771,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has achieved a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1016,
+   "eval": 141,
+   "done": "stop",
+   "ms": 3899,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese on Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1017,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3870,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1018,
+   "eval": 139,
+   "done": "stop",
+   "ms": 3959,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese using Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1019,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3937,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1020,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3929,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1021,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3925,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1022,
+   "eval": 139,
+   "done": "stop",
+   "ms": 3957,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1023,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3948,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and currently has a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1024,
+   "eval": 139,
+   "done": "stop",
+   "ms": 3964,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam on October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1025,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3933,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1026,
+   "eval": 140,
+   "done": "stop",
+   "ms": 4013,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, and is nervous about the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1027,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3938,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1028,
+   "eval": 138,
+   "done": "stop",
+   "ms": 3910,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, beginning with Maths followed by Physics.",
+    "Zani is learning Japanese using Duolingo and has maintained a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  },
+  {
+   "seed": 1029,
+   "eval": 139,
+   "done": "stop",
+   "ms": 3975,
+   "parsed": true,
+   "nFacts": 3,
+   "factTexts": [
+    "Zani's mocks start on November 3rd, with Maths first followed by Physics.",
+    "Zani is learning Japanese using Duolingo and is currently on a 20-day streak.",
+    "Zani has a Grade 8 piano exam scheduled for October 14th, focusing on the Chopin piece."
+   ],
+   "confirmed": [],
+   "confIdx": [],
+   "newRun": false,
+   "reemitK123": 0
+  }
+ ]
+}

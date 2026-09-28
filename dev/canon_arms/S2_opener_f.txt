@@ -1,0 +1,30 @@
+[EMOTION:flustered] Adorable? You actually think that? ...You probably just say that when you're bored. Stick to talking about football or something.
+[EMOTION:flustered] A dream? You actually dreamt about me? ...It must have been random, I guess. You probably just saw something that looked like me.
+[EMOTION:flustered] My laugh? You noticed that? ...It's just noise, really. You're probably just bored, Zani.
+[EMOTION:tsundere] You think I was thinking about you during class? Don't be ridiculous. I was noticing the structural failings of the lecture hall's lighting system, something much more important.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I'm just stating facts. You should focus on your own stuff.
+[EMOTION:tsundere] A team? Don't be ridiculous. We're not on some kind of official squad. Just because you think we'd make something... doesn't mean it's actually true.
+[EMOTION:flustered] Hey. You notice that when I'm focused? ...It’s just what happens when I’m actually paying attention to something. You should try it sometime.
+[EMOTION:tsundere] That's absurd. You need sleep. ...Not that I was tracking your schedule, though.
+[EMOTION:flustered] Dress up? What are you even talking about, Zani? I just... I just picked something that was clean. Don't read into things like that. You're being weird.
+[EMOTION:tsundere] Don't get the wrong idea about what I'm saying. I just notice things when they're... illogical. You're being weird today.
+[EMOTION:tsundere] Don't be ridiculous. I'm not smiling at all. Just standing here, waiting for you to stop being weird.
+[EMOTION:tsundere] Oh. You did? ...Well, don't expect them to get any of your inside jokes, or anything.
+[EMOTION:flustered] My favorite person? You think that just because of what you said? You talk a lot about rhythms and games, but you haven't figured out how to talk about anything that actually means anything.
+[EMOTION:flustered] H-hug? You mean like... physical contact? Don't be weird, Zani. ...You need to eat something; you sound like you haven't slept properly.
+[EMOTION:tsundere] Don't read too much into that, Zani. I just noticed you were here, that's all.
+[EMOTION:tsundere] You're always making these dramatic statements. Go to sleep, Zani. ...Not that I was keeping track of your schedule.
+[EMOTION:tsundere] What are you even talking about? I'm not "amazing" at anything, I just know how to process information. Don't get any ideas.
+[EMOTION:flustered] Calm? No way. It's just... whatever. Don't get the wrong idea about it. You're weird today.
+[EMOTION:tsundere] A Dr Pepper? You even remembered that. Don't think that means I actually wanted it, though.
+[EMOTION:tsundere] Don't get any ideas from that. I was just stating observable facts, nothing more. You're the one who always needs something simple to latch onto.
+[EMOTION:flustered] Feel better? You actually said that out of nowhere. What are you talking about, Zani? You need to eat something, you sound like you're running on fumes.
+[EMOTION:flustered] My hair? You noticed my hair? ...You should just focus on whatever else you're doing.
+[EMOTION:flustered] Like you? You even use that word like it means something. You're just saying that because you think it will throw me off balance. You need to stop focusing on how I sound when I talk about things.
+[EMOTION:flustered] Falling for me? You're saying that out of nowhere. You only think of things like that when you're bored. You should focus on your piano practice instead.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I'm just here because you're wasting my time otherwise.
+[EMOTION:flustered] What? You noticed that? ...It's just that you act like you need someone to check on you, Zani. So, are you actually going to study, or just stare?
+[EMOTION:tsundere] Seriously? You were expecting me to initiate? Don't read too much into that, though.
+[EMOTION:tsundere] Don't read too much into it, Zani. I'm just... around.
+[EMOTION:tsundere] It's not passion. It's just what I know. You really shouldn't focus on how much I care about stuff, Zani. You should probably just focus on getting some proper sleep.
+[EMOTION:flustered] H-holding your hand? ...Don't be ridiculous. You're getting dramatic, Zani. You should focus on something more useful, like what you're actually studying right now.

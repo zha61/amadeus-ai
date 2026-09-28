@@ -1,0 +1,51 @@
+{
+  "name": "amadeus",
+  "productName": "Amadeus",
+  "version": "1.0.0",
+  "description": "Amadeus \u2014 Kurisu Makise AI Chatbot",
+  "main": "main.js",
+  "author": "Amadeus Project",
+  "license": "ISC",
+  "scripts": {
+    "check": "node dev/check.js",
+    "check:selftest": "node dev/check.selftest.js",
+    "start": "electron .",
+    "build": "electron-builder --mac --arm64",
+    "pack": "electron-builder --dir",
+    "build-scheduler": "cd scheduler && npm install && npm run build && mkdir -p ../dist/mac-arm64 && cp -Rp ../dist-scheduler/mac-arm64/AmadeusCall.app ../dist/mac-arm64/",
+    "build-all": "npm run build && npm run build-scheduler"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.amadeus.kurisu",
+    "productName": "Amadeus",
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "assets/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "preload_call.js",
+      "amadeus.html",
+      "call-window.html",
+      "assets/**/*",
+      "live2d/**/*",
+      "music/**/*",
+      "kurisu_elevenlabs_server.py",
+      "amadeus_startup.mp4",
+      "amadeus_logo.png"
+    ]
+  }
+}

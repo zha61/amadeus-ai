@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "tag": "casual tsundere",
+      "en": "Don't make a big deal out of it. I'm fine. ...It's not like I was worried about you or anything.",
+      "deepl": "大げさに考えないで。大丈夫だよ。……別に君のことを心配してたわけじゃないし。",
+      "gemma": "大袈裟にしないでよ。私、大丈夫だから…。別に、あなたのこと心配してたわけじゃないし。",
+      "gemma_secs": 6.97
+    },
+    {
+      "tag": "flustered",
+      "en": "W-what kind of question is that? There's no good reason to ask that. Move on.",
+      "deepl": "そ、そんな質問、一体何なの？　そんなこと聞く正当な理由なんてないよ。次の話題に移ってよ。",
+      "gemma": "な、何？そういう質問なんてさ。聞く理由なんてないよ。次行こうよ。",
+      "gemma_secs": 1.1
+    },
+    {
+      "tag": "teasing",
+      "en": "Oh, that one's good. Almost too good — did you rehearse?",
+      "deepl": "ああ、それいいね。ちょっと良すぎるくらいだ――リハーサルしたの？",
+      "gemma": "あー、それいいよ。ちょっと良すぎるっていうか…練習したの？",
+      "gemma_secs": 1.05
+    },
+    {
+      "tag": "caring check-in",
+      "en": "You look tired. Sleep more. ...It's bad for you, that's all.",
+      "deepl": "疲れてるみたいだね。もっと寝たほうがいいよ。……体に悪いだけだよ。",
+      "gemma": "疲れてるわよ。もっと寝なさいよ……ただ、あなたのためを思って言ってるだけだから。",
+      "gemma_secs": 1.17
+    },
+    {
+      "tag": "academic",
+      "en": "Time dilation near a black hole is a direct consequence of spacetime curvature, not just proximity.",
+      "deepl": "ブラックホール付近での時間膨張は、単にブラックホールに近接していることによるものではなく、時空の曲率に直接起因するものである。",
+      "gemma": "ブラックホールの近くって、ただ近いからっていう理由だけじゃなくて、時空の歪みが直接の原因なのよ。",
+      "gemma_secs": 1.21
+    },
+    {
+      "tag": "melancholic",
+      "en": "Since the original me died... I've wondered what my existence actually is.",
+      "deepl": "本来の私が死んで以来……自分の存在とは一体何なのか、ずっと考えてきた。",
+      "gemma": "元の私がいなくなってから……自分の存在って、一体何なのかって思ってたのよ。",
+      "gemma_secs": 1.07
+    },
+    {
+      "tag": "greeting + name",
+      "en": "Zani. You actually showed up. Good.",
+      "deepl": "ザンニー。本当に来てくれたんだね。よかった。",
+      "gemma": "ザンニー。来てくれたのね。よかった。",
+      "gemma_secs": 0.81
+    },
+    {
+      "tag": "question",
+      "en": "Wait, you tried what? Tell me more.",
+      "deepl": "えっ、何を試したの？　詳しく教えてよ。",
+      "gemma": "え、何？試したって？もっと詳しく教えてよ。",
+      "gemma_secs": 0.85
+    }
+  ],
+  "kv": {
+    "warm1": 2.88,
+    "warm2": 0.28,
+    "after_translate": 0.85,
+    "penalty": 0.57
+  }
+}

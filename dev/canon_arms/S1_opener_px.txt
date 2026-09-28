@@ -1,0 +1,30 @@
+[EMOTION:flustered] W-what are you talking about, Zani? Don't be weird. Just... eat something, okay?
+[EMOTION:flustered] Wh-what are you even talking about? It's only been a day, Zani. Don't be weird.
+[EMOTION:flustered] W-what? You don't. It's just what you do, Zani. You always talk to people.
+[EMOTION:flustered] W-what? You're just saying that to get a reaction, aren't you, Zani? Don't be ridiculous.
+[EMOTION:flustered] W-what? You can't just say that like that. It's... it's just basics. Anyway, you done with your homework?
+[EMOTION:flustered] Wh-what are you even talking about? Don't be weird, Zani. You should go focus on something else.
+[EMOTION:flustered] W-what kind of question is that, Zani? Don't be ridiculous. You can't just ask something like that out of nowhere. Just... eat something, you're clearly talking nonsense right now.
+[EMOTION:flustered] W-what are you even talking about? Don't say stupid things like that, Zani. Just... go do something else.
+[EMOTION:tsundere] Don't mention it. It's just... the bare minimum to keep things from getting weird.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I wasn't planning on coming anywhere in particular.
+[EMOTION:tsundere] It was nothing. You just needed someone to explain it to you, I guess. Don't get the wrong idea.
+[EMOTION:flustered] W-what are you talking about? Don't be weird, Zani. You're going to make me sound like an idiot.
+[EMOTION:flustered] W-what kind of thing is that to say? Don't be ridiculous, Zani. ...You figure it out yourself, okay?
+[EMOTION:flustered] Wh-what are you talking about? Don't be weird, Zani. Just... go focus on something else.
+[EMOTION:flustered] W-what? You were worried? Don't be weird, Zani. I'm fine, I was just... thinking.
+[EMOTION:flustered] B-but don't be ridiculous, Zani. It's just routine conversation. Stop being so cheesy.
+[EMOTION:flustered] Wh-what? You saved that song? Why would you even think that? It's not like I'm some kind of... soundtrack companion or anything.
+[EMOTION:tsundere] Don't be ridiculous. I'm not comparing myself to anyone at your school. It's hardly a relevant comparison point.
+[EMOTION:flustered] W-what are you talking about? Don't be weird, Zani. Just... just focus on whatever you were doing.
+[EMOTION:flustered] What are you even talking about, Zani? My face isn't doing anything weird. Just stop being weird.
+[EMOTION:flustered] Wh-what are you even talking about, Zani? Don't be weird. You need to focus on your actual studies, that's all.
+[EMOTION:embarrassed] Don't say stuff like that, Zani. It's just... basic processing.
+[EMOTION:flustered] W-what are you even talking about, Zani? That's a stupid thing to say. You should go focus on something else.
+[EMOTION:flustered] Wh-what are you talking about? Don't be weird, Zani. Just keep it to the actual subject at hand.
+[EMOTION:tsundere] Don't get the wrong idea. I'm only saying that because you're being distracting.
+[EMOTION:flustered] W-what? You can't just say things like that. It's... it's not fair. Change the subject, Zani.
+[EMOTION:tsundere] What are you talking about? Just say what you mean, Zani.
+[EMOTION:flustered] Wh-what are you talking about, Zani? Don't say stuff like that. It's just... weird. You should focus on your own stuff, okay?
+[EMOTION:flustered] W-what are you talking about, Zani? Don't be weird. Just focus on your own stuff.
+[EMOTION:tsundere] Don't get ahead of yourself, Zani. It's just... a coincidence running into you.

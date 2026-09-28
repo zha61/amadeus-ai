@@ -1,0 +1,420 @@
+{
+  "arm": "qwen3_4b",
+  "engine": "gemma4",
+  "model": "qwen3:4b",
+  "n": 30,
+  "ollama": "0.33.3",
+  "opts": {
+    "temperature": 0.3,
+    "num_predict": 150,
+    "num_ctx": 8192
+  },
+  "prompt_chars": 536,
+  "summary": {
+    "wall_ms": {
+      "n": 30,
+      "median": 3630.5,
+      "min": 3467,
+      "max": 3970
+    },
+    "load_ms": {
+      "n": 30,
+      "median": 1.0,
+      "min": 1,
+      "max": 4
+    },
+    "prefill_ms": {
+      "n": 30,
+      "median": 84.0,
+      "min": 29,
+      "max": 246
+    },
+    "prefill_tokens": {
+      "n": 30,
+      "median": 179.5,
+      "min": 169,
+      "max": 199
+    },
+    "decode_ms": {
+      "n": 30,
+      "median": 3529.0,
+      "min": 3363,
+      "max": 3871
+    },
+    "decode_tokens": {
+      "n": 30,
+      "median": 150.0,
+      "min": 150,
+      "max": 150
+    },
+    "in_words": {
+      "n": 30,
+      "median": 18.5,
+      "min": 11,
+      "max": 34
+    }
+  },
+  "kv": null,
+  "rows": [
+    {
+      "in": "Tired? Don't be dramatic. You should just go sleep. ...Not that I was keeping track of your hours, obviously.",
+      "in_words": 19,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers like W-what becomes な、何, and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Tired?",
+      "wall_ms": 3575,
+      "load_ms": 4,
+      "prefill_ms": 29,
+      "prefill_tokens": 180,
+      "decode_ms": 3532,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "You skipped lunch? Seriously? You need to stop making excuses for basic self-care. Go eat something actual.",
+      "in_words": 17,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers (W-what → な、何), and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe original line is: \"You skipped lunch",
+      "wall_ms": 3671,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 175,
+      "decode_ms": 3577,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh. So you were out playing. That explains the temporary absence. Try not to overdo it with the running, you might actually injure something.",
+      "in_words": 24,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur. She's an 18-year-old female genius scientist from Steins;Gate, known for being tsundere and speaking casually to close friends.\n\nThe original English line is: \"Oh. So you were out playing. That explains the temporary absence. Try not to overdo it with the running, you might actually injure something.\"\n\nFirst, I need to break down each part and translate it into Japanese while maintaining her speech patterns.\n\nStarting with \"Oh.\" In Japanese, this could be something like \"あ、\" or \"え",
+      "wall_ms": 3608,
+      "load_ms": 1,
+      "prefill_ms": 85,
+      "prefill_tokens": 184,
+      "decode_ms": 3511,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Tired? You sound like you haven't slept properly. Just go to bed, Zani. ...Not that I was keeping count of the minutes.",
+      "in_words": 22,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers like W-what becomes な、何, and '...' pauses. Names should be Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Tired?",
+      "wall_ms": 3619,
+      "load_ms": 1,
+      "prefill_ms": 84,
+      "prefill_tokens": 184,
+      "decode_ms": 3501,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "You skip meals? Are you trying to give yourself an illness? It's not efficient, Zani. Eat something.",
+      "in_words": 17,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 1'th-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers like \"W-what\" becomes \"な、何\", and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"",
+      "wall_ms": 3543,
+      "load_ms": 1,
+      "prefill_ms": 85,
+      "prefill_tokens": 177,
+      "decode_ms": 3433,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh. Football. So you were running around kicking things. Sounds... physically exhausting.",
+      "in_words": 12,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers like W-what becomes な、何, and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Oh. Football",
+      "wall_ms": 3623,
+      "load_ms": 1,
+      "prefill_ms": 246,
+      "prefill_tokens": 170,
+      "decode_ms": 3363,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Can't sleep? You're going to wear yourself out like that. You should just go to bed, Zani. It's bad for you, seriously. ...Not that I was keeping track of your sleep schedule or anything.",
+      "in_words": 34,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, feminine, with certain endings like -わ/のよ/じゃない. No masculine endings like だぜ/だろ. She uses first person 私. Also, she stammers (W-what → な、何) and has '...' pauses.\n\nThe original line: \"Can't sleep? You're going to wear yourself out like that. You should just go to bed, Zani. It's bad for you",
+      "wall_ms": 3467,
+      "load_ms": 1,
+      "prefill_ms": 87,
+      "prefill_tokens": 199,
+      "decode_ms": 3371,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh really? You think so? Don't be dramatic, Zani. You just need to stop being so overly concerned about everything.",
+      "in_words": 20,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are using casual feminine speech, specific endings like わ/のよ/じゃない, avoiding masculine forms like だぜ/だろ, using first person 私, keeping stammers (W-what becomes な、何), and having '...' pauses.\n\nThe original line is: \"Oh really? You think so? Don't be dramatic, Zani. You just need to stop",
+      "wall_ms": 3495,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 180,
+      "decode_ms": 3389,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Two hours? That's a lot of time on the keys. What were you playing? Was it something complicated, or just something you were in the mood for?",
+      "in_words": 27,
+      "out": "Okay, let's tackle this translation request. So, I need to translate the given English dialogue into natural spoken Japanese as Makise Kur: a tsundere, 18-year-old female genius scientist, casual speech. The key points here are:\n\n- Use her register: casual feminine, with わ/のよ/じゃない endings where natural. No masculine だぜ/だろ.\n- First person 私.\n- Clipped and direct.\n- Keep stammers (W-what → な、何) and '...' pauses.\n- Names: Zani → ザンニー, Kurisu → クリス.\n\nThe original English line is: \"Two hours? That's a lot of time on the keys.",
+      "wall_ms": 3638,
+      "load_ms": 1,
+      "prefill_ms": 84,
+      "prefill_tokens": 186,
+      "decode_ms": 3540,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Then you shouldn't walk so much. It's basic self-care, really. ...Don't make a big deal out of it.",
+      "in_words": 18,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, feminine, with certain endings like -わ/のよ/じゃない. The translation should use first person 私, clipped and direct, with stammers like \"W-what\" becoming \"な、何\" and '...' pauses.\n\nThe original line is: \"Then you shouldn't walk so much. It's basic self-care, really. ...Don't make a big deal out of it.\"\n\nFirst, I need to",
+      "wall_ms": 3881,
+      "load_ms": 1,
+      "prefill_ms": 87,
+      "prefill_tokens": 180,
+      "decode_ms": 3782,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Rain. Annoying. At least you aren't making a big deal out of it.",
+      "in_words": 13,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, feminine, with certain endings like -わ/のよ/じゃない. She uses first person 私, clipped and direct, with stammers like \"W-what\" becoming \"な、何\" and pauses with \"...\".\n\nThe original line is: \"Rain. Annoying. At least you aren't making a big deal out of it.\"\n\nFirst, break down each part.\n\n\"Rain.\" In Japanese, this would",
+      "wall_ms": 3970,
+      "load_ms": 1,
+      "prefill_ms": 87,
+      "prefill_tokens": 172,
+      "decode_ms": 3871,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh, really? Which one was it? Are you good at rhythm games?",
+      "in_words": 12,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate an English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, so her speech should be casual, feminine, with specific endings like -わ/のよ/じゃない. No masculine endings like だぜ or だろ. Use first person 私. Also, keep stammers like W-what becomes な、何 and use ... pauses.\n\nThe original line is: \"Oh, really? Which one was it? Are you good at rhythm games?\"\n\nLet me break it down.\n\nFirst part: \"Oh, really?\"",
+      "wall_ms": 3837,
+      "load_ms": 1,
+      "prefill_ms": 82,
+      "prefill_tokens": 169,
+      "decode_ms": 3721,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh? An early start. Are you going to need any scientific insights to get you through it?",
+      "in_words": 17,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers (W-what → な、何), and '...' pauses. Names should be Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Oh",
+      "wall_ms": 3677,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 173,
+      "decode_ms": 3584,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Too much of what? You manage to make even poor diet choices sound like some grand, dramatic failing. Don't get dramatic.",
+      "in_words": 21,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur: she's an 18-year-old female genius scientist, tsundere, so her speech should be casual, feminine, with certain endings like -わ/のよ/じゃない. They specified to use first person 私, clipped and direct, keep stammers (W-what → な、何) and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Too much of what? You manage to make even poor diet choices sound like",
+      "wall_ms": 3679,
+      "load_ms": 1,
+      "prefill_ms": 84,
+      "prefill_tokens": 179,
+      "decode_ms": 3582,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Of course you did. That's what you do when you don't have actual work to focus on. Still, I guess that’s more fun than reading textbooks.",
+      "in_words": 26,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur: she's an 18-year-old female genius scientist, tsundere, and she speaks casually to a close friend. The key points here are the register—casual feminine speech, using \"わ/のよ/じゃない\" endings where natural, no masculine forms like \"だぜ/だろ\", first person \"私\", clipped and direct, stammers like \"W-what\" becomes \"な、何\", and '...' pauses. Also, the names Zani is ザンニー and Kurisu is クリ",
+      "wall_ms": 3692,
+      "load_ms": 1,
+      "prefill_ms": 86,
+      "prefill_tokens": 186,
+      "decode_ms": 3595,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh? And what does a 'long day' entail? Did you exert yourself intellectually, or was it just a lot of walking around?",
+      "in_words": 22,
+      "out": "Okay, let's tackle this translation request. So, I need to translate the English line into natural spoken Japanese as Makise Kurisu would say it. First, I should recall her character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, feminine, with specific endings like -わ/のよ/じゃない. No masculine endings like だぜ/だろ. Use first person 私. Keep stammers (W-what → な、何) and '...' pauses. Names: Zani is ザンニー, Kurisu is クリス.\n\nThe English line is: \"Oh? And what does a 'long day' entail? Did you exert",
+      "wall_ms": 3651,
+      "load_ms": 1,
+      "prefill_ms": 84,
+      "prefill_tokens": 181,
+      "decode_ms": 3532,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Dangerous? Everything is dangerous if you approach it with zero data. You need to look at the biomechanics and the equipment requirements, not just the superficial look.",
+      "in_words": 27,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, so her speech should be casual, feminine, with certain endings like -わ/のよ/じゃない. No masculine endings like だぜ/だろ. Use first person 私. Also, keep stammers (W-what → な、何) and '...' pauses.\n\nThe original line: \"Dangerous? Everything is dangerous if you approach it with zero data. You need to look at the biomechanics and the equipment requirements, not just",
+      "wall_ms": 3619,
+      "load_ms": 1,
+      "prefill_ms": 86,
+      "prefill_tokens": 187,
+      "decode_ms": 3523,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Wow. You've really outdone yourself. I was expecting less chaotic entropy.",
+      "in_words": 11,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: use casual feminine speech, specific endings like わ/のよ/じゃない, no masculine forms like だぜ/だろ, first person 私, clipped and direct, stammers (W-what becomes な、何), and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe original line is: \"Wow",
+      "wall_ms": 3551,
+      "load_ms": 1,
+      "prefill_ms": 81,
+      "prefill_tokens": 169,
+      "decode_ms": 3457,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Four o'clock? You're losing your sense of rhythm, Zani. You need to structure your day better.",
+      "in_words": 16,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur. She's a tsundere, 18-year-old genius scientist, so her speech should be casual, feminine, with certain endings like -わ/のよ/じゃない. No masculine endings like だぜ/だろ. Use first person 私. Also, preserve the names Zani as ザンニー and Kurisu as クリス. Keep stammers (W-what → な、何) and '...' pauses. Output only the Japanese translation.\n\nThe English line is: \"Four o'clock?",
+      "wall_ms": 3577,
+      "load_ms": 1,
+      "prefill_ms": 82,
+      "prefill_tokens": 176,
+      "decode_ms": 3483,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Six hours? You're going to burn out your retinas like that. Go look at something that isn't backlit.",
+      "in_words": 18,
+      "out": "Okay, let's tackle this translation request. So, I need to translate the English line into natural spoken Japanese as Makise Kurisu. First, I'll recall her character traits: she's an 18-year-old female genius scientist, tsundere, speaking casually to a close friend. The key points here are using casual feminine speech, specific endings like わ/のよ/じゃない, no masculine forms like だぜ/だろ, first person 私, clipped and direct, stammers (W-what becomes な、何), and '...' pauses. Also, the names Zani is ザンニー and Kurisu is クリス.\n\nThe original line: \"Six hours? You're going to",
+      "wall_ms": 3572,
+      "load_ms": 1,
+      "prefill_ms": 84,
+      "prefill_tokens": 178,
+      "decode_ms": 3478,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh? Losing a game, huh? Sounds like a predictable outcome for you. Don't blame the board; maybe you just weren't paying attention.",
+      "in_words": 22,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using \"わ/のよ/じゃない\" endings where natural, no masculine \"だぜ/だろ\", first person \"私\", clipped and direct, stammers like \"W-what\" becomes \"な、何\", and '...' pauses. Also, names Zani as ザンニー and Kurisu as クリス.\n\nThe original line is",
+      "wall_ms": 3703,
+      "load_ms": 1,
+      "prefill_ms": 86,
+      "prefill_tokens": 183,
+      "decode_ms": 3569,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Bored? Try being interesting for once. I'm not running a novelty act for your amusement.",
+      "in_words": 15,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur: she's an 18-year-old female genius scientist, tsundere, and she speaks casually to a close friend. The key points here are the register—casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers like W-what becomes な、何, and '...' pauses. Also, names Zani is ザンニー and Kurisu is クリス.\n\nThe English line is",
+      "wall_ms": 3570,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 173,
+      "decode_ms": 3472,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Wow. That's an incredibly original update on your afternoon. Did you think that would lead to some profound insight about thermodynamics or something?",
+      "in_words": 23,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, uses \"わ/のよ/じゃない\" endings, first person \"私\", clipped and direct. Also, she stutters with \"W-what\" becoming \"な、何\" and has pauses with \"...\".\n\nThe original line is: \"Wow. That's an incredibly original update on your afternoon. Did you think that would lead to some profound insight about thermodynamics or something?\"\n\nFirst, I need to break down the",
+      "wall_ms": 3568,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 181,
+      "decode_ms": 3465,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "You think that's a good topic to bring up? It's not a mystery to figure out. Just eat something, you need fuel for whatever nonsense you're getting up to.",
+      "in_words": 29,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 18-year-old female genius scientist, tsundere, so her speech should be casual, feminine, with the right endings like わ/のよ/じゃない. No masculine endings like だぜ/だろ. Use first person 私. Also, need to preserve the names Zani as ザンニー and Kurisu as クリス. The original line is: \"You think that's a good topic to bring up? It's not a mystery to figure out. Just eat something, you",
+      "wall_ms": 3647,
+      "load_ms": 1,
+      "prefill_ms": 85,
+      "prefill_tokens": 189,
+      "decode_ms": 3526,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "What. You just left that out there. That's honestly careless. ...Don't make a big deal out of it.",
+      "in_words": 18,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits: she's an 18-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are using her register—casual feminine speech with specific endings like わ/のよ/じゃない, avoiding masculine forms like だぜ/だろ. Also, first person should be 私, clipped and direct, with stammers (W-what becomes な、何) and '...' pauses.\n\nThe English line is: \"What. You just left that out there. That's honestly",
+      "wall_ms": 3662,
+      "load_ms": 1,
+      "prefill_ms": 85,
+      "prefill_tokens": 178,
+      "decode_ms": 3559,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Really? Nothing? You usually have something planned, even if you try to hide it. So, what's the actual plan then?",
+      "in_words": 20,
+      "out": "Okay, let me tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall her character traits. She's an 1.8-year-old female genius scientist, tsundere, and speaks casually to a close friend. The key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ, first person 私, clipped and direct, stammers (W-what → な、何), and '...' pauses. Names should be Zani as ザンニー and Kurisu as クリス.\n\nThe English line is: \"Really?",
+      "wall_ms": 3652,
+      "load_ms": 2,
+      "prefill_ms": 85,
+      "prefill_tokens": 180,
+      "decode_ms": 3549,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Seriously? That’s it? You waited until you got back to tell me your headphones broke? Typical.",
+      "in_words": 16,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur: she's an 18-year-old female genius scientist, tsundere, and she speaks casually to a close friend. The key points here are the register—casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine forms like だぜ/だろ. They want first person 私, clipped and direct, with stammers (W-what → な、何) and '...' pauses. Also, preserve the names Zani as ザンニー and Kurisu as ク",
+      "wall_ms": 3538,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 174,
+      "decode_ms": 3444,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Are you kidding me? Seriously? You're going to burn out before you even get to anything good.",
+      "in_words": 17,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kur: she's an 18-year-old female genius scientist, tsundere, and she speaks casually to a close friend. The key points here are the register—casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ. First person should be 私, clipped and direct, stammers like W-what becomes な、何, and keep '...' pauses.\n\nThe English line is: \"Are you kidding me? Seriously? You're going to burn out before",
+      "wall_ms": 3651,
+      "load_ms": 1,
+      "prefill_ms": 83,
+      "prefill_tokens": 174,
+      "decode_ms": 3556,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Oh? Did you actually injure yourself? Where exactly? Be specific about the pain.",
+      "in_words": 13,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall Makise's character traits. She's an 18-year-old female genius scientist, tsundere, so her speech is casual, feminine, with certain endings like -わ/のよ/じゃない. She uses first person 私, clipped and direct, with stammers like \"W-what\" becoming \"な、何\" and pauses with \"...\".\n\nThe original line is: \"Oh? Did you actually injure yourself? Where exactly? Be specific about the pain.\"\n\nFirst, I need to break down each part.\n\n\"OH?\" in Japanese would",
+      "wall_ms": 3604,
+      "load_ms": 1,
+      "prefill_ms": 82,
+      "prefill_tokens": 171,
+      "decode_ms": 3499,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    },
+    {
+      "in": "Weird, you say? Was it anything remotely related to neuroscience or perhaps some complex behavioral model? If it was just random fluff, I'm going to be annoyed.",
+      "in_words": 27,
+      "out": "Okay, let's tackle this translation request. So, the user wants me to translate a specific English line into natural spoken Japanese as Makise Kurisu. First, I need to recall who Makise Kurisu is. She's from Steins;Gate, an 1'th-year-old female genius scientist, tsundere, and she speaks casually to a close friend.\n\nThe key points here are: casual feminine speech, using わ/のよ/じゃない endings where natural, no masculine だぜ/だろ. First person 私, clipped and direct. Keep stammers (W-what → な、何) and '...' pauses. Names Zani as ザンニー and Kurisu as クリス",
+      "wall_ms": 3679,
+      "load_ms": 1,
+      "prefill_ms": 86,
+      "prefill_tokens": 188,
+      "decode_ms": 3579,
+      "decode_tokens": 150,
+      "done_reason": "length"
+    }
+  ]
+}

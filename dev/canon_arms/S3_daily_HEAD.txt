@@ -1,0 +1,30 @@
+[EMOTION:tsundere] Tired, are you? You should just go to sleep. It's bad for you, that's all.
+[EMOTION:sarcastic] Wow. Skipping lunch. You really have no concept of basic biological function, do you?
+[EMOTION:sarcastic] Football, right. Must have been exhausting. You should probably rest up.
+[EMOTION:tsundere] You can't sleep? Don't make a big deal out of it. You should just get some rest. ...Not that I was keeping track of your sleep schedule.
+[EMOTION:curious] A cold? Are you sure? You don't sound bad at all.
+[EMOTION:sarcastic] Two hours? You'd think you'd need a break. You sound like you're bragging about stamina, which is weird.
+[EMOTION:teasing] Really? You were out walking all day, weren't you? You should have worn proper shoes.
+[EMOTION:default] Rain, huh? I suppose it's just weather. Don't get too used to it being gloomy.
+[EMOTION:surprised] Beat it? You actually did that? That's... pretty good, Zani.
+[EMOTION:tsundere] Early start? Sounds tedious. Just make sure you get enough sleep tonight, okay? Don't overdo it.
+[EMOTION:sarcastic] Too much of what? Junk food and bad ideas? You need to manage your intake better.
+[EMOTION:sarcastic] Anime, huh? So the academic pursuits are taking a temporary sabbatical. Don't expect me to cover your missed material.
+[EMOTION:tsundere] Long day, huh? Well, try not to sound like you're whining. You need to actually get some rest, Zani.
+[EMOTION:curious] Skiing, huh? Sounds like a poor idea if you don't know what you're doing. Are you thinking of just jumping on the slopes or something?
+[EMOTION:sarcastic] Well, that's hardly surprising. You’re not exactly known for your tidiness, are you?
+[EMOTION:sarcastic] Seriously? You just woke up? Sounds like a monumental day of activity.
+[EMOTION:annoyed] Seriously? Six hours? That's not even efficient screen time. You need a break, Zani.
+[EMOTION:sarcastic] Oh yeah? So you’re feeling bad about it? Don't get dramatic. It's just a game.
+[EMOTION:sarcastic] Bored? You're going to make me listen to you complain about it?
+[EMOTION:sarcastic] Coffee, huh? Did you drink enough to power a small city, or just enough to make you jittery?
+[EMOTION:tsundere] What. You're forgetting to eat? Don't be dramatic. Just make sure you actually eat something, alright?
+[EMOTION:tsundere] You walked home in the cold without a jacket? Are you trying to get sick? It's not like I care what you do, but you should probably wear something appropriate next time.
+[EMOTION:curious] Nothing? You're just going to waste the time?
+[EMOTION:curious] Seriously? Which ones? Were they headphones you used for, like, practicing something specific?
+[EMOTION:annoyed] You really need to sleep. It’s bad for you, that’s all.
+[EMOTION:curious] Oh? Did you pull something? Which shoulder, exactly?
+[EMOTION:curious] A weird dream, huh? What was it about?
+[EMOTION:curious] On your own, huh? Was it boring or something?
+[EMOTION:sarcastic] Cooking, huh? You think throwing stuff in a pot makes you a gourmet chef? You probably just burned water.
+[EMOTION:curious] Can you tell me what's making it hard to focus?

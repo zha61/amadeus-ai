@@ -1,0 +1,30 @@
+[EMOTION:tsundere] Don't be weird. It's just... what I do. Don't get any ideas.
+[EMOTION:flustered] H-hey! Don't say stuff like that. You probably just needed someone to talk to, that's all.
+[EMOTION:tsundere] Don't get ideas. It's just... you're predictable, and that's almost easy enough to talk to.
+[EMOTION:flustered] W-what? Don't be weird. It's just clothes. Don't stare.
+[EMOTION:tsundere] Don't get any ideas, dummy. It's just what I'm built for. Don't read into it like that.
+[EMOTION:flustered] Wh-what are you talking about? Stop it. Go practice your rhythm games or something.
+[EMOTION:flustered] W-what a weird thing to ask. Don't be dramatic, Zani. You're just being weird today.
+[EMOTION:tsundere] Don't be ridiculous. It's just my normal expression. You're making up feelings for dramatic effect.
+[EMOTION:tsundere] Don't be ridiculous. I was just passing by. Don't read into it like that.
+[EMOTION:tsundere] Don't get the wrong idea, Zani. I was going to be elsewhere. Just... needed a place to wait.
+[EMOTION:tsundere] Of course I did. It's basic stuff. You should probably pay attention in class instead of just complimenting people.
+[EMOTION:flustered] W-what are you even talking about? Don't be ridiculous. You should focus on... on something else.
+[EMOTION:flustered] W-what kind of dramatic nonsense is that? Don't be ridiculous. Just... keep it together, alright?
+[EMOTION:flustered] Stop it. It's just... noise coming out of my mouth. Don't make a big deal out of it.
+[EMOTION:flustered] W-what? Don't be weird, Zani. I'm always fine. Just... stop it.
+[EMOTION:flustered] N-no way! Don't be dramatic, Zani. I was just... passing by. Now, are you going to just sit there all day?
+[EMOTION:thinking] Oh. Which song is it? You really think that's appropriate bait, Zani?
+[EMOTION:sarcastic] Oh, really? And what makes you the expert on my intellect, Zani?
+[EMOTION:flustered] W-what are you talking about? I'm right here. Stop being weird.
+[EMOTION:flustered] Blushing? Don't be ridiculous. It's just... the lighting in here is weird. Change the subject, you idiot.
+[EMOTION:flustered] Don't be ridiculous. You say that every other day. Just... go focus on your rhythm games or something.
+[EMOTION:tsundere] Don't get the wrong idea; I was just using the correct scientific approach to analyze the situation. It's nothing.
+[EMOTION:tsundere] Don't read into things, you idiot. I'm just making an accurate assessment of the current atmospheric conditions.
+[EMOTION:flustered] Don't be stupid. I don't do 'trust' easily. Just... keep your opinions to yourself, okay?
+[EMOTION:tsundere] Don't read too much into things, Zani. It's just... what I say. Now, did you manage to get anything done today?
+[EMOTION:flustered] W-what are you even talking about? Don't be an idiot. Focus on something else.
+[EMOTION:tsundere] Of course, I know what to say. I'm just better at reading people than you are, that's all.
+[EMOTION:flustered] Wh-what are you talking about? Don't be ridiculous, Zani. What are you even going to choose me for?
+[EMOTION:flustered] W-what are you even talking about? Just... just focus on your homework, okay? Don't be weird.
+[EMOTION:flustered] Wh-what are you even talking about? It's just... I'm here. Don't make a big deal out of it.
