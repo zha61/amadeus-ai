@@ -2,7 +2,15 @@
 
 **Read CLAUDE.md first, then this block, then the newest entry below.**
 
-## ⭐ 2026-09-27 (late night) — bugs.md 93 SHIPPED (log sink). NEXT: Zani's live check.
+## 🌐 2026-09-28 — Public snapshot: github.com/zha61/amadeus-ai
+Public snapshot of the private working repo. Third-party character assets and probe results that embed game
+script or private diary text are excluded.
+
+## ✅ 2026-09-29 — bugs.md 93 LIVE-VERIFIED (log sink works; one session). New from the logs: backlog #218, #219.
+✅ **LIVE-VERIFIED 2026-09-29 18:18–18:21** (one session, checked by reading the files): all 6 logs created with spawn headers; whisper output arrives after ~8s of imports; one reply produced a renderer `[Perf]` line, the full fish `[TTS]` chain and rag retrieval lines; 0 LipSync peak/ticker lines kept; at close the Ollama log shows the diary (18:20:51) and summary (18:20:58, 93 tokens) and main.log has no facts-close timeout (1 exchange → skipped-short, as designed).
+**Next session (fresh):** #219 (1-line fix), #218, #217, #205 (repetition check), #206 (read Ollama log after 3 cold boots).
+
+## (done) 2026-09-27 (late night) — bugs.md 93 SHIPPED (log sink).
 1. Relaunch. `ls data/logs/` must show fish, http, rag, whisper, main and renderer `.log`, each server file
    with a `=== … spawn <name> pid … ===` header.
 2. Send one message. `renderer.log` must hold a `[Perf]` line; `fish.log` must hold `[TTS]` lines.

@@ -1683,3 +1683,16 @@ copies. **No app code, data or ChromaDB was changed.**
      while planning #216. After a memory-panel add/edit/delete, the active set for the rest of that session
      is store order, not `_factRank` order, so a live upcoming exam could fall out if >20 facts exist. Only
      matters above 20 facts (store has 3 today). Fix sketch: call `initFacts()` instead. Small, low risk.
+218. **The close-time diary re-index never finishes — it races the quit.** First seen 2026-09-29 in the new
+     `renderer.log` (bugs.md 93): `[RAG] diary index skipped: Failed to fetch` at 17:20:59.066, the same
+     millisecond as the page's unload lines. `onSaveDiarySummary`'s `finally` calls `indexDiaryInBackground()`,
+     but main.js then runs Step 5 and quits, killing the fetch (and the RAG server). Harmless today: the next
+     boot's `/index-diary` adds the entry (50/50 entries present on 2026-09-27). A silent fallback that works —
+     so it is a clarity issue, not a data loss. Options: drop the close-time call, or let main await it.
+219. **Two small log-noise items from the first live logs (2026-09-29).** (1) `main.log` gets one Electron
+     warning per launch: `'console-message' arguments are deprecated`, because `attachRendererLog`'s listener
+     also accepts the old positional arguments as a backup. The `details` form works (levels are correct in
+     `renderer.log`), so the fix is to take only `details` — 1 line in main.js + rebuild; re-run
+     `dev/log_sink_test.js` (its positional-shape check changes). (2) At unload the renderer logs
+     `BGM track not found: music/believe_me.mp3` and `[BootVideo] error` — teardown clears `src`, which fires
+     `error` events. They read like real failures in the log; they are not.

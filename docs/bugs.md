@@ -904,7 +904,7 @@ Zani asked for a review of the 77 implementation. The fix itself stands; the way
 
 ### 93. Every Python server wrote into a pipe nothing read — output lost, and a full pipe blocks the server
 - **Found:** 2026-09-27 by the silent-fallback audit (backlog #203/#204). **Fixed:** same day. `main.js`
-  (rebuilt, asar verified), `kurisu_rag_server.py`, `amadeus.html`. Tag `pre-203`. ⚠️ **NOT live-verified yet.**
+  (rebuilt, asar verified), `kurisu_rag_server.py`, `amadeus.html`. Tag `pre-203`. ✅ **LIVE-VERIFIED 2026-09-29 18:18–18:21** (one session, checked by reading the files): all 6 logs created with spawn headers; whisper output arrives after ~8s of imports; one reply produced a renderer `[Perf]` line, the full fish `[TTS]` chain and rag retrieval lines; 0 LipSync peak/ticker lines kept; at close the Ollama log shows the diary (18:20:51) and summary (18:20:58, 93 tokens) and main.log has no facts-close timeout (1 exchange → skipped-short, as designed).
 - **Bug:** `spawnTtsServer`/`spawnHttpServer`/`spawnRagServer`/`spawnWhisperServer` passed no `stdio`, so
   Node gave each child a PIPE, and nothing ever read `proc.stdout`/`proc.stderr`. (1) Every server line was
   lost — errors, watchdog context, the RAG error branch. (2) A pipe that fills BLOCKS the writer: measured

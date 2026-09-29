@@ -1,6 +1,6 @@
 # AMADEUS — Kurisu Makise AI (Steins;Gate 0)
 # Electron macOS app · Zani (zha61, he/him) · M5 MacBook Pro 16GB RAM
-# Last updated: September 27, 2026 (bugs.md 93 — log sink in data/logs/; NOT yet live-verified)
+# Last updated: September 29, 2026 (bugs.md 93 — log sink in data/logs/; live-verified)
 
 ## ZANI'S STANDING INSTRUCTIONS — read these before anything else
 
