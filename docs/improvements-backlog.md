@@ -1625,14 +1625,23 @@ copies. **No app code, data or ChromaDB was changed.**
      to the renderer AND leaves no record (it did not happen in the window: 52/52 P1 turns have a trace
      line). Fix sketch (needs his yes): one rotating `data/logs/` file per process, and a trace line
      for the RAG error branch. Design it with #203; state its disk cost first.
-205. **The Whisper no-speech gate let a repetition hallucination through.** `rag_trace.log`
+205. ✅ **FIXED 2026-09-30 — bugs.md 97 (compression ratio per segment + a 4-repeat check; tag `pre-205`). Live-checked: 0 false positives in 11 utterances; the loop case is offline-only (Whisper de-duplicates spoken repeats).** **The Whisper no-speech gate let a repetition hallucination through.** `rag_trace.log`
      2026-09-27 12:52:02 holds the query "What a great deal, a great deal, a great deal, …" (cut at 80
      chars) — the first voice turn of that session (P1 `voice-rms`, `rescueHoldMs 1600`). A phrase
      repeated 6+ times is Whisper's typical output on non-speech. The gate (`amadeus.html`,
      `hfHandleUtteranceBlob`) checks only `no_speech_prob` and `avg_logprob`, so she replied to it.
      n=1; RMS (#201) passes more noise to Whisper than Silero would. ✅ **CONFIRMED 2026-09-27: Zani did NOT
      say it** — a hallucination reached her. BROKEN. Possible fix: a repetition check on the transcript. Not a display change.
-206. **Cold boot: the RAG readiness gate and the renderer prewarm both fell back (1 of 2 boots).**
+206. ✅ **CLOSED 2026-09-30 — zero code. RAG gate WORKS (3/3 new cold boots); renderer prewarm never completes a real prefill (→ #224); diary index OK.**
+     **Evidence (Ollama `server*.log`, `main.log`, `renderer.log`, `rag.log`):** cold boots = both models loaded at launch:
+     09-27 12:50 (original) and 17:27 (model-expired), 09-29 18:18 and 09-30 19:29 (first launch after a Mac REBOOT).
+     bge-m3 warm-up embed 16.4s (original only) → then 2.96 / 2.96 / 3.45s; "RAG server ready" 4.5s and 6.3s after
+     launch (main.log exists from 09-29) — inside the 10s cap. `/health` answers only after the warm-up
+     (`kurisu_rag_server.py` warms at import, `app.run` last), so "ready" means warm. The 16.4s did not recur (n=3).
+     Renderer prewarm: HTTP 500 at 4.00s at 4/4 cold boots (the bugs.md 84 cap holds). `/index-diary` 200 at every
+     boot, no error. `dev/diary_index_check.py` after the 20:51 close: 1 missing (that entry) — expected (bugs.md 95).
+     *Original report, kept for history:*
+     **Cold boot: the RAG readiness gate and the renderer prewarm both fell back (1 of 2 boots).**
      Ollama log 2026-09-27: at the cold boot (12:50:55) the RAG server's bge-m3 warm-up embed took
      **16.4s** (ended 12:51:14), longer than `waitForRagServer`'s 10s cap, so the window opened without
      RAG ready — against bug 62's intent — and the warm-up ran into the boot-video window. The renderer
@@ -1641,6 +1650,10 @@ copies. **No app code, data or ChromaDB was changed.**
      the video is not measured (Zani's check passed that day, boot not identified). **Next step (zero
      code):** read the Ollama log after the next 3 cold boots; the embed duration and prewarm status
      are there. Verdict UNKNOWN until n≥3.
+     **Since bugs.md 95 (2026-09-29)** the boot index is the ONLY index of a new diary entry. If a cold boot makes
+     both the boot try and its +30s retry fail, the entry waits for the next launch (the 5s client abort does not
+     stop the server: a slow request can still finish server-side). Read `rag.log` `/index-diary` lines at each of
+     the 3 boots too, and run `python3 dev/diary_index_check.py` after them.
 207. **DeepL fallback: alive but never exercised.** `/v2/usage` with `config.json`'s key → HTTP 200,
      `character_count 0 / 500000` (2026-09-27). The key is VALID — REFERENCE.md's "stale" refers to a
      value once listed in the doc, not this key. gemma4 translated 52/52 P1 turns, so the path has run
@@ -1679,20 +1692,87 @@ copies. **No app code, data or ChromaDB was changed.**
      gemma4 lists ALL known facts as confirmed (false-confirm rate 1.00 in both mention cells) and a dense
      chat is cut 27/30 at 800. Per the pre-registration: A + refresh on duplicate/replace only, with A worded
      as "learned", not "last mentioned".
-217. **`_memoryRefreshActive()` takes the first 20 facts UNRANKED; boot (`initFacts`) ranks them.** Found
+217. ✅ **FIXED 2026-09-30, LIVE-VERIFIED the same evening — bugs.md 96 (`_memoryRefreshActive` calls `initFacts`; tag `pre-217`). Correction: the ORDER also changed below 20 facts, when a dated fact ranks above one stored before it.** **`_memoryRefreshActive()` takes the first 20 facts UNRANKED; boot (`initFacts`) ranks them.** Found
      while planning #216. After a memory-panel add/edit/delete, the active set for the rest of that session
      is store order, not `_factRank` order, so a live upcoming exam could fall out if >20 facts exist. Only
      matters above 20 facts (store has 3 today). Fix sketch: call `initFacts()` instead. Small, low risk.
-218. **The close-time diary re-index never finishes — it races the quit.** First seen 2026-09-29 in the new
+218. ✅ **FIXED 2026-09-29 — bugs.md 95 (close-time call removed; boot reconciles; LIVE-VERIFIED 2026-09-30).** **The close-time diary re-index never finishes — it races the quit.** First seen 2026-09-29 in the new
      `renderer.log` (bugs.md 93): `[RAG] diary index skipped: Failed to fetch` at 17:20:59.066, the same
      millisecond as the page's unload lines. `onSaveDiarySummary`'s `finally` calls `indexDiaryInBackground()`,
      but main.js then runs Step 5 and quits, killing the fetch (and the RAG server). Harmless today: the next
      boot's `/index-diary` adds the entry (50/50 entries present on 2026-09-27). A silent fallback that works —
      so it is a clarity issue, not a data loss. Options: drop the close-time call, or let main await it.
-219. **Two small log-noise items from the first live logs (2026-09-29).** (1) `main.log` gets one Electron
+     **2026-09-29 (evening) — it is TIMING-DEPENDENT:** in a 4-turn session the re-index FINISHED (`rag.log`
+     18:47:26 `upserted 1 new entries`; Ollama embed 40ms) because the facts pass (18:47:27, 0.84s) kept the app
+     open; the 1-turn session at 17:20Z skipped facts (`skipped-short`) and the fetch died. Plan with both cases.
+219. ✅ **FIXED 2026-09-29 — bugs.md 94 (rebuilt; LIVE-VERIFIED the same evening).** **Two small log-noise items from the first live logs (2026-09-29).** (1) `main.log` gets one Electron
      warning per launch: `'console-message' arguments are deprecated`, because `attachRendererLog`'s listener
      also accepts the old positional arguments as a backup. The `details` form works (levels are correct in
      `renderer.log`), so the fix is to take only `details` — 1 line in main.js + rebuild; re-run
      `dev/log_sink_test.js` (its positional-shape check changes). (2) At unload the renderer logs
      `BGM track not found: music/believe_me.mp3` and `[BootVideo] error` — teardown clears `src`, which fires
      `error` events. They read like real failures in the log; they are not.
+220. **A quit during the boot diary index can SIGTERM the RAG server mid-`upsert` — effect UNTESTED.** Found while
+     planning #218 (2026-09-29). `stopServices()` (`main.js`) calls `ragProcess.kill()` (SIGTERM; Python's default
+     handler exits at once). #218 removed the CLOSE-time case; the boot-time case remains if Zani quits within ~25s of
+     launch while `/index-diary` embeds. SQLite writes are atomic; what ChromaDB 1.5.8 does to its vector index on a
+     kill mid-write is NOT tested. Cheap check first: on a COPY, kill a server mid-upsert and reopen it. Detect any
+     drift with `dev/diary_index_check.py`. Low priority — rare window, and the next boot re-adds a missing entry.
+221. **Her VOICE sounds too calm on tsundere/flustered replies — "no fluster in the voice".** Raised by Zani
+     2026-09-30 (example message: "You look a bit cuter today"). His answers: **too calm, no fluster; no English
+     words at the start; unsure whether it is tsundere only or flustered too.** This is the TTS voice, NOT the text:
+     not #180 (closed), not reply length, not the display. It changes how she sounds → CLAUDE.md 53 (blind A/B by
+     his ear, `pre-221` tag, live trial, one-command revert). Nothing changed yet. Hypotheses, strongest first:
+     - **H1 — the direction reaches only her FIRST sentence.** Fish's own S2 guide: a tag's effect lasts *"until the
+       next tag or end of the sentence"* ([fish.audio blog, S2 word-level control](https://fish.audio/blog/fish-audio-s2-fine-grained-ai-voice-control-at-the-word-level/)).
+       `/speak` prepends ONE `EMOTION_TAGS` line (`kurisu_fish_server.py` Step 3) and her replies average ~3.2
+       sentences, so sentences 2+ get no direction. The July V3 config removed the per-sentence re-anchors
+       (`EMOTION_ANCHOR` in the now-unused `add_prosody_tags`, e.g. `"tsundere": "[still guarded, warmth leaking
+       through]"`) together with the dense pause tags. **V3 was chosen for pause naturalness** (a 1.19s dead-air
+       outlier), not for emotion strength — so this loss was never measured.
+     - **H2 — the `tsundere` direction breaks rules 15 and 32.** Only 1 of 4 fragments ends in an acoustic noun
+       ("herself", "up", "throughout" — rule 32's own bad example), and it asks for a 4-stage arc (sharp → catching →
+       warm → clipped) inside 1–2 short sentences. `flustered` is closer to compliant but also an arc.
+     - **H3 — speed is fixed at 1.1** for every emotion (Zani's July choice; do NOT reintroduce turn-to-turn variance).
+     - **H4 — the Japanese words are gentle** (e.g. `いいけどさ、ちゃんと自分も面倒見てよね`). The translate prompt is
+       register-aware; changing it touches #196's closed work — test last, if at all.
+     **Plan sketch (needs a reviewed plan and his yes):** fixed Japanese lines taken from `fish.log` (real tsundere and
+     flustered replies, 2+ sentences), synthesised under arms: A = current; B = H2 rewrite (short, rule-32 fragments,
+     one quality); C = B + a SHORT re-anchor at each sentence start (H1). Measure pauses like `dev/voice_ab_test.py`
+     (V3's reason must not regress: no dead air > ~0.6s within a sentence). Blind paired A/B for Zani
+     (`dev/blind_ab.py` pattern: sides randomised, flipped repeats). Cost ≈ $0.005/sample (~$0.20 for 40). Fish credit
+     only, no gemma4 (Japanese is fixed), so it can run with the app closed or open. Bump `GREETING_TTS_VER` if
+     `EMOTION_TAGS` changes (cached greetings). Check both tsundere AND flustered, since he is unsure which.
+222. **A held "unfinished" hands-free transcript can wait forever after a discard.** Found while planning #205
+     (2026-09-30); Zani chose to record it, not fix it inside #205. If a transcript ends in "and"/"so"/"," it is held
+     (`hf.pendingText`, `HF_RESCUE_RE`) for `HF_RESCUE_MS`. When he starts speaking again, `hfOnSpeechStart` clears the
+     rescue timer. If THAT utterance is then discarded by the gate (noise, or now a #205 loop), the held text has no
+     timer: it is sent only when he speaks again (combined with the new words), or never if the session ends.
+     Old behaviour, not new. Fix sketch: in `hfAfterDiscard`, if `hf.pendingText` is set and no timer runs, re-arm the
+     rescue timer (or send it). Hands-free only; no display change. Needs a test that drives both paths.
+223. **Hands-free (RMS fallback) can get STUCK — status "●" (capturing) or "Transcribing…" — and nothing reaches Whisper.**
+     Seen live 2026-09-30 during the #205 check. After a long voice turn (20:09:30 transcribed, 20:09:38 reply) no
+     request reached Whisper again; Zani saw "Transcribing…" stay on. Two new sessions (20:10:23, 20:11:29, both RMS —
+     Silero fails, #201) stayed on "●" and sent nothing. After a TEXT message and a new session (20:12:27) it worked
+     again (20:12:35 reply). INTERMITTENT. **Not reproduced in the next launch (20:37–20:43):** a suspected stall was only slow
+     (`stt 2044` ms on long audio, 7.4s total); DevTools then read `ctx:'running'`, 1 track. New hypothesis (H3, untested):
+     a SUSPENDED `AudioContext` freezes the analyser's last frame — quiet frame → stuck "Listening…", loud frame → stuck "●";
+     her voice playback resumes the context (it recovered after a spoken text reply). When stuck, also read `audioCtx.state`. **Not caused by #205:** its code runs only after Whisper answers, and Whisper
+     got no request (server healthy, no open connection). Hypotheses, NOT proven — the stuck paths log nothing:
+     (H1) `hfStartRms` starts `floor=1e-6` and updates it only while NOT speaking, so steady noise at session start
+     (BGM restarts on toggle-off) can open an utterance whose release (`band<floor*1.8`) never comes → stuck "●".
+     (H2) "Transcribing…" is only replaced when `hfMaybeRelisten` runs after her audio; it has 5 silent early exits
+     (state, mode, hidden, overlay, `isLoading` at timer time) — one of them may have fired.
+     Next step (zero code first): when stuck, run in DevTools `({state:hf.state, engine:hf.engine, paused:hfRmsPaused,
+     active:hf.active, loading:isLoading, mode:currentMode, hidden:document.hidden})` and note whether BGM played.
+     A fix needs a reviewed plan; logging each early exit (rule 52) is the cheap first part. #201 (Silero) would bypass H1.
+224. **The renderer prewarm (`prewarmOllama`) never completes a real prefill inside its 4s boot cap, and shows NO
+     measurable benefit.** Found in #206 (2026-09-30). In 8 launches (renderer.log 09-29 → 09-30) it was aborted
+     5 times (all cold boots included) and "primed" 3 times — but those 3 finished 0.8–2.4s after page start, too fast
+     for a ~3900-token prefill: Ollama still held the PREVIOUS session's prefix. First-turn prefill: aborted 750 / 898
+     / 987 ms (n=3) vs primed 1369 / 1414 ms (n=2) — primed was NOT faster (n too small to conclude). A real turn
+     prefills the same prompt in ~0.9s, yet the boot prewarm takes >4s: cause UNKNOWN (the RAG embeds had finished
+     before it started). Cost today: ~4s of GPU work at boot plus the ~1.7s tail after abort (bugs.md 84), with no
+     sign of benefit. **Latency work is CLOSED by Zani (CLAUDE.md instruction 2): record only, do not propose a fix
+     unprompted.** Any change sits next to the boot video (CLAUDE.md 36) and needs a plan + his yes.
+

@@ -1,6 +1,6 @@
 # AMADEUS — Kurisu Makise AI (Steins;Gate 0)
 # Electron macOS app · Zani (zha61, he/him) · M5 MacBook Pro 16GB RAM
-# Last updated: September 29, 2026 (bugs.md 93 — log sink in data/logs/; live-verified)
+# Last updated: September 30, 2026 (bugs.md 97 — #205 Whisper repetition gate)
 
 ## ZANI'S STANDING INSTRUCTIONS — read these before anything else
 
@@ -131,10 +131,19 @@ three days: *"her tone sounds way too calm"*, *"I feel like I like her voice bef
 - `node dev/facts_close_test.js` — 29 checks + 3 mutants (bugs.md 92). The OUTCOME check: after a close with a fact in
   the reply, the fact is IN `amadeus_facts_v1`. Run it after touching `extractFactsNow`, `_parseFactsJson`, `mergeFacts`,
   the `onRunFactsExtraction` handler or main.js Step 5. Also run `node dev/facts_abort_test.js` (15).
-- `node dev/log_sink_test.js` — 29 checks + 4 mutants (bugs.md 93), ~15s. Run after touching `spawnLogged`,
+- `node dev/log_sink_test.js` — 33 checks + 5 mutants (bugs.md 93/94), ~36s — check 9 runs the REAL Electron
+  (hidden window, ~150 MB while it runs; the listener must take ONE parameter, bugs.md 94). Run after touching `spawnLogged`,
   `childStdio`, `installMainLog`, `attachRendererLog` or any spawn in main.js.
+- `node dev/diary_close_index_test.js` — 8 checks + 3 mutants (bugs.md 95). Run after touching the
+  `onSaveDiarySummary` handler or the boot `indexDiaryInBackground()` calls. Nothing may index at close.
+- `node dev/unload_log_test.js` — 6 checks + 3 mutants (bugs.md 94), <1s. Run after touching `beforeunload`, `initBGM`'s
+  `onerror` or the `[BootVideo]` trail. `_pageUnloading` must be set FIRST in `beforeunload`.
 - **Logs (bugs.md 93):** `data/logs/{fish,http,rag,whisper,main,renderer}.log` (+ `.1`). Read these FIRST when
   something failed silently. Renderer log drops only `[LipSync] peak:` / `[LipSync ticker]` info lines.
+- `node dev/whisper_gate_test.js` — 12 checks + 3 mutants, and `python3 dev/whisper_server_test.py` — 4 checks
+  (bugs.md 97). Run after touching `hfHandleUtteranceBlob`, `hfRepeatRun`, the `HF_*` gate constants or `/transcribe`.
+- `node dev/facts_refresh_rank_test.js` — 7 checks + 3 mutants (bugs.md 96). A memory-panel add/edit/delete must
+  re-select facts with the BOOT ranking (`initFacts`). Run after touching `initFacts`, `_factRank` or `_memoryRefreshActive`.
 - `node dev/facts_age_test.js` — 19 checks + 3 mutants (backlog #216). Proves the prompt is BYTE-IDENTICAL to
   `bbb0c8b` for facts under 30 days old, and that a 30+ day undated fact carries `[learned over … — it may have changed]`.
 - `node dev/greeting_cache_test.js` — 5 checks (bugs.md 91). Every greeting must be READ from the file the
@@ -251,7 +260,7 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
 - Fish Audio S2 Pro TTS via Flask port 5002 (`kurisu_fish_server.py`)
 - RAG server Flask port 5003 (`kurisu_rag_server.py`) — spawned by main.js
 - Translator: **gemma4 is primary** (`TRANSLATOR='gemma4'` in kurisu_fish_server.py) — register-aware EN→JP via `translate_via_gemma()`. DeepL is FALLBACK only (header: `Authorization: DeepL-Auth-Key ...`). Set `TRANSLATOR='deepl'` to revert.
-- Whisper STT via Flask port 5004 (`kurisu_whisper_server.py`) — `mlx-community/whisper-large-v3-turbo`; returns `no_speech_prob`/`avg_logprob` for the hands-free gate
+- Whisper STT via Flask port 5004 (`kurisu_whisper_server.py`) — `mlx-community/whisper-large-v3-turbo`; returns `no_speech_prob`/`avg_logprob`/`compression_ratio` (max per segment) for the hands-free gate, which also drops a 2–6 word group repeated 4+ times (bugs.md 97)
 - Voice model reference_id: `c4d832799bf845ee86638a1bc0cd0d41`
 - bge-m3 (Ollama) — RAG embedding, 1024-dim multilingual
 - Silero VAD v5 (vendored vendor/vad/, lazy-loaded) — hands-free voice sessions; RMS fallback in amadeus.html
@@ -490,7 +499,10 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
 
 ## RAG (Phase 1)
 - FOUR ChromaDB collections at `~/Documents/Amadeus/data/chroma/`: `kurisu_ja` (756 clips) + `kurisu_en` (1672 lines) + `amadeus_diary` (56 rows as of 2026-09-03) + `amadeus_behavior` (15 situational rules, indexed at startup)
-- **`amadeus_diary` row ids are `'d' + sha1(text)[:16]` (bugs.md 78).** They were the entry's DATE, or its ARRAY POSITION when dates collided — and entries are `unshift()`ed, so positions shift on every write and `upsert` created a new row each launch. That left 79 rows for 55 entries, one stored 5×, **weighting retrieval by duplication rather than relevance.** `/index-diary` skips by TEXT, not id, so it is correct whether or not `dev/dedupe_diary.py` has run, and a normal launch now embeds **0** entries instead of all 50 (it is fire-and-forget during boot — CLAUDE.md 36/37).
+- **`amadeus_diary` row ids are `'d' + sha1(text)[:16]` (bugs.md 78).** They were the entry's DATE, or its ARRAY POSITION when dates collided — and entries are `unshift()`ed, so positions shift on every write and `upsert` created a new row each launch. That left 79 rows for 55 entries, one stored 5×, **weighting retrieval by duplication rather than relevance.** `/index-diary` skips by TEXT, not id, so it is correct whether or not `dev/dedupe_diary.py` has run, and a normal launch embeds only what is NEW — usually **1** entry, the previous session's (bugs.md 95: the close no longer indexes; the boot index reconciles) — instead of all 50 (it is fire-and-forget during boot — CLAUDE.md 36/37).
+- **Invariant (bugs.md 95): every localStorage diary entry is in `amadeus_diary`.** Check it with
+  `python3 dev/diary_index_check.py` (app CLOSED; read-only, works on copies; exit 0 = none missing, 3 = missing,
+  1 = could not read — it never reports 0 for data it did not decode). Right after a close, 1 missing is EXPECTED.
 - **The collection is deliberately a SUPERSET of the 50-entry localStorage diary** — it retains entries that aged out. Never "mirror localStorage"; that destroys real long-term memory.
 - Server: port 5003, k=3 per collection, 4s timeout, falls through on failure. Renderer has a 60s circuit breaker (`_ragDownUntil`) so a dead server costs 4s ONCE per minute, not per message.
 - HYBRID retrieval: dense (bge-m3) + Okapi BM25 lexical (EN words / JA char-bigrams, zero deps) fused by reciprocal-rank fusion. Gates: `STYLE_THRESHOLD=0.7` (en/ja), `BEHAVIOR_THRESHOLD=0.5`. Per-query distances logged to `data/rag_trace.log` for tuning.

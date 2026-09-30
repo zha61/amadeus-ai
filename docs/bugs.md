@@ -620,6 +620,7 @@ Zani asked for a review of the 77 implementation. The fix itself stands; the way
 - **Fix, two halves, and they are independent by design:**
   1. **`kurisu_rag_server.py`** — id is now `'d' + sha1(text)[:16]`, so identical text always maps to the same row and duplicates are impossible by construction. **The skip test is on TEXT, not on id**, deliberately: skipping by id would treat every legacy row as absent and insert 50 fresh copies on the first launch after this change — silently doubling the very problem being fixed. Matching on text is correct whether or not the migration has run, so **deployment order does not matter.**
   2. **`dev/dedupe_diary.py`** — one-off migration, dry-run by default, backs up `chroma.sqlite3` and refuses to proceed without a verified backup. Re-keys by add-then-delete so a crash mid-way loses nothing.
+- *(2026-09-29, bugs.md 95: the close-time index was removed, so a normal launch now embeds the previous session's entry — usually 1, not 0.)*
 - **Bonus fix, same change:** the old code re-embedded **all 50 entries on every launch**, fire-and-forget during boot (`indexDiaryInBackground()`, `amadeus.html:866/977`), on the GPU that renders her — precisely what CLAUDE.md 36/37 and bugs 60/62/63 exist to prevent. With the text skip, **a normal launch embeds 0**.
 - **Verified on an isolated COPY of the live database, never on the live one:**
   - migration 79 → 55 rows; **0 texts lost, 0 added**, all 55 dates preserved; re-running is a clean no-op (idempotent).
@@ -921,8 +922,117 @@ Zani asked for a review of the 77 implementation. The fix itself stands; the way
   now writes a trace line (#204), `parsEmo` logs an unknown/missing tag (#212, return value unchanged),
   main warns when the fallback diary prompt is used (#210). Disk worst case 24 MB. Logs are local
   (`data/` is git-ignored) and hold her replies and his words.
-- **Test:** `node dev/log_sink_test.js` — 29 checks + 4 mutants. CONTROL: the same 2 MB child on an
+- **Test:** `node dev/log_sink_test.js` — 29 checks + 4 mutants (33 + 5 since bugs.md 94). CONTROL: the same 2 MB child on an
   unread pipe BLOCKS; OUTCOME: with `spawnLogged` it exits and all 2 MB is in the file.
 - **Revert:** `git checkout pre-203 -- main.js kurisu_rag_server.py amadeus.html && npm run build`.
 - **Lesson:** a child's stdio is part of its lifecycle. Default `'pipe'` with no reader is a slow-fuse hang
   AND a silent-evidence sink (CLAUDE.md 52). Every spawn must say where its output goes.
+
+### 94. False log lines: an Electron deprecation warning at every launch, and "failures" at every close
+- **Found:** 2026-09-29 in the first live logs of bugs.md 93 (backlog #219). **Fixed:** same day. `main.js`
+  (rebuilt, asar `main.js` byte-identical to source), `amadeus.html`. Tag `pre-219`. ✅ **LIVE-VERIFIED 2026-09-29 18:44–18:47** (4 text turns, normal close): no deprecation line after the newest `main.log` header; `[unload]` marker then 4 `[BootVideo] … (unload teardown)` lines; no `BGM track not found`; `[Perf]` lines carry `INFO`. No WARNING/ERROR line occurred live, so that level rests on the real-Electron test (check 9).
+- **Bug 1:** `main.log` got `'console-message' arguments are deprecated` once per launch. Electron 35.7.5's own
+  code (read from the framework binary): `this.listeners("console-message").some(e=>e.length>1)&&warn()` — it
+  warns when ANY listener DECLARES more than one parameter, whether or not it reads them. `attachRendererLog`'s
+  listener was `(details, lvl, msg)`. **Fix:** `(details)` only. **Probed on the real Electron 35.7.5 (same binary
+  as `dist/`, `cmp`):** a 1-parameter listener → no warning; `details.level` is the string `debug` / `info` /
+  `warning` / `error`. That mattered: the only live `renderer.log` had 46 INFO and 0 WARNING/ERROR lines, so the
+  level mapping had never been seen working.
+- **Bug 2:** at close, `beforeunload` clears every media `src`, which fires error events. The BGM `onerror` logged
+  `BGM track not found` (false) and then called `tryPlay()` — it STARTED the next track after `audioCtx.close()`.
+  The boot-video trail logged `[BootVideo] error`. **Fix:** `_pageUnloading`, set FIRST in `beforeunload`, plus one
+  `[unload]` marker line. The BGM `onerror` returns early during unload (no line, no new track). The trail lines are
+  KEPT and end in `(unload teardown)` (CLAUDE.md 48d: label, never drop). Safe because Electron fires the window
+  `close` event BEFORE `beforeunload`, and main cancels it while the diary runs — so `beforeunload` runs once, at
+  the real exit (log: diary 17:20:51Z, unload lines 17:20:59Z).
+- **Test:** `node dev/log_sink_test.js` 33 + 5 mutants — check 9 runs the LOG SINK block in the REAL Electron and
+  asserts no deprecation line and correct levels; the 3-parameter mutant is caught only there. `node
+  dev/unload_log_test.js` 6 + 3 mutants — the flag is already true at every `src` clear; during unload a BGM error
+  writes nothing and creates no `Audio`; outside unload the old skip still works.
+- **Revert:** `git checkout pre-219 -- main.js amadeus.html && npm run build`.
+- **Lesson:** a deprecation can hinge on a function's DECLARED arity, not on what it reads — a "backup" parameter
+  is enough to trigger it. And a log line written during teardown needs the same scrutiny as any other: it
+  looked like a failure, and the handler behind it was still doing work.
+
+### 95. The close-time diary re-index raced the quit — it finished only when a later step kept the app open
+- **Found:** 2026-09-29 in the first live `renderer.log` (backlog #218). **Fixed:** same day. `amadeus.html` (no rebuild),
+  a comment in `kurisu_rag_server.py`. Tag `pre-218`. ✅ **LIVE-VERIFIED 2026-09-30 (2 launches).** Launch 1 (4 turns, close 19:32): no `diary index skipped`, no `/index-diary` at close, `diary_index_check.py` → 1 missing (the new 19:31 entry), exit 3 — as expected. Launch 2: `rag.log` 19:33:27 `upserted 1 new entries`; check → **0 missing**, 69 documents, exit 0. **In launch 2 the diary was read from `000118.ldb`** (LevelDB had compacted it) — the `.ldb`/Snappy path, added during the build, was needed on the very first real use.
+- **Bug:** `onSaveDiarySummary`'s `finally` acked main (`diarySummarySaved()`) and THEN fired `indexDiaryInBackground()`,
+  never awaited. Main went on at once, ran Step 5 (facts) and quit; `stopServices()` SIGTERMs the RAG server.
+  **Evidence, same day:** a 1-message close (facts skipped) → `[RAG] diary index skipped: Failed to fetch` at the
+  unload millisecond; a 4-message close (facts ran 0.84s) → `upserted 1 new entries`. Timing decided it. Harm was
+  nil: the next boot's index added the entry (18:45:06 `upserted 1`), and a check on copies found **50/50** diary
+  entries in ChromaDB. But it was unawaited work during shutdown, a false failure line, and a window in which the
+  quit could kill the server mid-`upsert` (effect untested — backlog #220).
+- **Fix:** removed the close-time call. localStorage is the source of truth, ChromaDB a derived index, and the boot
+  index (both boot paths) is an idempotent reconciliation — `/index-diary` skips by text. Rejected: awaiting it at
+  close (new IPC + preload + rebuild, inside a 40s budget that 12+12+25s can already exceed, and a timed-out await
+  still leaves the server writing at the kill). Cost: +1 bge-m3 embed per boot (~40ms warm), after the reveal — this
+  already happened after every close that lost the race. Her prompt is unchanged: the newest entry is in the 7-entry
+  window regardless of RAG.
+- **Test:** `node dev/diary_close_index_test.js` — 8 checks + 3 mutants (the shipped handler extracted by anchor:
+  summary saved, main acked exactly once on every path, 0 index calls and 0 fetches at close; both boot paths
+  still index). **Outcome tool:** `python3 dev/diary_index_check.py` — decodes LevelDB `.log` AND `.ldb` (Snappy,
+  pure Python; highest sequence wins) and reports diary entries missing from ChromaDB; exits 1 if it cannot read.
+  Negative control: one row removed from a COPY → exactly 1 missing, exit 3.
+- **Revert:** `git checkout pre-218 -- amadeus.html kurisu_rag_server.py`, then relaunch.
+- **Lesson:** for a derived index, reconcile at startup and CHECK THE INVARIANT; do not fire unawaited writes on the
+  way out. A log line said "skipped"; only a check of the data could say whether anything was lost.
+
+### 96. A memory-panel change re-selected her facts UNRANKED — boot ranks them
+- **Found:** 2026-09-27 while planning #216 (backlog #217). **Fixed:** 2026-09-30. `amadeus.html` only (no rebuild).
+  Tag `pre-217`. ✅ **LIVE-VERIFIED 2026-09-30 19:52:** same 3 facts, same order, before and after a refresh in
+  DevTools; no renderer error. The >20 effect rests on the offline test (the store holds 3 facts).
+- **Bug:** boot selects the 20 facts she sees with `initFacts()` — ranked by `_factRank` (upcoming event first, then the
+  last week, then the rest). After a memory-panel add, edit or delete, `_memoryRefreshActive()` re-selected them with
+  `loadFacts().slice(0,FACTS_INJECT_MAX)` — STORE order. Two effects for the rest of that session: (1) above 20 facts, a
+  live upcoming event past store position 20 fell out of her prompt; (2) at any size, a dated fact that ranks above a
+  fact stored before it lost its place (with only undated facts the order is the same — they all rank 2 and the sort
+  is stable). The backlog said only (1). Not reached yet: the store holds 3 facts, and a panel change is rare.
+- **Fix:** `_memoryRefreshActive(){ initFacts() }` — ONE selection policy for both read paths. The store order is not
+  touched (the panel rows use store indices; ranking the store would make the next edit change the wrong fact). The
+  in-session extractor still does NOT refresh the active set (boot freeze, CLAUDE.md 41). Her boot prompt is
+  byte-identical; after a panel change it is now the prompt the next boot would build.
+- **Test:** `node dev/facts_refresh_rank_test.js` — 7 checks + 3 mutants. Shipped code extracted by anchor; outcomes in
+  `formatFactsSection()`: 25 facts with the exam at store position 22 stay in the prompt after add, delete and edit;
+  the active set after each change equals a fresh `initFacts()`; an added fact appears at once; boot output is
+  byte-identical to `b8e929e` on 4 fixtures. Mutants: the old slice, `initFacts` without its sort, a refresh that
+  does not re-read the store.
+- **Revert:** `git checkout pre-217 -- amadeus.html`, then relaunch.
+- **Lesson:** two code paths that select the same thing must call the same function. A copy of the selection with the
+  ranking left out looked like a refresh and was a different policy.
+
+### 97. A Whisper repetition hallucination passed the hands-free gate — loops are CONFIDENT
+- **Found:** 2026-09-27 audit (backlog #205): `rag_trace.log` 12:52:02 holds "What a great deal, a great deal, a great
+  deal, …" as a hands-free (`voice-rms`) query; Zani confirmed he did not say it, and she replied to it. **Fixed:**
+  2026-09-30. `amadeus.html` + `kurisu_whisper_server.py` (no rebuild). Tag `pre-205`.
+  ✅ **Live-checked 2026-09-30:** 0 false positives on 11 real utterances (ratios 0.33–1.74); one real junk output
+  ("you currently", 74 segments, ratio 10.89) discarded. The loop case CANNOT be produced by speaking: Whisper
+  transcribed 8 spoken repeats of "a great deal" as ONE — it de-duplicates real speech, so the "real phrase said 4×"
+  limit below is also less likely than first thought. The loop case is verified offline only.
+- **Bug:** the gate (`hfHandleUtteranceBlob`) checked only `no_speech_prob > 0.6` and `avg_logprob < -1.0`. A repetition
+  loop has sound in it and is decoded with HIGH confidence, so it passes both. Whisper's own third failure signal —
+  the compression ratio, `mlx_whisper/decoding.py` — was computed per segment and never sent to the app. The loop also
+  ended in "," so the rescue hold (`HF_RESCUE_RE`) kept it 1600ms and then sent it.
+- **Fix:** two signals, either one discards (same `hfAfterDiscard('gate')` path; nothing new on screen, rule 51):
+  **(A)** the server returns `compression_ratio` = the MAXIMUM over segments; the gate discards above
+  `HF_COMPRESSION_MAX = 2.4` (Whisper's default, used per segment as Whisper uses it). **(B)** `hfRepeatRun(text)` — a
+  2–6 word group repeated `HF_REPEAT_MIN = 4`+ times in a row — catches a loop Whisper SPLIT into short segments,
+  where each segment's ratio is low. The discard line now names the reason (`nospeech|logprob|compression|repeat`) and
+  whisper.log prints `compression=` and `segments=` per utterance (rule 52).
+- **Measured before building (pure CPU):** the hallucination's first 80 chars → ratio 3.08. **The ratio on a WHOLE
+  transcript is length-biased** — natural English (canon windows) median 1.09 at 100 chars, 1.74 at 900, 2.00 at 3000,
+  with 1/300 above 2.4 at 900 — so it is NOT applied to the whole transcript (no maximum utterance length exists).
+  Rule B at 4+ repeats: **1 hit in 4403 real texts** (1511 trace queries, 1672 canon lines, 1220 of her replies — the
+  hit is the hallucination) and 0 in 500 canon 1500-char windows; at 3+ it also hit a canon line ("gah hoh ×3").
+  The shipped JS function was re-run on the same corpus: same result.
+- **Known limits:** a 3-repeat loop split into short segments still passes; a real phrase said 4× in one breath is
+  dropped (he must say it again). There are no real Whisper transcripts of Zani yet — whisper.log now keeps the
+  ratio of every utterance. The upstream cause, RMS instead of Silero (#201), is not fixed by this.
+- **Test:** `node dev/whisper_gate_test.js` — 12 checks + 3 mutants (shipped gate by anchor, stub fetch; outcome =
+  submitted or discarded: one-segment loop, split loop, loop ending in ",", normal, "no no no no", 3-repeat, a
+  ~1500-char monologue, old server without the field, ratio exactly 2.4, the old two discards, empty).
+  `python3 dev/whisper_server_test.py` — 4 checks (mlx_whisper stubbed before import, Flask test client).
+- **Revert:** `git checkout pre-205 -- amadeus.html kurisu_whisper_server.py`, then relaunch.
+- **Lesson:** a gate built from a subset of a model's own failure signals has a hole where the missing signal was.
+  And a threshold taken from a library is only valid at the scope the library applies it (per segment, not per text).

@@ -470,8 +470,9 @@ def index_diary():
         # would treat every legacy row as absent and insert 50 fresh copies on the
         # first launch after this change -- silently doubling the very problem it
         # fixes.  Matching on text means a legacy row still counts as indexed.
-        # It also means a normal launch embeds 0 entries instead of all 50, on the
-        # same GPU that renders her during boot (CLAUDE.md 36/37, bugs 60/62/63).
+        # It also means a normal launch embeds only what is new -- usually 1 entry,
+        # the previous session's (bugs.md 95: the close no longer indexes) -- instead
+        # of all 50, on the same GPU that renders her (CLAUDE.md 36/37, bugs 60/62/63).
         seen = set((d or '').strip() for d in col.get(include=['documents'])['documents'])
         ids, docs, metas = [], [], []
         for i, e in enumerate(entries):

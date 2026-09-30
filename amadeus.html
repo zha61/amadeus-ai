@@ -682,7 +682,7 @@ const GREETINGS=[
   ["Hi. ...Don't just stand there. Say something.",'tsundere'],
 ]
 
-let history=[],isLoading=false,currentMode='text',live2dModel=null,pixiApp=null,mediaRecorder=null,audioChunks=[],isRecording=false,isTranscribing=false,subtitleTimer=null,origH=0,origW=0,bgmAudio=null,bgmIndex=0,bgmStarted=false,bgmInterrupted=false,voiceFirstOn=false,voiceSendTimer=null
+let history=[],isLoading=false,currentMode='text',live2dModel=null,pixiApp=null,mediaRecorder=null,audioChunks=[],isRecording=false,isTranscribing=false,subtitleTimer=null,origH=0,origW=0,bgmAudio=null,bgmIndex=0,bgmStarted=false,bgmInterrupted=false,_pageUnloading=false,voiceFirstOn=false,voiceSendTimer=null
 
 // ── LIP SYNC (Web Audio API: amplitude + formant analysis) ──
 // Amplitude (peak time-domain) drives ParamMouthOpenY (jaw drop).
@@ -747,7 +747,7 @@ async function playBootVideo(){
   if(!vid._evtLogWired){
     vid._evtLogWired=true
     for(const ev of ['loadstart','loadeddata','canplay','playing','waiting','stalled','suspend','abort','emptied','error','ended'])
-      vid.addEventListener(ev,()=>console.log('[BootVideo]',ev,'t='+vid.currentTime.toFixed(2),'rs='+vid.readyState))
+      vid.addEventListener(ev,()=>console.log('[BootVideo]',ev,'t='+vid.currentTime.toFixed(2),'rs='+vid.readyState,...(_pageUnloading?['(unload teardown)']:[])))  // #219: label, never drop (CLAUDE.md 48d)
   }
 
   // ── DECOUPLED DESIGN (bug 59 — supersedes the bug 28/30/55/58 patch layers) ──
@@ -3469,6 +3469,8 @@ const HF_RELISTEN_DELAY_MS = 600     // settle after her reply before re-arming
 const HF_RESCUE_MS         = 1600    // resume window when a transcript looks unfinished
 const HF_NO_SPEECH_MAX     = 0.6     // whisper gate: discard utterance above this
 const HF_LOGPROB_MIN       = -1.0    // whisper gate: discard below this confidence
+const HF_COMPRESSION_MAX   = 2.4     // whisper gate: discard a segment ratio above this — Whisper's own default (#205)
+const HF_REPEAT_MIN        = 4       // whisper gate: discard a 2–6 word group repeated this many times in a row (#205)
 const HF_IDLE_MAX_MS       = 10*60*1000  // end a SILENT session (#56, battery) — RESET on speech
 const HF_SESSION_ABS_MAX_MS= 60*60*1000  // absolute cap: a FORGOTTEN session still ends (#56's real intent)
 const HF_RESCUE_RE         = /(\b(and|but|so|or|because|um+|uh+|like)|,)\s*$/i
@@ -3628,6 +3630,22 @@ async function hfOnSpeechEnd(float32Audio){
   }
 }
 
+// Backlog #205: most times a 2–6 word group repeats back-to-back — Whisper's
+// repetition-loop hallucination on non-speech ("What a great deal, a great deal, …").
+// Loops come out CONFIDENT, so no_speech/logprob pass them. This catches a loop that
+// Whisper split into many short segments, which the per-segment compression ratio
+// misses. 4+ repeats: 0 hits in 4903 real texts (trace, canon, her replies).
+function hfRepeatRun(text){
+  const w=String(text||'').toLowerCase().match(/[a-z0-9']+/g)||[]
+  let best=0
+  for(let n=2;n<=6;n++)for(let i=0;i+n<=w.length;i++){
+    let k=1
+    while(i+(k+1)*n<=w.length&&w.slice(i+k*n,i+(k+1)*n).join(' ')===w.slice(i,i+n).join(' '))k++
+    if(k>best)best=k
+  }
+  return best
+}
+
 // Shared downstream for both engines (silero WAV / rms webm).
 async function hfHandleUtteranceBlob(blob,filename){
   const form=new FormData()
@@ -3652,8 +3670,12 @@ async function hfHandleUtteranceBlob(blob,filename){
   // speech model — gets the veto. Discards breath/noise silently and re-arms.
   const noSpeech=typeof data.no_speech_prob==='number'?data.no_speech_prob:0
   const logProb=typeof data.avg_logprob==='number'?data.avg_logprob:0
-  if(!text||noSpeech>HF_NO_SPEECH_MAX||logProb<HF_LOGPROB_MIN){
-    console.log('[HandsFree] gate discard:',JSON.stringify(text),'no_speech=',noSpeech,'logprob=',logProb)
+  const compression=typeof data.compression_ratio==='number'?data.compression_ratio:0   // #205
+  const repeats=hfRepeatRun(text)
+  const reason=!text?'empty':noSpeech>HF_NO_SPEECH_MAX?'nospeech':logProb<HF_LOGPROB_MIN?'logprob'
+    :compression>HF_COMPRESSION_MAX?'compression':repeats>=HF_REPEAT_MIN?'repeat':null
+  if(reason){
+    console.log('[HandsFree] gate discard: reason='+reason,JSON.stringify(text),'no_speech=',noSpeech,'logprob=',logProb,'compression=',compression,'repeats=',repeats)
     hfAfterDiscard('gate')
     return
   }
@@ -3869,6 +3891,7 @@ function initBGM(){
     }
     bgmAudio.onerror=()=>{
       if(bgmInterrupted)return  // session blip — don't skip track
+      if(_pageUnloading)return  // #219: beforeunload cleared src — not a missing file; do not start another track
       console.log('BGM track not found:',shuffled[i],', skipping...')
       i++;tryPlay()
     }
@@ -3921,6 +3944,10 @@ window.addEventListener('load',()=>{
 // device for several seconds after the process exits, causing
 // AUDIO_RENDERER_ERROR on the next launch's boot video.
 window.addEventListener('beforeunload', () => {
+  // #219: FIRST, before any src is cleared — the media events that teardown causes
+  // must not read as failures in renderer.log, and BGM must not start a new track.
+  _pageUnloading=true
+  try { console.log('[unload] releasing audio/video — media abort/emptied/error events after this line are expected') } catch(e) {}
   try {
     // Stop TTS audio first — currentAudio is created with new Audio() so it is
     // NOT in the DOM and won't be caught by querySelectorAll below. It may have
@@ -4079,8 +4106,9 @@ let _factsActive=[]   // frozen at boot — read by buildSystemPrompt all sessio
 // recency slice, a stale preference learned yesterday could crowd out
 // "exam tomorrow". Dated facts that are still live (today or ahead) rank first,
 // then very recent past events (a week back — still worth asking how it went),
-// then everything else by recency. Sorted once at boot; the prompt stays frozen
-// for the session (KV discipline).
+// then everything else by recency. Sorted at boot; the prompt stays frozen for
+// the session (KV discipline) — except after a memory-panel change, which re-runs
+// this SAME selection (_memoryRefreshActive, backlog #217).
 function _factRank(f){
   // undated: neutral — unless learned 180+ days ago (backlog #216), then least useful
   if(!f.event_date||!/^\d{4}-\d{2}-\d{2}$/.test(f.event_date)) return _factAgeDays(f)>=180?3:2
@@ -4522,7 +4550,7 @@ window.setBirthdayMode=function(on){
 let _pendingMemoryNote=null
 const MEM_CATS=[['preference','Preferences'],['project','Projects'],['event','Dates & events'],['person','People'],['other','Other']]
 function _memEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function _memoryRefreshActive(){ _factsActive=loadFacts().slice(0,FACTS_INJECT_MAX) }   // live effect this session
+function _memoryRefreshActive(){ initFacts() }   // live effect this session — same ranked selection as boot (backlog #217)
 function _memoryNote(desc){ _pendingMemoryNote=(_pendingMemoryNote?_pendingMemoryNote+'; ':'')+desc }
 
 function renderMemory(){
@@ -5397,8 +5425,11 @@ if (window.electronAPI) {
         console.warn('[Diary-summary] save failed:', e)
       } finally {
         window.electronAPI.diarySummarySaved()
-        // Re-index diary into RAG corpus now that both new entry + summary are saved.
-        indexDiaryInBackground()
+        // NO re-index here (backlog #218, bugs.md 95).  It was never awaited: main quits
+        // right after this ack, so the fetch raced the quit (and could leave the RAG server
+        // killed mid-upsert).  The boot index (both boot paths) reconciles the new entry —
+        // /index-diary skips by text, so it adds exactly the entries ChromaDB lacks.
+        // Check the invariant with dev/diary_index_check.py (app closed).
       }
     })
   }

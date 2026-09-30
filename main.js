@@ -115,11 +115,13 @@ let _rendererWrite = null
 function attachRendererLog(wc, dir = LOG_DIR) {
   try {
     if (!_rendererWrite) _rendererWrite = openLineLog('renderer', dir)
-    wc.on('console-message', (details, lvl, msg) => {
+    // ONE parameter only (backlog #219): Electron 35 prints a deprecation warning when ANY
+    // 'console-message' listener declares more than one.  details.level is a string —
+    // debug / info / warning / error (probed on Electron 35.7.5, 2026-09-29).
+    wc.on('console-message', (details) => {
       try {
-        // Electron 35: details.level/.message; the positional args are deprecated.
-        const level = typeof details?.level === 'string' ? details.level : (['debug', 'info', 'warning', 'error'][lvl] || 'info')
-        const message = String(details?.message ?? msg ?? '')
+        const level = typeof details?.level === 'string' ? details.level : 'info'
+        const message = String(details?.message ?? '')
         if (!rendererLineWanted(level, message)) return
         _rendererWrite(`${new Date().toISOString()} ${level.toUpperCase()} ${message}`)
       } catch (e) {}

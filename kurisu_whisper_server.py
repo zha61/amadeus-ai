@@ -82,10 +82,18 @@ def transcribe():
         segs = result.get('segments') or []
         no_speech = max((s.get('no_speech_prob', 0.0) for s in segs), default=1.0)
         avg_lp    = min((s.get('avg_logprob', 0.0) for s in segs), default=-10.0)
-        print(f'[whisper] Transcript: {transcript!r} no_speech={no_speech:.2f} logprob={avg_lp:.2f}')
+        # Backlog #205: Whisper's third failure signal. A repetition loop is CONFIDENT,
+        # so it passes the two above; its text compresses well. Whisper already
+        # computed this per segment (and kept the last try when every temperature
+        # fallback failed). Per SEGMENT, as Whisper uses it: on a whole long transcript
+        # natural English drifts toward 2.4.
+        compression = max((s.get('compression_ratio', 0.0) for s in segs), default=0.0)
+        print(f'[whisper] Transcript: {transcript!r} no_speech={no_speech:.2f} logprob={avg_lp:.2f} '
+              f'compression={compression:.2f} segments={len(segs)}')
         return jsonify({'transcript': transcript,
                         'no_speech_prob': round(no_speech, 3),
-                        'avg_logprob': round(avg_lp, 3)})
+                        'avg_logprob': round(avg_lp, 3),
+                        'compression_ratio': round(compression, 3)})
     except Exception as e:
         print(f'[whisper] Error: {e}')
         return jsonify({'error': str(e)}), 500

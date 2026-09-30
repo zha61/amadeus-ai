@@ -5,7 +5,7 @@
  * The helpers are EXTRACTED FROM THE SHIPPED main.js by anchor (exit 2 if one moves).
  * OUTCOME check (CLAUDE.md 50): a child that writes 2 MB now FINISHES, and its output is in
  * the file. CONTROL: the same child on the old default pipe must BLOCK, or this test has no teeth.
- * Plants 4 mutants; each must be caught.
+ * Plants 5 mutants; each must be caught. Check 9 runs the REAL Electron (backlog #219).
  */
 const fs=require('fs'), path=require('path'), os=require('os'), {spawn}=require('child_process'), EventEmitter=require('events')
 const ROOT=path.join(__dirname,'..')
@@ -27,6 +27,29 @@ function load(mutate=x=>x, fakeConsole=null){
       out.rotate=rotateLogIfLarge;out.wanted=rendererLineWanted;out.attach=attachRendererLog;out.install=installMainLog;
       out.ROT=LOG_ROTATE_BYTES;`)(require,path,fs,spawn,PYTHON,ROOT,con,out)
   return out
+}
+// Runs the LOG SINK block inside the real Electron from node_modules (same binary as dist/, checked
+// with cmp 2026-09-29).  Hidden window, no model call, ~2 s, ~150 MB while it runs.
+const ELECTRON=require(path.join(ROOT,'node_modules','electron'))
+function electronRun(block,dir){
+  const bf=path.join(dir,'block.js'), mf=path.join(dir,'main.js')
+  fs.writeFileSync(bf,block)
+  fs.writeFileSync(mf,`const {app,BrowserWindow}=require('electron'),path=require('path'),fs=require('fs'),{spawn}=require('child_process')
+const out={}
+new Function('require','path','fs','spawn','PYTHON','AMADEUS_DIR','console','out',fs.readFileSync(${JSON.stringify(bf)},'utf8')+';out.attach=attachRendererLog')(require,path,fs,spawn,'',${JSON.stringify(ROOT)},console,out)
+app.whenReady().then(()=>{
+  const w=new BrowserWindow({show:false})
+  out.attach(w.webContents,${JSON.stringify(dir)})
+  w.on('page-title-updated',()=>setTimeout(()=>{console.log('EL_DONE');app.quit()},300))
+  w.loadURL('data:text/html,'+encodeURIComponent('<script>console.debug("el-debug");console.log("el-info");console.log("[LipSync] peak: 0.3");console.warn("el-warn");console.error("el-error");setTimeout(()=>document.title="x",100)</script>'))
+})`)
+  const env={...process.env}; delete env.ELECTRON_RUN_AS_NODE
+  return new Promise(res=>{
+    let out=''; const p=spawn(ELECTRON,[mf],{env})
+    p.stdout.on('data',b=>out+=b); p.stderr.on('data',b=>out+=b)
+    const timer=setTimeout(()=>p.kill('SIGKILL'),20000)
+    p.on('exit',()=>{clearTimeout(timer);res({done:/EL_DONE/.test(out),out})})
+  })
 }
 const WRITE2MB="import sys\nfor i in range(10000): sys.stdout.write('o'*99+'\\n'); sys.stderr.write('e'*99+'\\n')\n"
 
@@ -76,16 +99,16 @@ async function checks(mutate=x=>x){
     t('keeps every warning and error, even LipSync', L.wanted('warning','[LipSync] peak: odd')&&L.wanted('warning','[LipSync] setup failed')&&L.wanted('error','x'))
     t('keeps other info lines ([Perf], [Facts], [parsEmo], untagged)', ['[Perf] text you→her 4000ms','[Facts] store size: 3','[parsEmo] no tag → default','plain'].every(m=>L.wanted('info',m)))
   }
-  { // 7. attachRendererLog with the Electron 35 event shape AND the deprecated positional shape
+  { // 7. attachRendererLog with the Electron 35 event shape (fake emitter; the REAL Electron is check 9)
     const warns=[], L=load(mutate,{log(){},warn:(...a)=>warns.push(a.join(' ')),error(){}}), d=tmp(), wc=new EventEmitter()
     L.attach(wc,d)
     wc.emit('console-message',{level:'info',message:'[Perf] text you→her 4321ms'})
     wc.emit('console-message',{level:'info',message:'[LipSync] peak: 0.2'})
-    wc.emit('console-message',{},2,'[RAG] unavailable — skipping retrieval for 60s')
+    wc.emit('console-message',{level:'warning',message:'[RAG] unavailable — skipping retrieval for 60s'})
     wc.emit('render-process-gone',{},{reason:'crashed',exitCode:5})
     const txt=fs.readFileSync(path.join(d,'renderer.log'),'utf8')
     t('renderer.log: Electron 35 shape logged with level', /INFO \[Perf\] text you→her 4321ms/.test(txt))
-    t('renderer.log: deprecated positional shape logged as WARNING', /WARNING \[RAG\] unavailable/.test(txt))
+    t('renderer.log: details.level warning logged as WARNING', /WARNING \[RAG\] unavailable/.test(txt))
     t('renderer.log: LipSync peak dropped', !/LipSync/.test(txt))
     t('render-process-gone reported', warns.some(w=>/renderer process gone: crashed exitCode 5/.test(w)))
   }
@@ -96,6 +119,15 @@ async function checks(mutate=x=>x){
     const txt=fs.readFileSync(path.join(d,'main.log'),'utf8')
     t('main.log: WARN line formatted like console', /WARN \[main:watchdog\] rag exited \(code 1\)/.test(txt))
     t('original console still receives it', seen.some(s=>/watchdog/.test(s)))
+  }
+  { // 9. OUTCOME in the REAL Electron (backlog #219): the shipped listener, a hidden window, one line
+    //    per level.  Electron 35 warns when any 'console-message' listener has >1 parameter.
+    const d=tmp(), e=await electronRun(mutate(BLOCK),d)
+    const f=path.join(d,'renderer.log'), txt=fs.existsSync(f)?fs.readFileSync(f,'utf8'):''
+    t('Electron: page finished and quit', e.done)
+    t("Electron: NO 'console-message' deprecation warning", e.done&&!/console-message' arguments are deprecated/.test(e.out))
+    t('Electron: levels are right (DEBUG, INFO, WARNING, ERROR)', /DEBUG el-debug/.test(txt)&&/INFO el-info/.test(txt)&&/WARNING el-warn/.test(txt)&&/ERROR el-error/.test(txt))
+    t('Electron: LipSync peak info line dropped', /INFO el-info/.test(txt)&&!/LipSync/.test(txt))
   }
   return r
 }
@@ -132,6 +164,7 @@ function parsEmoChecks(){  // behaviour must be unchanged; only a log line is ad
     "fallback 'pipe' instead of 'ignore'":x=>x.replace("return { stdio: 'ignore', fd: null }","return { stdio: 'pipe', fd: null }"),
     'filter drops warnings':x=>x.replace("if (level === 'warning' || level === 'error') return true","if (level === 'error') return true"),
     'session cap removed':x=>x.replace('if (written + n > cap) {','if (false) {'),
+    'listener takes the deprecated positional args (#219)':x=>x.replace("wc.on('console-message', (details) => {","wc.on('console-message', (details, lvl, msg) => {"),
   }
   let caught=0
   for(const [name,mut] of Object.entries(mutants)){

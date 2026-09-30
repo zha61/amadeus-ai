@@ -182,6 +182,8 @@ audio.addEventListener('loadedmetadata', () => {
 ```
 amadeus.html:
   formatMemorySection()  reads diary localStorage → up to 7 most-recent entries
+  indexDiaryInBackground() runs at BOOT only (both boot paths) — NOT at close (bugs.md 95); /index-diary skips
+                         by text, so it reconciles whatever ChromaDB lacks. Invariant: dev/diary_index_check.py
                          strips "Entry —" prefix, defaults missing date
                          returns formatted "RECENT CONVERSATIONS:" block
   formatTimeContext()    (NEW April 30) returns context note for 01:00-04:59,
@@ -207,6 +209,8 @@ main.js (diary-on-close):
 Logs (bugs.md 93, 2026-09-27): data/logs/fish.log, http.log, rag.log, whisper.log (child stdout+stderr via
   spawnLogged, rotated >2 MB at spawn), main.log (main console), renderer.log (renderer console minus two
   LipSync debug lines). Line logs cap at 5 MB per session. data/ is git-ignored.
+  At close, renderer.log shows `[unload] releasing audio/video …`; boot-video trail lines after it end in
+  `(unload teardown)` and are expected, not failures (bugs.md 94). The renderer listener takes ONE parameter.
 
 preload.js (15 IPC channels — verified against preload.js on 2026-09-27):
   Diary (stage 1):

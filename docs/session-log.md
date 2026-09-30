@@ -1,10 +1,77 @@
-# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-09-27, after bugs.md 93)
+# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-09-30, after #206 closed)
 
 **Read CLAUDE.md first, then this block, then the newest entry below.**
 
 ## 🌐 2026-09-28 — Public snapshot: github.com/zha61/amadeus-ai
 Public snapshot of the private working repo. Third-party character assets and probe results that embed game
 script or private diary text are excluded.
+
+## ⏭️ NEXT SESSION (fresh, Zani's choice 2026-09-30): #221 — her tsundere/flustered VOICE sounds too calm
+Read backlog #221 in full, then plan the blind A/B (fixed Japanese lines from `fish.log`; A current / B rule-15/32
+rewrite / C = B + per-sentence re-anchor; check V3's pause problem; tsundere AND flustered; state Fish credit first).
+CLAUDE.md 53 applies. Also open, not in his order: #222, #223 (hands-free stuck — needs the DevTools line when it
+happens), #224 (prewarm, record only). **Not pushed:** all 2026-09-30 commits — ask him before pushing.
+
+## ✅ 2026-09-30 — #206 CLOSED, zero code (backlog #206, new #224)
+RAG readiness gate WORKS at 3/3 new cold boots (embed ~3s, ready in 4.5–6.3s; the 16.4s original did not recur).
+The renderer prewarm is aborted at the 4s cap at every cold boot and shows no measurable benefit → backlog #224
+(record only; latency work is closed). Diary index: no error at any boot; `diary_index_check.py` after the 20:51
+close → 1 missing (that entry), exit 3 — expected.
+
+## 🎤 2026-09-30 — #205 SHIPPED and LIVE-CHECKED (bugs.md 97). No rebuild.
+The hands-free gate also drops a Whisper repetition loop: segment compression ratio > 2.4, or a 2–6 word group
+repeated 4+ times. Nothing new on screen. **Live check (Hands-Free ON):**
+1. Say 3 normal sentences — she replies to each. 2. Say one long sentence (~20s) — she replies.
+3. Say "a great deal" 8 times IN ONE BREATH (a 900ms pause splits it) — no reply, status back to "Listening…".
+4. Close. Read `whisper.log` (`compression=`, `segments=`) and `renderer.log` (`gate discard: reason=`).
+Revert: `git checkout pre-205 -- amadeus.html kurisu_whisper_server.py` (relaunch only).
+✅ **LIVE-CHECKED 2026-09-30 20:07–20:43 (3 launches): 0 false positives.** 11 real utterances reached her (ratios
+0.33–1.74, incl. ~20s monologues of 6 segments). One real Whisper junk output was discarded (20:39:06, "you currently",
+74 segments, ratio 10.89 — `reason=logprob` fired first; the ratio check would also have). **Step 4 cannot be done by
+voice:** Whisper transcribed 8 SPOKEN repeats as one "a great deal" (ratio 0.60) — it de-duplicates real speech; the loop
+comes only from non-speech. The loop case rests on `dev/whisper_gate_test.js`. Do not ask Zani to repeat step 4.
+Found during the check, NOT caused by #205: hands-free (RMS) got stuck twice → backlog #223 (evidence + DevTools line).
+**Order Zani set (2026-09-30):** #205 → #206 → #221. New: backlog #222 (held rescue text after a discard; recorded only), #223.
+
+## ✅ 2026-09-30 — #217 SHIPPED and LIVE-VERIFIED (bugs.md 96). No rebuild.
+✅ **LIVE-VERIFIED 2026-09-30 19:52** (Zani's DevTools screenshot): the same 3 facts in the same order before and after
+`_memoryRefreshActive()` (it prints `undefined` — no return value, not an error); `factsStatus()` → `3 stored (3 active
+this session)`; `renderer.log` from 18:50:49Z has no WARNING/ERROR line. **Live check used (closed):**
+A memory-panel add/edit/delete now re-selects her facts with the boot ranking (`_memoryRefreshActive` → `initFacts`).
+Her boot prompt is byte-identical (tested against `b8e929e`). Zani chose #217 before #221 this session.
+**Live check (no panel use — a panel change queues a "she notices" note and writes her memory):** relaunch; in DevTools
+1. `_factsActive.map(f=>f.fact)` → note the list. 2. `_memoryRefreshActive()`, then step 1 again → the SAME list.
+3. `factsStatus()` → `3 stored (3 active this session)`. Then read `data/logs/renderer.log` for errors.
+The store holds 3 facts, so the live check cannot show the >20 effect — the offline test proves it.
+Revert: `git checkout pre-217 -- amadeus.html` (relaunch only).
+**Next:** #205 → #206 → #221 (Zani's order).
+
+## 🎙️ 2026-09-30 — NEW from Zani: her voice sounds too calm when she is tsundere/flustered (backlog #221)
+He said: too calm, no fluster in the voice; no English words; unsure if tsundere only or flustered too. Nothing changed.
+**Strongest lead (H1):** Fish S2 applies a tag only "until the next tag or end of the sentence", and `/speak` sends ONE
+direction at the start — sentences 2+ are undirected. V3 (July) removed the per-sentence re-anchors while fixing pauses.
+Next: reviewed plan → blind A/B arms (current / rule-32 rewrite / + per-sentence re-anchor) → his ear → live trial.
+**2026-09-30: Zani chose #217 first (now shipped).** Order: #205 → #206 → #221.
+
+## ✅ 2026-09-30 — #218 SHIPPED and LIVE-VERIFIED (bugs.md 95). No rebuild.
+✅ **LIVE-VERIFIED 2026-09-30 (2 launches).** Launch 1 (4 turns, close 19:32): no `diary index skipped`, no `/index-diary` at close, `diary_index_check.py` → 1 missing (the new 19:31 entry), exit 3 — as expected. Launch 2: `rag.log` 19:33:27 `upserted 1 new entries`; check → **0 missing**, 69 documents, exit 0. **In launch 2 the diary was read from `000118.ldb`** (LevelDB had compacted it) — the `.ldb`/Snappy path, added during the build, was needed on the very first real use.
+The close no longer indexes the diary; the boot index reconciles it. **Live check used (closed):**
+1. Launch, chat, close normally. `renderer.log`: no `diary index skipped`; `rag.log`: no `/index-diary` at close;
+   `python3 dev/diary_index_check.py` → exactly **1** missing (the new entry) — EXPECTED.
+2. Launch again (closing after the greeting is fine). `rag.log`: `upserted 1 new entries`;
+   `diary_index_check.py` → **0** missing.
+Revert: `git checkout pre-218 -- amadeus.html kurisu_rag_server.py` (relaunch only).
+**Next:** #217 → #205 → #206. New: backlog #220 (quit during the boot index; untested, low priority).
+
+## ✅ 2026-09-29 (evening) — #219 SHIPPED and LIVE-VERIFIED (bugs.md 94, log noise). Rebuilt.
+✅ **LIVE-VERIFIED 2026-09-29 18:44–18:47** (4 text turns, normal close): no deprecation line after the newest `main.log` header; `[unload]` marker then 4 `[BootVideo] … (unload teardown)` lines; no `BGM track not found`; `[Perf]` lines carry `INFO`. No WARNING/ERROR line occurred live, so that level rests on the real-Electron test (check 9).
+**Live check used (kept for reference, closed):** relaunch → send one message → close normally. Then read, AFTER the newest
+`main log start` header in `data/logs/main.log`: no `'console-message' arguments are deprecated` line. In
+`renderer.log`: an `[unload] releasing audio/video …` line, no `BGM track not found` after it, the boot-video
+lines after it end in `(unload teardown)`, and the `[Perf]` line still carries a level.
+Revert: `git checkout pre-219 -- main.js amadeus.html && npm run build`.
+**Next, in Zani's order, one at a time with a reviewed plan and his yes:** #218 → #217 → #205 → #206 (ask him
+when he has done 3 cold boots). **The push of `138cb2f` was blocked by the auto-mode check** — Zani runs it himself.
 
 ## ✅ 2026-09-29 — bugs.md 93 LIVE-VERIFIED (log sink works; one session). New from the logs: backlog #218, #219.
 ✅ **LIVE-VERIFIED 2026-09-29 18:18–18:21** (one session, checked by reading the files): all 6 logs created with spawn headers; whisper output arrives after ~8s of imports; one reply produced a renderer `[Perf]` line, the full fish `[TTS]` chain and rag retrieval lines; 0 LipSync peak/ticker lines kept; at close the Ollama log shows the diary (18:20:51) and summary (18:20:58, 93 tokens) and main.log has no facts-close timeout (1 exchange → skipped-short, as designed).
@@ -557,6 +624,87 @@ this paragraph guessed the cause and guessed wrong.)
   been re-checked (backlog #169).
 - **No video AND no voice, but `/speak` works when tested directly = the audio DEVICE,
   not the code.** Check `system_profiler SPAudioDataType`. See the Aug 23 entry.
+
+---
+
+## September 30, 2026 (evening) — #205 live check, #223 found, #206 closed with zero code
+- #205 live: 0 false positives in 11 utterances; Whisper de-duplicates SPOKEN repeats (8× "a great deal" → one), so the
+  loop case cannot be spoken — it rests on the offline test. One real junk output (74 segments, ratio 10.89) discarded.
+- Hands-free (RMS) got stuck twice → backlog #223 (3 hypotheses; the DevTools line to run when it happens).
+- #206: the analysis was reviewed for flaws at Zani's request before the check. Six were found and fixed in the
+  report: "primed" launches were only the PREVIOUS session's cache (0.8–2.4s, too fast for a real prefill); the cost
+  comparison used later turns instead of primed-vs-aborted first turns (primed was not faster, n=2 vs 3); two of the
+  "cold" boots were model-expired, not reboot-cold; "RAG ready means warm" was checked in code (it is true); a guessed
+  cause was withdrawn; `main.log` logs the close only on failure, so the Ollama log was used to confirm the close wrote a
+  diary entry before reading the check. New backlog #224. No code changed.
+
+---
+
+## September 30, 2026 (later) — #205: the Whisper gate drops repetition loops (bugs.md 97)
+- Plan reviewed twice; he asked for a better one and the second review MEASURED two serious flaws before any code:
+  a ratio per segment misses a loop split into short segments, and a ratio on the whole transcript drifts toward 2.4
+  on long natural English (1/300 above 2.4 at 900 chars). Fix: Whisper's ratio per segment (A) + a 4-repeat word-group
+  check (B, 1 hit in 4403 real texts = the hallucination). Also fixed in the plan: the log names the reason; the live
+  check says "one breath" (900ms pause splits an utterance); the Python test stubs mlx_whisper (no MLX load); the
+  CLAUDE.md Stack line. F5 (held rescue text after a discard) recorded as backlog #222 by Zani's choice.
+- **Shipped** (`amadeus.html`, `kurisu_whisper_server.py`; tag `pre-205`; no rebuild).
+- A fixture error was caught by the test itself: the "~1500-char" monologue was 1102 chars; the text was lengthened, the
+  check was not weakened.
+- New `dev/whisper_gate_test.js` 12/12 + 3/3, `dev/whisper_server_test.py` 4/4. `npm run check` exit 0,
+  `check:selftest` 7/7, all 13 JS test files exit 0.
+- Checked against bugs.md rules 3 (no duplicate `const`; `compression`/`repeats`/`reason` are new names in
+  `hfHandleUtteranceBlob`), 19 (server still spawned with `PYTHON`), 37 (no gemma4), 48b (every discard still goes
+  through `hfAfterDiscard` → `perfAbort`), 48c (only the hands-free path auto-sends; tap-to-record has a human Send),
+  49 (no declaration deleted), 50 (outcome: submitted or not), 51 (no display change), 52 (the reason and the ratio
+  are logged).
+
+---
+
+## September 30, 2026 — #217: a memory-panel change now uses the boot ranking (bugs.md 96)
+- Fresh session. Zani chose #217 before #221. First plan reviewed twice; he asked for a better one and the second review
+  found 7 flaws, all fixed before code: the live check called `dumpSystemPrompt()` without its required stage `n`; the
+  live check used the panel (queues a "she notices" note, writes her memory); the live check cannot show the >20 effect
+  with 3 facts; the "order changes at any size" claim was too wide (only when a dated fact ranks above one stored before
+  it); "every JS test in dev/" would have run `facts_arm_probe.js` (gemma4) and `warm_greetings.js` (Fish); no proof that
+  the boot prompt stays the same; two stale "sorted once at boot" texts (`amadeus.html` comment, roadmap.md:58).
+- **Shipped** (`amadeus.html`, tag `pre-217`, no rebuild): `_memoryRefreshActive(){ initFacts() }`.
+- New `dev/facts_refresh_rank_test.js` 7/7 + 3/3. `npm run check` exit 0, `check:selftest` 7/7, all 12 JS test files exit 0.
+- Checked against bugs.md rules 3 (no `const` added), 37 (no gemma4 call), 41 (no new per-turn content; the panel
+  refresh already re-wrote the facts block), 49 (no declaration deleted), 50 (outcome in `formatFactsSection()`),
+  51 (no display change), 53 (boot prompt byte-identical, check 5), 64 (no date writes touched).
+
+---
+
+## September 29, 2026 (night) — #218: no diary index at close; the boot reconciles (bugs.md 95)
+- Zani asked twice for a better plan and whether it was world-class. The second review added the missing piece: CHECK
+  THE INVARIANT, not a log line. On copies (app closed), all 50/50 diary entries were in ChromaDB.
+- **Shipped** (`amadeus.html`, comment in `kurisu_rag_server.py`; tag `pre-218`; no rebuild): removed the unawaited
+  `indexDiaryInBackground()` after the summary ack. Awaiting it at close was measured against the budget and rejected.
+- New `dev/diary_close_index_test.js` 8/8 + 3/3; new `dev/diary_index_check.py` (reads LevelDB `.log` and `.ldb` with
+  a pure-Python Snappy decoder — found while writing it: launch 2 may write no diary, so the value can sit in a
+  compressed table). Negative control on a COPY: 1 missing, exit 3. All gates green; all 11 JS tests exit 0.
+- Checked against bugs.md rules 17/18 (close handlers and timeouts untouched), 27, 36/37 (the boot embed runs after
+  the reveal, as before), 48, 49 (no declaration deleted), 50 (outcome: ack + no fetch; the invariant tool), 51, 52
+  (the tool exits 1 when it cannot read).
+- New backlog #220 (quit during the BOOT index could SIGTERM the server mid-upsert — untested).
+
+---
+
+## September 29, 2026 — #219: two false log lines (bugs.md 94)
+- Fresh session. Zani asked for #219 → #218 → #217 → #205 → #206, one at a time, each with a reviewed plan.
+- **First plan reviewed twice.** Zani asked for a better one; the second review found 5 flaws, the key one being
+  that the renderer log's level mapping had NEVER been seen working live (46 INFO, 0 WARNING/ERROR lines). A probe
+  on the real Electron 35.7.5 (scratchpad, hidden window) settled it: 1 parameter → no warning, levels are strings.
+- **Shipped** (`main.js` rebuilt, asar byte-identical; `amadeus.html`; tag `pre-219`): the listener takes only
+  `(details)`; `_pageUnloading` set first in `beforeunload` with an `[unload]` marker; BGM `onerror` stops during
+  unload (it was also starting the next track after `audioCtx.close()`); boot-video trail lines are labelled, not dropped.
+- Tests: `log_sink_test.js` 33/33 + 5/5 (check 9 runs the REAL Electron — the test now takes ~36s, not ~18s as
+  first estimated: Electron runs once per mutant); new `unload_log_test.js` 6/6 + 3/3. `npm run check`,
+  `check:selftest` 7/7 and all 10 JS test files exit 0.
+- Checked against bugs.md rules 27 (no process.exit), 31 (teardown order kept — the flag is set before it), 35/38
+  (boot-video listener, src and load untouched — only its log text), 48a (writer still never throws), 48d (lines
+  labelled, not dropped; only the false BGM line removed), 49 (`lvl`/`msg` deleted — no other use), 50 (outcome in
+  real Electron), 51 (nothing she says or shows changes), 52.
 
 ---
 
