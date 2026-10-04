@@ -1,5 +1,5 @@
 # Kurisu Personality — Amadeus Project
-# Last updated: August 16, 2026
+# Last updated: October 4, 2026 (voice: Fish s2.1-pro + volume -1.0, #221b)
 
 ---
 
@@ -218,7 +218,7 @@ Emotional (notice: she does not stammer every time, and never the same way twice
 
 ## Emotion System (19 emotions + default)
 
-| Emotion | Fish Audio S2 Pro Tag (voice actor direction) |
+| Emotion | Fish Audio Tag (voice actor direction) |
 |---|---|
 | happy | [warm and genuinely bright, speaking at a natural upbeat pace, voice carrying a real smile, slightly higher pitch than usual, light and clear] |
 | excited | [rushing forward with energy, pitch climbing, words tumbling out faster than intended, barely containing enthusiasm, voice bright and sharp] |
@@ -251,7 +251,7 @@ Emotional (notice: she does not stammer every time, and never the same way twice
 - **Strategy:** Neutral baseline + rich emotion tags = better controllability
 - Tags prepended to Japanese text before Fish Audio API call
 - Emotion set at exact moment `playSyncedAudio` starts
-- **API params ("V3" config, adopted 2026-07-13 after the A/B listen test in `dev/voice_ab_test.py`; verified against `kurisu_fish_server.py:441-453` on 2026-08-16):**
+- **API params ("V3" config, adopted 2026-07-13 after the A/B listen test in `dev/voice_ab_test.py`; verified against `kurisu_fish_server.py:470-482` on 2026-10-04):**
   temperature **0.7**, top_p 0.8, repetition_penalty **1.2**, normalize **True**
 - **Speed: Fish's default 1.0 — no speed field is sent** (since 2026-09-30). She has always spoken at 1.0: the old
   top-level `"speed": 1.1` was ignored by Fish, which reads only `prosody.speed` (backlog #225, bugs.md 98). Zani

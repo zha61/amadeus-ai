@@ -1,6 +1,6 @@
 # AMADEUS — Reference Document
 # Detailed info for Claude Code to read on-demand (not loaded every session)
-# Last updated: August 26, 2026
+# Last updated: October 4, 2026 (#221b: Fish s2.1-pro + prosody volume -1.0; Ollama 0.35.0 read)
 
 ## CREDENTIALS
 
@@ -118,7 +118,7 @@ keep_alive: '30m'
 ```
 
 ## FISH AUDIO API PARAMS
-Verified against `kurisu_fish_server.py:441-453` on 2026-08-16.
+Verified against `kurisu_fish_server.py:470-482` (`fish_tts` payload) on 2026-10-04.
 ```python
 payload = {
     "temperature": 0.7,         # V3 (was 0.8)
@@ -319,7 +319,7 @@ IPC round-trips (≤8s) + headroom (8s) = 40s. `MEMORY_WINDOW_SIZE = 7` here mus
 4. Neutral baseline voice + rich emotion tags — better controllability
 5. Katakana for Kurisu's name — 紅莉栖 mispronounced by TTS
 6. gemma4:latest — improved instruction following vs gemma3:12b, native system role
-7. ElevenLabs kept as backup — Fish Audio S2 Pro is primary
+7. ElevenLabs kept as backup — Fish Audio (model `s2.1-pro` since 2026-10-04) is primary
 8. Streaming Ollama — reduces perceived lag
 9. normalize: True — V3 (2026-07-13) chose consistency; the old `False` rationale (dynamic range) lost the A/B listen test
 10. Emotion-conditional breath sounds — no audible breathing for calm/neutral speech

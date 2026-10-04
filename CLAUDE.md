@@ -1,6 +1,6 @@
 # AMADEUS — Kurisu Makise AI (Steins;Gate 0)
 # Electron macOS app · Zani (zha61, he/him) · M5 MacBook Pro 16GB RAM
-# Last updated: October 4, 2026 (#221b shipped for a live trial: Fish s2.1-pro + prosody volume -1.0, GREETING_TTS_VER v4)
+# Last updated: October 4, 2026 (#221b KEPT: Fish s2.1-pro + prosody volume -1.0, GREETING_TTS_VER v4; pushed + public sync)
 
 ## ZANI'S STANDING INSTRUCTIONS — read these before anything else
 
@@ -390,8 +390,8 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
 44. Any Ollama model the app depends on INTERACTIVELY must pass its own `keep_alive`.
     **Never rely on Ollama's default — it is not a stable contract.** On 0.32.15 the default
     was 5 minutes; on **0.33.2 it is 30 minutes** (measured 2026-08-31: an embed sent with no
-    `keep_alive` came back with `expires_at` 30.0 min away). **The machine now runs 0.34.4
-    (`/api/version`, 2026-09-27 — it upgraded itself again).** Its `server config` log line reads
+    `keep_alive` came back with `expires_at` 30.0 min away). **The machine ran 0.34.4
+    (`/api/version`, 2026-09-27) and reads 0.35.0 on 2026-10-04 — it upgrades itself (0.35.0 not benchmarked).** Its `server config` log line reads
     `OLLAMA_KEEP_ALIVE:5m0s` (all six retained `server*.log`, 2026-09-23 → 09-27) — the default looks
     like **5 minutes again**. Not yet cross-checked with `/api/ps` `expires_at`; do that before citing it. The default changed under us
     within a week, which is the argument FOR this rule, not against it: bugs.md 75's fix is

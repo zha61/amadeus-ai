@@ -64,3 +64,6 @@ next to the Stage 1 result (an arm that wins only where Stage 1 found no problem
 Guard (`common.Guard`, bytes × $15/1M × 1.5) counts EVERY call as if paid, so a free model that bills by
 mistake is still bounded: cap **$0.30**. Expected real spend: only the 6 new A2 clips on s2-pro (~$0.03).
 Wallet read before and after; it lags, so it is read again at the next session.
+
+## OUTCOME (2026-10-04)
+M advanced from 2a; confirmed and shipped through `dev/voice_221b2/PREREG_221b2.md` (with a loudness fix). Zani kept it.

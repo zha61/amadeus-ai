@@ -1,4 +1,4 @@
-# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-10-01, #221b Stage 2b pre-registered)
+# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-10-04, #221b KEPT, pushed, public synced; was: #221b Stage 2b pre-registered)
 
 **Read CLAUDE.md first, then this block, then the newest entry below.**
 
@@ -15,7 +15,7 @@ Revert: `git checkout pre-225 -- kurisu_fish_server.py`. **Live check:** one rep
 **✅ #221b CLOSED — KEPT (2026-10-04). Zani after the live trial: *"I like her voice now. It's good."*** Her voice is now
 Fish `s2.1-pro` + `{"volume": -1.0}`. Only follow-up: warm the 14 birthday greetings before 2027-06-10 (app CLOSED, start the server,
 `node dev/warm_greetings.js`). If her loudness ever jumps: `level_check.py` (CLAUDE.md 54). **Pushed 2026-10-04 with his yes:** `main` `44113ce..a65685e`
-+ tags `221b2-prereg`, `pre-221b` (private `zha61/amadeus`; keys scanned: 0 hits). The PUBLIC repo is NOT synced.
++ tags `221b2-prereg`, `pre-221b` (private `zha61/amadeus`; keys scanned: 0 hits). The PUBLIC repo was synced the same day (see the 🌐 block).
 *(trial record:)* **#221b — SHIPPED FOR A LIVE TRIAL (2026-10-04), tag `pre-221b`.** Server: `s2.1-pro` + `{"volume": -1.0}`; `GREETING_TTS_VER` v4.
 WARMED 2026-10-04: 74/88 greetings at v4 (gemma4-translated, 0 failed); `level_check` on all 74: level −0.6 LU, pitch +1.46 st →
 PASS, but 8 greetings were > +4 st (a cached greeting repeats the SAME draw every boot). RE-DRAWN with Zani's yes: round 1 fixed 6,
@@ -657,7 +657,7 @@ this paragraph guessed the cause and guessed wrong.)
   (a 1/8→0/8 'fix' and an 8→6 'regression'). Use n≥30 per arm and report a p-value.
 - **Measure before you build.** Bug 68's premise was tested against real Ollama first,
   and the reply-quality scare was settled by A/B rather than argument. Both saved work.
-- **Two numbering schemes exist.** CLAUDE.md rules (1-51) ≠ bugs.md entries (1-82,
+- **Two numbering schemes exist.** CLAUDE.md rules (1-54 on 2026-10-04) ≠ bugs.md entries (1-99 on 2026-10-04; was 1-82,
   plus 55b and 77b), as of 2026-09-03. They collide. Always name the file. These counts drift every
   session — check them rather than quoting them.
 

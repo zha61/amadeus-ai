@@ -6,7 +6,7 @@ Architectural rules (TTS pipeline, subtitle sync logic, prosody design) live in 
 **Rule: never reintroduce any of these.**
 
 > ⚠️ **Two independent numbering schemes.** `CLAUDE.md`'s "BUGS — DO NOT REINTRODUCE"
-> list (1-51, as of 2026-09-07) is NOT the same as this file's entries (1-82, plus 55b and 77b). They collide: e.g.
+> list (1-54, as of 2026-10-04) is NOT the same as this file's entries (1-99, plus 55b and 77b). They collide: e.g.
 > CLAUDE.md rule 30 is the boot-video error-listener rule, while bugs.md entry 30
 > is the Phase-3 timeout deadlock. Always say which file you mean.
 > Known integrity notes: entry 55 appears TWICE (see 55b), and entries here are

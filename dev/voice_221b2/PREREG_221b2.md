@@ -156,3 +156,8 @@ Pass → the ship plan uses that temperature (global: every emotion; the guard l
 uses 4 paid clips (~$0.02) to confirm level and pitch on the paid model. Fail → ship plan at 0.7, or stop — his choice.
 **Cost:** real $0 (free model only). Guard (every call as paid, x1.5): Part 1 $0.775, cap $0.80; Part 2 ≈ $0.44, cap
 $0.45 (corrects the "$0.30" said in chat). Each cap needs Zani's yes.
+
+## OUTCOME (2026-10-04)
+Shipped (tag `pre-221b`, commit `64eea81`): C at temperature 0.7 = `s2.1-pro` + `{"volume": -1.0}` — 2c rejected a lower
+temperature. 74 greetings warmed at v4 (birthday pools deferred); 8 greetings > +4 st re-drawn (0 high left). Live trial:
+Zani — *"I like her voice now. It's good."* **KEPT.** Total real spend 2b → ship ≈ $0.41.
