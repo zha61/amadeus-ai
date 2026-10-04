@@ -1,0 +1,57 @@
+{
+ "stray": {
+  "C7": 0.61,
+  "C6": 0.545,
+  "C5": 0.68
+ },
+ "high": {
+  "C7": 4,
+  "C6": 8,
+  "C5": 16
+ },
+ "n": {
+  "C7": 48,
+  "C6": 48,
+  "C5": 48
+ },
+ "arms": {
+  "C6": {
+   "perm_p": 0.2539,
+   "checks": {
+    "stray<=0.75xC7": false,
+    "perm_p<=0.05": false,
+    "high<=C7": false,
+    "screens": true
+   },
+   "qualifies": false
+  },
+  "C5": {
+   "perm_p": 0.7367,
+   "checks": {
+    "stray<=0.75xC7": false,
+    "perm_p<=0.05": false,
+    "high<=C7": false,
+    "screens": true
+   },
+   "qualifies": false
+  }
+ },
+ "chosen": null,
+ "flags": {
+  "C7": {
+   "loop": 0,
+   "bleed": 0,
+   "pause": 1
+  },
+  "C6": {
+   "loop": 0,
+   "bleed": 0,
+   "pause": 1
+  },
+  "C5": {
+   "loop": 0,
+   "bleed": 0,
+   "pause": 1
+  }
+ }
+}

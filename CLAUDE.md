@@ -1,6 +1,6 @@
 # AMADEUS — Kurisu Makise AI (Steins;Gate 0)
 # Electron macOS app · Zani (zha61, he/him) · M5 MacBook Pro 16GB RAM
-# Last updated: September 30, 2026 (bugs.md 97 — #205 Whisper repetition gate)
+# Last updated: October 4, 2026 (#221b shipped for a live trial: Fish s2.1-pro + prosody volume -1.0, GREETING_TTS_VER v4)
 
 ## ZANI'S STANDING INSTRUCTIONS — read these before anything else
 
@@ -146,6 +146,11 @@ three days: *"her tone sounds way too calm"*, *"I feel like I like her voice bef
   re-select facts with the BOOT ranking (`initFacts`). Run after touching `initFacts`, `_factRank` or `_memoryRefreshActive`.
 - `node dev/facts_age_test.js` — 19 checks + 3 mutants (backlog #216). Proves the prompt is BYTE-IDENTICAL to
   `bbb0c8b` for facts under 30 days old, and that a 30+ day undated fact carries `[learned over … — it may have changed]`.
+- `python3 dev/fish_payload_test.py` — 21 checks incl. 8 mutants (bugs.md 98/99), <1s, no network. The exact body `/speak` sends
+  to Fish: V3 values, no `speed`, `prosody` EXACTLY `{"volume": -1.0}`, model header `s2.1-pro`, `repetition_penalty` 1.2.
+  Run after touching `fish_tts` or `/speak`. Fails on `pre-221b` (6 failures).
+- `python3 dev/voice_221b2/level_check.py MANIFEST` — $0 ship guard (bugs.md 99): new greeting files vs the SAME greetings at
+  v3 (s2-pro). FAILS outside ±1.5 LU or a pitch rise > +4 st. `selftest`: key port 176/176, shipped request == Stage 3.
 - `node dev/greeting_cache_test.js` — 5 checks (bugs.md 91). Every greeting must be READ from the file the
   writer SAVES. Run it after touching `greetingCacheKey`, the `amadeus-asset` handler or the cache writer.
 - **Launch:** `open ~/Documents/Amadeus/dist/mac-arm64/Amadeus.app`
@@ -225,6 +230,26 @@ All pure-CPU unless noted. **Anything that calls gemma4 must not run while the a
   and prints the lines side by side. **The markers are proxies; only Zani can judge the sound.**
   Pure CPU, no model call.
 
+- **#221 voice A/B (2026-09-30, `dev/voice_221/`, PREREG_221.md):** `step0_speed.py` (does Fish apply a field?
+  measure it, 2–4 clips), `select_lines.py` (fixed Japanese lines by rule; calls gemma4 — app CLOSED), `synth_arms.py`
+  (shipped `fish_tts()`, byte-cost guard — **the Fish wallet lags, so never use it as a real-time guard**), `screens.py`
+  (pauses without edge silence, Whisper English-bleed flag, LUFS; app CLOSED), `blind_audio.py make|score|selftest`
+  (blind AUDIO sheet; open it in a normal browser — the app's preview pane shows a static copy that cannot play the MP3s).
+  Fish price: $15 per 1M UTF-8 bytes; real cost was ~0.54x the guard's x1.5 estimate. MP3s live in git-ignored
+  `dev/voice_test/221/`.
+- **#221b (2026-09-30, `dev/voice_221b/`, PREREG_221b.md):** Stage 1 = which emotion sounds too calm ($0, the #221 A
+  clips); Stage 2a = pilot A (s2-pro, `c4d8`) vs M (`s2.1-pro-free`, `c4d8`) vs MV (`s2.1-pro-free`, old voice `fb03`),
+  2 draws each. `arms_b.shipped_request` captures the REAL `fish_tts()` request (mocked post), so arms cannot drift.
+  `synth_b.py`, `screens_b.py` (app CLOSED), `blind_b.py make1|score1|make2a|score2a|selftest`. **s2.1 is ~8.5 LU
+  louder than s2-pro** — the sheet is level-matched; a ship would need the loudness handled.
+- **#221b Stage 2b (2026-10-01, `dev/voice_221b2/`, PREREG_221b2.md):** `freeze_lines.py` (16 lines, frozen), `step0.py
+  [--dry|selftest]` (FAILED — record only), `step0b.py` (erratum 1, FAILED — record only),
+  `step0c.py [--dry|selftest]` (erratum 2: Fish `volume` is a step; probes `normalize_loudness`, picks + confirms the prosody object), `synth_b2.py [--stage3] [--dry]` (refuses
+  unless Step 0c passed; Stage 3 unless 2b passed), `screens_b2.py [--stage3|selftest]` (app CLOSED), `blind_b2.py
+  make2b|score2b|make3|score3|selftest`. Candidate C = the ship request with the `-free` model header.
+  Stage 2c: `t2c.py part1|screen1|decide1|part2|screen2|make2|score2|selftest` — Fish `temperature` 0.6/0.5 vs 0.7 against
+  s2.1's pitch outliers (addendum 2c); `--dry` on part1/part2.
+
 ## Presence latency trace (P1, built Sep 4, 2026 — backlog #186)
 Measures the ONE number that presence means: **he stops talking → she starts talking**, plus the
 per-stage breakdown. Pure instrumentation — no model call, no GPU work, no behaviour change.
@@ -257,7 +282,7 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
 ## Stack
 - Electron 35 (arm64) → `http://localhost:8765/amadeus.html`
 - Ollama gemma4:latest (127.0.0.1:11434, streaming, temp 0.85, num_predict 120, num_ctx 8192, think:false)
-- Fish Audio S2 Pro TTS via Flask port 5002 (`kurisu_fish_server.py`)
+- Fish Audio **s2.1-pro** TTS (since 2026-10-04, #221b; was s2-pro) via Flask port 5002 (`kurisu_fish_server.py`)
 - RAG server Flask port 5003 (`kurisu_rag_server.py`) — spawned by main.js
 - Translator: **gemma4 is primary** (`TRANSLATOR='gemma4'` in kurisu_fish_server.py) — register-aware EN→JP via `translate_via_gemma()`. DeepL is FALLBACK only (header: `Authorization: DeepL-Auth-Key ...`). Set `TRANSLATOR='deepl'` to revert.
 - Whisper STT via Flask port 5004 (`kurisu_whisper_server.py`) — `mlx-community/whisper-large-v3-turbo`; returns `no_speech_prob`/`avg_logprob`/`compression_ratio` (max per segment) for the hands-free gate, which also drops a 2–6 word group repeated 4+ times (bugs.md 97)
@@ -488,12 +513,21 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
     measured, a `pre-<name>` tag first, and a one-command revert written down before he starts. And
     when he reports a feel, believe the report over the table (bugs.md 90).
 
+54. **Fish `prosody.volume` is an undocumented SWITCH, not a dial.** Measured on s2.1 (#221b, 2026-10-01): absent or 0 =
+    the loud normalised path (~−13 LUFS); ANY non-zero value = a quieter path (~−21.6 + V LUFS, floor ~−25.5): −8.5, −6.0
+    and −4.5 dB all gave ≈ −25.5. `-1.0` puts her at s2-pro's level, which the lip sync (`AMPLITUDE_GAIN`) and BGM ducking
+    are tuned to. **Never set it to 0, drop it, or "fine-tune" it from the docs** — re-measure (`level_check.py`). A level
+    step is silent: the reply still plays, ~10 LU louder or quieter. Also: a LOWER Fish temperature makes s2.1's pitch
+    HIGHER, not steadier (#221b 2c: high draws 4/8/16 of 48 at 0.7/0.6/0.5). (bugs.md 99)
+
 ## Key Architecture
 - **UI palette:** red — `--bg:#060404`, `--blue:#c0392b`, `--blue-bright:#e84040`. Background = CSS grid via `#app::before`.
 - **Subtitle sync:** msPerWord = (audioDuration × 0.95 × 1000) / wordCount via loadedmetadata; 300ms fallback
 - **Emotion** set at moment playSyncedAudio starts
 - **Ollama:** only start if not running, keep_alive:'30m', think:false always
-- **Fish Audio:** temp 0.7, top_p 0.8, repetition_penalty 1.2, normalize True, speed FIXED 1.1, NO inline prosody tags — "V3" config from July 13 2026 voice A/B test (dev/voice_ab_test.py). Bump GREETING_TTS_VER in amadeus.html if these change.
+- **Fish Audio:** model **`s2.1-pro`** + **`"prosody": {"volume": -1.0}`** (#221b, blind A/B by Zani, KEPT after the live trial 2026-10-04: *"I like her voice now. It's good."* —
+  revert `git checkout pre-221b -- kurisu_fish_server.py amadeus.html dev/warm_greetings.js dev/fish_payload_test.py`),
+  temp 0.7, top_p 0.8, repetition_penalty 1.2, normalize True, NO inline prosody tags, **NO speed field — she speaks at Fish's default 1.0**, which is what Zani has always heard and kept ("pace is fine", 2026-09-30). The old top-level `"speed": 1.1` was ignored by Fish (it reads only `prosody.speed`) and was removed (backlog #225, bugs.md 98). Never change `prosody` without a blind A/B (CLAUDE.md 53) AND a level re-measure (rule 54); `python3 dev/fish_payload_test.py` guards the payload — "V3" config from July 13 2026 voice A/B test (dev/voice_ab_test.py). Bump GREETING_TTS_VER in amadeus.html if these change.
 - **Lip sync calibration** (near top of amadeus.html): AMPLITUDE_GAIN=3, ATTACK_FACTOR=0.8, DECAY_FACTOR=0.18, SILENCE_DECAY=0.55, SILENCE_THRESHOLD=0.012, MOUTH_FADE_MS=100, VOWEL_FORM_SCALE=0.7, VOWEL_RATIO_CENTER=0.25, VOWEL_RATIO_GAIN=3.5, IDLE_FORM=-0.49
 - **HISTORY_WINDOW=30** — max messages sent to Ollama per turn (15 exchanges). Full history array kept for diary generation.
 

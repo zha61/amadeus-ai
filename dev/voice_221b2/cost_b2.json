@@ -1,0 +1,32 @@
+{
+ "step0": {
+  "estimated_usd": 0.0981,
+  "wallet_start": 9.18201,
+  "wallet_end": 9.18201
+ },
+ "step0b": {
+  "estimated_usd": 0.2453,
+  "wallet_start": 9.18201,
+  "wallet_end": 9.18201
+ },
+ "step0c": {
+  "estimated_usd": 0.4252,
+  "wallet_start": 9.18201,
+  "wallet_end": 9.18201
+ },
+ "stage2b": {
+  "estimated_usd": 0.794,
+  "wallet_start": 9.18201,
+  "wallet_end": 9.18201
+ },
+ "stage3": {
+  "estimated_usd": 0.0566,
+  "wallet_start": 9.083745,
+  "wallet_end": 9.083745
+ },
+ "t2c_part1": {
+  "estimated_usd": 0.3009,
+  "wallet_start": 9.04602,
+  "wallet_end": 9.04602
+ }
+}

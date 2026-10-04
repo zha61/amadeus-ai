@@ -1,0 +1,149 @@
+{
+ "answers_file": "answers_zani.txt",
+ "item18": "unanswered - scored under all three fills; none changes the outcome",
+ "item11_note": "Zani: picked B only because A's opening 'na' sounded weird; everything after, A sounded much better",
+ "fills": {
+  "A": {
+   "arms": {
+    "B": {
+     "wins": 8,
+     "losses": 6,
+     "ties": 2,
+     "p_one_sided": 0.3953,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 4,
+       "losses": 3,
+       "ties": 1
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 3,
+       "ties": 1
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    },
+    "C": {
+     "wins": 6,
+     "losses": 9,
+     "ties": 1,
+     "p_one_sided": 0.8491,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 2,
+       "losses": 5,
+       "ties": 1
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 4,
+       "ties": 0
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    }
+   },
+   "consistency": "4/5",
+   "noise_non_tie": "4/4",
+   "broken": []
+  },
+  "B": {
+   "arms": {
+    "B": {
+     "wins": 7,
+     "losses": 7,
+     "ties": 2,
+     "p_one_sided": 0.6047,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 3,
+       "losses": 4,
+       "ties": 1
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 3,
+       "ties": 1
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    },
+    "C": {
+     "wins": 6,
+     "losses": 9,
+     "ties": 1,
+     "p_one_sided": 0.8491,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 2,
+       "losses": 5,
+       "ties": 1
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 4,
+       "ties": 0
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    }
+   },
+   "consistency": "4/5",
+   "noise_non_tie": "4/4",
+   "broken": []
+  },
+  "=": {
+   "arms": {
+    "B": {
+     "wins": 7,
+     "losses": 6,
+     "ties": 3,
+     "p_one_sided": 0.5,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 3,
+       "losses": 3,
+       "ties": 2
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 3,
+       "ties": 1
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    },
+    "C": {
+     "wins": 6,
+     "losses": 9,
+     "ties": 1,
+     "p_one_sided": 0.8491,
+     "by_emotion": {
+      "tsundere": {
+       "wins": 2,
+       "losses": 5,
+       "ties": 1
+      },
+      "flustered": {
+       "wins": 4,
+       "losses": 4,
+       "ties": 0
+      }
+     },
+     "passes": false,
+     "screens_pass": true
+    }
+   },
+   "consistency": "4/5",
+   "noise_non_tie": "4/4",
+   "broken": []
+  }
+ },
+ "decision": "NO ARM PASSES (PREREG_221 decision rule). Stop and report; nothing ships."
+}

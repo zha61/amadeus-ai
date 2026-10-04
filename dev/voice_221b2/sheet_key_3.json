@@ -1,0 +1,37 @@
+{
+ "seed": 2213,
+ "items": [
+  {
+   "id": "t2",
+   "file": "../voice_test/221b2/t2_P1.mp3"
+  },
+  {
+   "id": "g_sarcastic1",
+   "file": "../voice_test/221b2/g_sarcastic1_P1.mp3"
+  },
+  {
+   "id": "f4",
+   "file": "../voice_test/221b2/f4_P1.mp3"
+  },
+  {
+   "id": "t6",
+   "file": "../voice_test/221b2/t6_P1.mp3"
+  },
+  {
+   "id": "f8",
+   "file": "../voice_test/221b2/f8_P1.mp3"
+  },
+  {
+   "id": "g_curious1",
+   "file": "../voice_test/221b2/g_curious1_P1.mp3"
+  },
+  {
+   "id": "g_dismissive1",
+   "file": "../voice_test/221b2/g_dismissive1_P1.mp3"
+  },
+  {
+   "id": "g_teasing1",
+   "file": "../voice_test/221b2/g_teasing1_P1.mp3"
+  }
+ ]
+}

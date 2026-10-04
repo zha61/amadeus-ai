@@ -1,0 +1,40 @@
+1 A
+2 B na
+3 B
+4 A
+5 A
+6 A
+7 A nb
+8 B na
+9 B
+10 A
+11 A
+12 A
+13 A
+14 A nb
+15 B
+16 A
+17 B
+18 B
+19 A
+20 A
+21 =
+22 A
+23 A
+24 B na
+25 B
+26 B
+27 B
+28 A nb
+29 B
+30 = na nb
+31 A
+32 B
+33 A
+34 B na
+35 A nb
+36 A nb
+37 A
+38 B na
+39 B
+40 B na

@@ -1036,3 +1036,37 @@ Zani asked for a review of the 77 implementation. The fix itself stands; the way
 - **Revert:** `git checkout pre-205 -- amadeus.html kurisu_whisper_server.py`, then relaunch.
 - **Lesson:** a gate built from a subset of a model's own failure signals has a hole where the missing signal was.
   And a threshold taken from a library is only valid at the scope the library applies it (per segment, not per text).
+
+### 98. The server sent `"speed": 1.1` for months, and Fish never applied it — a dead field and a false log line
+- **Found:** 2026-09-30 by #221 Step 0 (backlog #225). **Fixed:** 2026-09-30, `kurisu_fish_server.py`. No rebuild.
+- **Bug:** `fish_tts()` put `"speed"` at the TOP level of the request. Fish reads speed only from `prosody.speed`, so
+  the field was ignored (0.6 vs 1.8 → 7.73s vs 8.05s; `prosody.speed` 0.6 vs 1.8 → 13.06s vs 4.21s). V3's "fixed 1.1"
+  and the older `compute_speed` variance were never heard. `/speak` still logged `[TTS] Speed: 1.1x` on every reply,
+  and four docs repeated it — a false statement of what she sounds like.
+- **Fix:** option (a) of #225, Zani's choice (*"pace is fine"*): remove the field, the `speed = 1.1` line and the log
+  line. **No audio change** — the field was ignored, so `GREETING_TTS_VER` stays `v3` (it became `v4` with #221b, bugs.md 99). `compute_speed()` stays
+  (uncalled; `dev/voice_ab_test.py` imports it). The dev helper `dev/voice_221/common.synth` no longer takes `speed`;
+  `step0_speed.py` now sends an explicit payload, so it still reproduces its measurement.
+- **Test:** `python3 dev/fish_payload_test.py` — 16 checks then (21 since bugs.md 99), no network. Drives the real `/speak` (Flask test client,
+  translation and `requests.post` mocked) and checks the exact JSON Fish gets: V3 values, no `speed`, no `prosody`,
+  `repetition_penalty` 1.2 (bugs.md 54), no `Speed:` log line. Mutants: top-level speed, `prosody.speed`, penalty 1.1.
+  **Fails on the old server (6 failures)**, passes on the new one.
+- **Revert:** `git checkout pre-225 -- kurisu_fish_server.py`, then relaunch.
+- **Lesson:** a parameter the API does not document is not "set" because the request carried it. Check the API
+  reference, and measure the effect once (CLAUDE.md 52: a setting that silently does nothing is a silent fallback).
+
+### 99. Fish `prosody.volume` is an undocumented SWITCH — a "small" volume edit moves her ~10 LU (found while shipping #221b)
+- **Found:** 2026-10-01, #221b Steps 0–0c (`dev/voice_221b2/step0*_result.json`). **Shipped:** 2026-10-04 with s2.1-pro.
+- **Trap:** Fish documents `prosody.volume` as "dB, 0 = no change". On s2.1 it is not a dial: absent or 0 → the loud normalised
+  path (median −13.1 LUFS); −1.0 → −22.5; +3.0 → −18.9; −4.5 / −6.0 / −8.5 → ≈ −25.5 (a floor). `normalize_loudness: false`
+  alone changes nothing (−12.8). A request without the field is ~10 LU louder than one with −1.0, and nothing errors.
+- **Why it matters:** the lip sync (`AMPLITUDE_GAIN=3`, `SILENCE_THRESHOLD=0.012`) and BGM ducking are tuned to s2-pro's level
+  (−22.0 LUFS). s2.1 at its default is ~8.5 LU louder (~2.7x amplitude), which would pin her mouth open.
+- **Fix:** `FISH_PROSODY = {"volume": -1.0}` in `kurisu_fish_server.py`, sent as the ONLY prosody field. Peak-to-loudness matched
+  s2-pro (12.7 vs 12.15 dB), so the lip-sync input shape matches too.
+- **Guards:** `python3 dev/fish_payload_test.py` (21; mutants: no prosody, volume 0, extra prosody fields, model s2-pro — fails on
+  `pre-221b`); `python3 dev/voice_221b2/level_check.py MANIFEST` ($0: new greeting files vs the same greetings at v3).
+- **My own errors on the way (kept as the record):** Step 0's ±1 st pitch gate was tighter than the estimator (erratum 1); Step 0b
+  assumed a slope and had no flat-response check (erratum 2); Step 0c's scorer pooled Step 0b's confirm clips and printed a false
+  FAIL (fixed with a mutant, re-scored on the saved clips — `step0c_result_bug_pooled.json`).
+- **Rule:** CLAUDE.md 54. Revert of the whole ship: `git checkout pre-221b -- kurisu_fish_server.py amadeus.html dev/warm_greetings.js dev/fish_payload_test.py`.

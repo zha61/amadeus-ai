@@ -1,0 +1,333 @@
+{
+ "seed": 221,
+ "items": [
+  {
+   "id": "f8",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t6",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t5",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t8",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t8",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f7",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t5",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f2",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t1",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "repeat",
+   "repeat_of": 32
+  },
+  {
+   "id": "t7",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f8",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f1",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t1",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t2",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f2",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f3",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f6",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t4",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f1",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f7",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t2",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t7",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t5",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "repeat",
+   "repeat_of": 6
+  },
+  {
+   "id": "f4",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t1",
+   "emotion": "tsundere",
+   "cand": "A'",
+   "cand_side": "B",
+   "kind": "noise",
+   "repeat_of": null
+  },
+  {
+   "id": "f3",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t3",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t4",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f1",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "repeat",
+   "repeat_of": 18
+  },
+  {
+   "id": "f6",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f4",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f2",
+   "emotion": "flustered",
+   "cand": "A'",
+   "cand_side": "B",
+   "kind": "noise",
+   "repeat_of": null
+  },
+  {
+   "id": "t1",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t3",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "repeat",
+   "repeat_of": 26
+  },
+  {
+   "id": "f1",
+   "emotion": "flustered",
+   "cand": "A'",
+   "cand_side": "A",
+   "kind": "noise",
+   "repeat_of": null
+  },
+  {
+   "id": "f2",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "repeat",
+   "repeat_of": 7
+  },
+  {
+   "id": "t6",
+   "emotion": "tsundere",
+   "cand": "C",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f5",
+   "emotion": "flustered",
+   "cand": "C",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "f5",
+   "emotion": "flustered",
+   "cand": "B",
+   "cand_side": "B",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t3",
+   "emotion": "tsundere",
+   "cand": "B",
+   "cand_side": "A",
+   "kind": "test",
+   "repeat_of": null
+  },
+  {
+   "id": "t2",
+   "emotion": "tsundere",
+   "cand": "A'",
+   "cand_side": "A",
+   "kind": "noise",
+   "repeat_of": null
+  }
+ ]
+}

@@ -33,7 +33,12 @@ except Exception as _e:
 # ── FISH AUDIO CONFIG ──────────────────────────────────────────
 FISH_VOICE_ID  = "c4d832799bf845ee86638a1bc0cd0d41"  # Neutral baseline — rich tags drive emotion
 FISH_API_URL   = "https://api.fish.audio/v1/tts"
-FISH_MODEL     = "s2-pro"
+FISH_MODEL     = "s2.1-pro"   # #221b (2026-10-04): was "s2-pro". Blind A/B by Zani: 2a 15-1, 2b 14-1-1 (PREREG_221b2)
+# Fish volume is an UNDOCUMENTED SWITCH (#221b Step 0-0c): absent or 0 = loud normalised path (~-13 LUFS on s2.1);
+# any non-zero value = a quieter path (~-21.6 + V LUFS, floor ~-25.5). -1.0 puts s2.1 at s2-pro's level (~-22.6 LUFS),
+# which the lip sync (AMPLITUDE_GAIN) and BGM ducking are tuned to. Never set it to 0 or drop it without re-measuring:
+# python3 dev/voice_221b2/level_check.py.  (CLAUDE.md 54, bugs.md 99)
+FISH_PROSODY   = {"volume": -1.0}
 
 # ── DEEPL TRANSLATION CONFIG (primary — reliable) ──────────────
 DEEPL_URL      = "https://api-free.deepl.com/v2/translate"
@@ -73,7 +78,8 @@ EMOTION_TAGS = {
     "wink":         "[light and playful, barely suppressing laughter, voice lilting upward, words drawn out slightly for effect, warmth that she would deny if called out]",
 }
 
-# ── Emotion-dependent speech speed ──
+# ── Emotion-dependent speech speed ── UNUSED by /speak (kept for dev/voice_ab_test.py).
+# Never reached Fish either: it was sent as a top-level field, which Fish ignores (backlog #225).
 # Kurisu baseline: 1.2 (confident researcher, slightly faster than neutral)
 # Adjusted per emotion to match canonical Steins;Gate voice acting pacing
 EMOTION_SPEED = {
@@ -454,8 +460,13 @@ def translate_via_deepl(text):
     return None
 
 
-def fish_tts(tagged_text: str, speed: float = 1.2) -> bytes:
-    """Call Fish Audio S2 Pro API and return raw MP3 bytes. Text should already be emotion-tagged."""
+def fish_tts(tagged_text: str) -> bytes:
+    """Call Fish Audio S2 Pro API and return raw MP3 bytes. Text should already be emotion-tagged.
+
+    No speed is sent: she speaks at Fish's default 1.0, which is what Zani has always heard
+    and kept ("pace is fine", 2026-09-30). A top-level "speed" used to be sent here, but Fish
+    reads speed only from prosody.speed, so it was ignored (backlog #225). The prosody object
+    carries ONLY the volume (FISH_PROSODY, #221b). Test: python3 dev/fish_payload_test.py."""
     payload = {
         "text": tagged_text,
         "reference_id": FISH_VOICE_ID,
@@ -467,7 +478,7 @@ def fish_tts(tagged_text: str, speed: float = 1.2) -> bytes:
         "temperature": 0.7,        # V3 config: less prosody randomness — stability over variation
         "top_p": 0.8,               # Fish Audio recommended: broader sampling diversity
         "repetition_penalty": 1.2,  # Prevents Fish Audio phoneme loop bug
-        "speed": round(max(0.5, min(2.0, speed)), 2),  # Fish Audio cloud: 0.5–2.0
+        "prosody": dict(FISH_PROSODY),  # loudness only — see FISH_PROSODY (#221b)
     }
 
     headers = {
@@ -529,16 +540,14 @@ def speak():
         tagged_text = f"{tag} {japanese_text}".strip() if tag else japanese_text
         print(f"[TTS] Full tagged text → Fish Audio:\n  {tagged_text}")
 
-        # Step 4: Generate audio via Fish Audio S2 Pro
-        # Fixed 1.1 speed (V3 config): compute_speed's turn-to-turn variance
-        # (measured 1.087 → 1.22 on consecutive turns, a 12% pace lurch) was the
-        # "speed sounds weird" complaint. Emotion pace nuance still comes from the
-        # EMOTION_TAGS descriptions ("speaking slowly", "words tumbling out fast").
-        speed = 1.1
+        # Step 4: Generate audio via Fish Audio (FISH_MODEL), at Fish's default speed 1.0
+        # (backlog #225: the "fixed 1.1" of V3 was never applied — Fish ignored the
+        # field — and Zani kept 1.0). compute_speed() stays uncalled. Emotion pace
+        # nuance comes only from the EMOTION_TAGS descriptions.
         _t_fish_start = time.perf_counter()
-        audio_bytes = fish_tts(tagged_text, speed=speed)
+        audio_bytes = fish_tts(tagged_text)
         fish_ms = int((time.perf_counter() - _t_fish_start) * 1000)
-        print(f"[TTS] Speed: {speed}x (emotion={emotion}, jp_len={len(japanese_text)})")
+        print(f"[TTS] Synth: emotion={emotion}, jp_len={len(japanese_text)}, model={FISH_MODEL}")
         print(f"[TTS] P1 stages: translate={translate_ms}ms ({_last_translator}) fish={fish_ms}ms")
         audio_b64 = base64.b64encode(audio_bytes).decode("utf-8")
         print(f"[TTS] Returning audio_b64 length: {len(audio_b64)}")
@@ -567,14 +576,14 @@ def speak():
 
 @app.route("/health", methods=["GET"])
 def health():
-    return jsonify({"status": "ok", "tts": "fish-audio-s2-pro"})
+    return jsonify({"status": "ok", "tts": f"fish-audio-{FISH_MODEL}"})
 
 
 if __name__ == "__main__":
     print("="*50)
     print("  Kurisu Fish Audio S2 Pro TTS Server")
     print(f"  Voice: 牧瀬クリス ({FISH_VOICE_ID[:8]}...)")
-    print("  Model: s2-pro")
+    print(f"  Model: {FISH_MODEL}  prosody: {FISH_PROSODY}")
     print("  Port:  5002")
     print("="*50)
     app.run(host="127.0.0.1", port=5002, debug=False)

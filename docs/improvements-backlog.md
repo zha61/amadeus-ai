@@ -1718,7 +1718,40 @@ copies. **No app code, data or ChromaDB was changed.**
      launch while `/index-diary` embeds. SQLite writes are atomic; what ChromaDB 1.5.8 does to its vector index on a
      kill mid-write is NOT tested. Cheap check first: on a COPY, kill a server mid-upsert and reopen it. Detect any
      drift with `dev/diary_index_check.py`. Low priority — rare window, and the next boot re-adds a missing entry.
-221. **Her VOICE sounds too calm on tsundere/flustered replies — "no fluster in the voice".** Raised by Zani
+221. ✅ **CLOSED — KEPT BY ZANI 2026-10-04 after the live trial: *"I like her voice now. It's good."*** Wallet $8.774550 (2026-10-04 17:11Z): the warm + re-draw cost ~$0.27 real (estimate $0.22 — the Japanese ran longer than the 1.26 bytes/char ratio). Open follow-up only: warm the 14 birthday greetings before 2027-06-10. *Ship record:* **#221b SHIPPED FOR A LIVE TRIAL 2026-10-04 (tag `pre-221b`; Zani chose "ship at 0.7"): s2.1-pro + `{"volume": -1.0}`, `GREETING_TTS_VER` v4, 74 greetings warmed offline 2026-10-04 (level_check PASS: −0.6 LU, +1.46 st; 8 of 74 were > +4 st — re-drawn with his yes, now 0 high; final −0.65 LU, +1.42 st) (birthday pools deferred: warm them before 2027-06-10 — `node dev/warm_greetings.js` with the app closed). Revert: `git checkout pre-221b -- kurisu_fish_server.py amadeus.html dev/warm_greetings.js dev/fish_payload_test.py`, relaunch. bugs.md 99, CLAUDE.md 54.** *History:* **#221b Stage 2b — PRE-REGISTERED 2026-10-01 (`dev/voice_221b2/`, PREREG_221b2.md, tag `221b2-prereg`).** Candidate C = `s2.1-pro-free` + voice `c4d8` + `"prosody": {"volume": V}` — byte-identical to the ship request except the model header. **Step 0** fixes V so s2.1 plays at s2-pro's level (−22.0 LUFS ±1 LU; lip sync and BGM ducking are tuned to it). **2b:** 8 unheard even lines + 8 guard lines (teasing/sarcastic/dismissive/curious from `fish.log`), 2 draws per arm, 40-item blind sheet; pass = sign test p ≤ 0.05 on the target pairs + per-line, per-emotion, not-her, guard and screen rules. **Stage 3:** 8 clips on the PAID `s2.1-pro` must match the free draws. Cost: 2b real $0.098 (22 paid s2-pro A clips), Stage 3 $0.038. Zani approved the cost. **STEP 0 FAILED (2026-10-01, `step0_result.json`) — stopped by the PREREG, 2b NOT run.** `volume: -8.5` lowered s2.1 by 12.8 LU (not 8.5 — non-linear), to −25.9 LUFS: 3.9 LU too quiet. Pitch check failed at 1.8 semitones, but on level-matched copies it is 1.1 (t2 1.59, f2 0.63): the estimator skips quiet frames, and its own A-vs-A noise is ~3 semitones, so a ±1.0 gate on 3 draws was a PREREG flaw. Peaks fine (−12.7 dBTP), duration 0.996. 12 free calls; wallet unchanged $9.1820. **Zani chose option 1: PREREG erratum 1 — pitch report-only (level-matched), Step 0b selects V* by a fit over −8.5/−6.0/−4.5 and confirms on 6 fresh clips.** **STEP 0b FAILED too (`step0b_result.json`):** volume −8.5 / −6.0 / −4.5 all gave ≈ −25.5 LUFS (−25.9 / −25.3 / −25.4) — a STEP, not a slope: any non-zero `volume` drops the level by ~12 LU, its size barely matters. My linear fit assumed a slope, clamped to V*=0.0, and the confirm at 0.0 gave −12.6 LUFS (= no prosody). Erratum 1 had no check for a flat response — my design flaw. Hypothesis (untested): a non-zero volume switches off Fish's loudness normalisation. 18 free calls, real $0. **Zani chose option 1 again: PREREG erratum 2, `step0c.py` — probes volume −1/+3, `normalize_loudness:false`, and false + volume 3.5.** **STEP 0c PASSED (`step0c_result.json`): `{"volume": -1.0}`** → confirm −22.6 LUFS (6 fresh clips, −22.3…−23.2), peak −9.4 dBTP, duration 0.97, pitch 0.0 st (level-matched). Probe: −1 → −22.5, +3 → −18.9, `normalize_loudness:false` → −12.8 (no change), false+3.5 → −18.3. So `volume: 0` (or absent) = Fish's loud normalised path; any non-zero value = a quieter path (~−21.6 + V, floor ~−25.5). UNDOCUMENTED — a ship must guard it. Scorer bug found and fixed before use: the confirm filter pooled Step 0b's 6 clips (same `phase` label) and printed a false FAIL; re-scored on the saved clips (no new call), mutant added. Zani approved erratum 3 (2b is the first test of the quiet path; ship guard `level_check.py`; PLR reported — A 12.2 / C 12.5 dB) and the $0.80 cap. **2b built 2026-10-01:** 54 calls OK (22 paid, real $0.0983), screens PASS (C−A native −0.9 LU; flags A 0/0/0, C 0 loop / 0 bleed / 1 pause; PLR A 12.15 / C 12.7 dB); sheet gains −1.3…+2.3 dB. Response time: paid s2-pro A median 1.09s, FREE C 3.25s (no SLA — Stage 3 measures the paid model). **2b PASSED (`result_2b.json`):** target pairs 14-1-1, sign p=0.00049; lines 7 net-positive, 0 negative; tsundere 7-0-1, flustered 7-1; GUARD 16-0 (teasing/sarcastic/dismissive/curious); 0 "not her" on any C clip; 1 "too much" (f2 C2, the one loss); consistency 4/4; A-vs-A noise 4/4 non-tie; he ticked "not her" on one CURRENT clip (t6 A2). **Stage 3 (paid `s2.1-pro`, his yes, real $0.0377): screens PASS** — median |ΔLUFS| vs free 0.52 LU, duration ratio 0.983, pitch 0.56 st, 0 loops, 0 bleed. **Speed: paid s2.1 median 1.75s vs s2-pro 1.09s; on the same lines +499 ms (n=7)** — a ship makes each reply ~0.5s slower (Fish time only; wall incl. network). Wallet $9.0837 before Stage 3 (2b billed exactly $0.0983). **Stage 3 listening PASSED: 8/8 fine, 0 broken, 0 not her.** His note: clip 1 (t2 P1) was "noticeably higher in pitch and tone compare to normal" — measured +5.2 st vs today's voice and +2.8 st vs the free draws of t2 (348 Hz vs ~280 Hz typical); the other 7 paid clips sit +1.3…+3.5 st above today's voice. s2.1 is about 2 semitones higher than s2-pro overall, and a draw can be much higher. Zani: the high draw is TOO HIGH (1b); +0.5s per reply is acceptable (2a). **Stage 2c pre-registered (addendum 2c, `t2c.py`):** temperature 0.6 / 0.5 vs 0.7 — Part 1 objective (pitch stray, high clips, screens; free, real $0), Part 2 blind sheet with too-high / too-calm boxes. **Part 1 RESULT (2026-10-01, `t2c_part1.json`): STOP — no arm qualifies, and the hypothesis is REJECTED: lower temperature RAISES pitch.** High clips (> +4 st vs today's voice): 0.7 → 4/48, 0.6 → 8/48, 0.5 → 16/48; median +1.8 / +2.2 / +2.4 st; stray 0.61 / 0.55 / 0.68 (perm p 0.25 / 0.74). Screens clean (0 loop, 0 bleed, 1 pause per arm). Also: the same 0.7 config gave 0/32 high draws in 2b but 4/16 tonight (p=0.009) — the outlier rate drifts. 112 free calls, real $0; wallet $9.0460 (Stage 3 billed exactly $0.0377). Wallet $9.182010 (2026-10-01; the 2a drop was exactly the 6 paid clips, $0.0267 — the free model billed nothing).
+     *2a results:* **#221b — PILOT PASSED (`dev/voice_221b/`, PREREG_221b.md, tag `221b-prereg`).** **RESULTS (2026-10-01).** Stage 1: 18/18 "too calm" → BOTH emotions need a fix (8/8 each). Stage 2a (`result_2a.json`):
+     **M (s2.1-pro, `c4d8`) 15-1-0, p=0.00026 (lines 7-0)**, tsundere 7-1, flustered 8-0, "not her" 0; MV (s2.1 + `fb03`)
+     13-3-0, p=0.011, tsundere 5-3, flustered 8-0, "not her" 2. Consistency 3/4 (trusted); A-vs-A 4/4 non-tie. Zani ticked
+     "not her" on 9 CURRENT (A) clips. Both advance; the rule picks **M** (higher net). **Next: a reviewed 2b plan** (even
+     lines, fresh draws, other-emotion guard lines, loudness — s2.1 is ~8.5 LU louder) + his yes. Nothing shipped.
+     Zani asked for a way around Fish's Professional Voice Clone verification — declined (it protects the voice owner's
+     consent). He named `fb03` as the voice he wants to use; it is arm MV.
+     *Start:* Zani: "fix her voice on
+     tsundere and flustered — I don't know which one, or both". Research: Fish auto-tags the shipped voice `c4d8` "calm,
+     measured, neutral-tone" and the old `fb03` "expressive, dynamic, energetic" (also "middle-aged"); `s2-pro` is now
+     "legacy", `s2.1-pro` recommended (`s2.1-pro-free` $0 until 2026-11-30 — Zani chose it for the pilot, accepting
+     that Fish may keep free requests). Stage 1 sheet (which emotion, $0) and Stage 2a pilot (M = s2.1, MV = s2.1 +
+     `fb03`, 2 draws each, 8 odd lines; even lines kept unheard for 2b) are BUILT, waiting for his answers. Screens:
+     0 loops, 0 bleed, 0 pause flags for all arms; **s2.1 is ~8.5 LU louder** (−13.5 vs −22.0 LUFS), pitch M +2.3 /
+     MV +3.9 semitones (rough; A-vs-A noise ~3), duration +10%. Real spend ~$0.03 (6 paid s2-pro A2 draws).
+     *Previous state:* 🔬 **MEASURED 2026-09-30 — NO ARM PASSED; nothing shipped (`dev/voice_221/`, PREREG_221.md, result.json).**
+     Blind AUDIO A/B, 16 fixed Japanese lines (8 tsundere: 4 `fish.log` + 4 E1 romantic; 8 flustered: 1 `fish.log` +
+     7 E1 romantic, translated once by the shipped `translate_via_gemma`), shipped `fish_tts()` payload, Zani's ear:
+     | Arm | vs A (wins-losses-ties) | one-sided p | tsundere | flustered |
+     |---|---|---|---|---|
+     | B — short rule-32 tags (H2) | 7-6-3 (item 18 unanswered; 7–8 wins under any fill) | 0.40–0.60 | 3-3-2 | 4-3-1 |
+     | C — B + re-anchor per sentence (H1) | 6-9-1 | 0.85 | **2-5-1** | 4-4-0 |
+     Consistency on flipped repeats 4/5 (good). **A vs A′ (same config, two draws): he chose a side 4/4** — one Fish draw
+     varies about as much as the arms do, so single-clip pairs are near the noise. Screens: B and C passed (0 English
+     bleed anywhere); C had 6 pauses >0.8s at sentence boundaries vs A 3, B 0 — the re-anchors add dead air, V3's old
+     problem. Zani on item 11 (f8, C vs A): he picked C only because A's opening "な" sounded wrong; "everything after,
+     A sounded much better" — read as A, C is 5-10. **Conclusions:** re-anchoring (H1 as built) is REJECTED — it is worse
+     for tsundere and adds pauses; the rule-32 rewrite (H2) is indistinguishable from the current tags. The current
+     `EMOTION_TAGS` stay. Cost: $0.189 real (wallet $9.4418 → $9.2528). **Found on the way: backlog #225** (the speed
+     field is ignored — she speaks at 1.0). **Still open, each needs a new plan and his yes:** H3 via #225 (speed has
+     NEVER been tested by ear), H4 (the Japanese wording; touches #196), H6 (the neutral reference voice `c4d8…` vs the
+     old expressive `fb03…`). A future sheet needs 2+ draws per arm per line, because of the A/A′ result.
+     *Original entry:* **Her VOICE sounds too calm on tsundere/flustered replies — "no fluster in the voice".** Raised by Zani
      2026-09-30 (example message: "You look a bit cuter today"). His answers: **too calm, no fluster; no English
      words at the start; unsure whether it is tsundere only or flustered too.** This is the TTS voice, NOT the text:
      not #180 (closed), not reply length, not the display. It changes how she sounds → CLAUDE.md 53 (blind A/B by
@@ -1733,7 +1766,7 @@ copies. **No app code, data or ChromaDB was changed.**
      - **H2 — the `tsundere` direction breaks rules 15 and 32.** Only 1 of 4 fragments ends in an acoustic noun
        ("herself", "up", "throughout" — rule 32's own bad example), and it asks for a 4-stage arc (sharp → catching →
        warm → clipped) inside 1–2 short sentences. `flustered` is closer to compliant but also an arc.
-     - **H3 — speed is fixed at 1.1** for every emotion (Zani's July choice; do NOT reintroduce turn-to-turn variance).
+     - **H3 — CLOSED 2026-09-30 (#225): the 1.1 was never applied; she speaks at 1.0 and Zani says the pace is fine.** *Was:* speed is fixed at 1.1 for every emotion (Zani's July choice; do NOT reintroduce turn-to-turn variance).
      - **H4 — the Japanese words are gentle** (e.g. `いいけどさ、ちゃんと自分も面倒見てよね`). The translate prompt is
        register-aware; changing it touches #196's closed work — test last, if at all.
      **Plan sketch (needs a reviewed plan and his yes):** fixed Japanese lines taken from `fish.log` (real tsundere and
@@ -1775,4 +1808,18 @@ copies. **No app code, data or ChromaDB was changed.**
      before it started). Cost today: ~4s of GPU work at boot plus the ~1.7s tail after abort (bugs.md 84), with no
      sign of benefit. **Latency work is CLOSED by Zani (CLAUDE.md instruction 2): record only, do not propose a fix
      unprompted.** Any change sits next to the boot video (CLAUDE.md 36) and needs a plan + his yes.
-
+225. ✅ **CLOSED 2026-09-30 — option (a), zero audio change (bugs.md 98).** Zani: *"pace is fine"*, so no speed A/B. The dead
+     top-level `speed`, the `speed = 1.1` line and the false `[TTS] Speed: 1.1x` log line are removed; the payload is now
+     guarded by `dev/fish_payload_test.py`. `GREETING_TTS_VER` stays `v3` (Fish ignored the field, so the audio is the same).
+     *Original entry:* **Fish IGNORES the `speed` the server sends — she has spoken at 1.0, not 1.1, since at least V3.** Found by #221
+     Step 0 (2026-09-30, `dev/voice_221/step0_result.json`): `fish_tts()` (`kurisu_fish_server.py`) puts `"speed"` at the
+     TOP level of the payload; Fish's API reference has speed only as `prosody.speed`. Same text through the shipped
+     `fish_tts()` at 0.6 and 1.8 → 7.73s vs 8.05s (ratio 0.96, i.e. no effect); `"prosody": {"speed": …}` 0.6 vs 1.8 →
+     13.06s vs 4.21s (ratio 3.11). The July voice_ab_test data agrees (speed 1.22 → 8.39 ch/s, 1.1 → 8.73 ch/s).
+     **Consequences:** V3's "fixed speed 1.1" and the pre-V3 `compute_speed` variance were never applied, so the July
+     "speed sounds weird" complaint was not caused by speed; H3 of #221 (speed) has never been heard. The server comment
+     at the `speed = 1.1` line still says it is applied (left as is — no runtime file changed this session).
+     **NOT changed:** moving it to `prosody.speed` would make her 10% faster than every reply he has ever heard — a voice
+     change, so CLAUDE.md 53 applies (blind A/B by his ear, then a live trial). Options: (a) do nothing and delete the dead
+     field; (b) A/B 1.0 vs 1.1 (and maybe a faster pace for tsundere/flustered only) via `prosody.speed`. Either way,
+     bump `GREETING_TTS_VER` if the audio changes. Needs his decision.

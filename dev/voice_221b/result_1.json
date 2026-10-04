@@ -1,0 +1,19 @@
+{
+ "per_emotion": {
+  "tsundere": {
+   "R": 0,
+   "C": 8,
+   "M": 0
+  },
+  "flustered": {
+   "R": 0,
+   "C": 8,
+   "M": 0
+  }
+ },
+ "needs_fix": {
+  "tsundere": true,
+  "flustered": true
+ },
+ "repeat_agreement": "2/2"
+}

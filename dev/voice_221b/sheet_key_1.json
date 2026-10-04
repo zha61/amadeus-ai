@@ -1,0 +1,95 @@
+{
+ "seed": 2210,
+ "items": [
+  {
+   "id": "t5",
+   "repeat_of": null
+  },
+  {
+   "id": "f7",
+   "repeat_of": null
+  },
+  {
+   "id": "t6",
+   "repeat_of": 11
+  },
+  {
+   "id": "t7",
+   "repeat_of": null
+  },
+  {
+   "id": "f3",
+   "repeat_of": null
+  },
+  {
+   "id": "t1",
+   "repeat_of": null
+  },
+  {
+   "id": "t4",
+   "repeat_of": 7
+  },
+  {
+   "id": "t4",
+   "repeat_of": null
+  },
+  {
+   "id": "f1",
+   "repeat_of": null
+  },
+  {
+   "id": "t8",
+   "repeat_of": null
+  },
+  {
+   "id": "t3",
+   "repeat_of": null
+  },
+  {
+   "id": "t6",
+   "repeat_of": null
+  },
+  {
+   "id": "f6",
+   "repeat_of": null
+  },
+  {
+   "id": "f8",
+   "repeat_of": null
+  },
+  {
+   "id": "t2",
+   "repeat_of": null
+  },
+  {
+   "id": "f4",
+   "repeat_of": null
+  },
+  {
+   "id": "f2",
+   "repeat_of": null
+  },
+  {
+   "id": "f5",
+   "repeat_of": null
+  }
+ ],
+ "emotion": {
+  "t1": "tsundere",
+  "t2": "tsundere",
+  "t3": "tsundere",
+  "t4": "tsundere",
+  "t5": "tsundere",
+  "t6": "tsundere",
+  "t7": "tsundere",
+  "t8": "tsundere",
+  "f1": "flustered",
+  "f2": "flustered",
+  "f3": "flustered",
+  "f4": "flustered",
+  "f5": "flustered",
+  "f6": "flustered",
+  "f7": "flustered",
+  "f8": "flustered"
+ }
+}

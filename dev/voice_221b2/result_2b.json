@@ -1,0 +1,43 @@
+{
+ "target": {
+  "wins": 14,
+  "losses": 1,
+  "ties": 1
+ },
+ "guard": {
+  "wins": 16,
+  "losses": 0,
+  "ties": 0
+ },
+ "tsundere": {
+  "wins": 7,
+  "losses": 0,
+  "ties": 1
+ },
+ "flustered": {
+  "wins": 7,
+  "losses": 1,
+  "ties": 0
+ },
+ "sign_p_target": 0.00049,
+ "lines_net_pos": 7,
+ "lines_net_neg": 0,
+ "not_her_target_C": 0,
+ "not_her_guard_C": 0,
+ "too_much_C": 1,
+ "too_much_A": 0,
+ "consistency": "4/4",
+ "noise_non_tie": "4/4",
+ "checks": {
+  "trusted": true,
+  "sign_p<=0.05": true,
+  "lines": true,
+  "tsundere": true,
+  "flustered": true,
+  "not_her_target<=2": true,
+  "guard_losses<=wins+2": true,
+  "not_her_guard<=2": true,
+  "screens": true
+ },
+ "passes": true
+}

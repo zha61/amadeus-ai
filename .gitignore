@@ -44,3 +44,16 @@ assets/icon.icns
 assets/icon_1024.png
 assets/ama.webp
 amadeus_logo.png
+
+# ── public repo: voice-test data files that hold her real chat replies or their transcripts (2026-10-04) ──
+dev/voice_221/clips.json
+dev/voice_221/lines.json
+dev/voice_221/screens.json
+dev/voice_221/step0_result.json
+dev/voice_221b/clips_b.json
+dev/voice_221b/screens_b.json
+dev/voice_221b2/clips_b2.json
+dev/voice_221b2/lines_b2.json
+dev/voice_221b2/screens_b2.json
+dev/voice_221b2/screens_s3.json
+dev/voice_221b2/t2c_screens.json

@@ -244,15 +244,18 @@ Emotional (notice: she does not stammer every time, and never the same way twice
 ---
 
 ## Voice Design
-- **Voice model:** Fish Audio S2 Pro, neutral baseline (`c4d832799bf845ee86638a1bc0cd0d41`)
+- **Voice model:** Fish Audio **s2.1-pro** (since 2026-10-04, #221b; was s2-pro), neutral baseline (`c4d832799bf845ee86638a1bc0cd0d41`).
+  Zani preferred it blind (2a 15-1, 2b 14-1-1): less calm on tsundere/flustered. It is ~2 semitones higher and its pitch
+  varies more per reply (a few draws ~+5 st). `prosody {"volume": -1.0}` keeps her at s2-pro's loudness (CLAUDE.md 54).
 - **Old expressive model (backup):** `fb03cde57e7740c38a9601459afaae42`
 - **Strategy:** Neutral baseline + rich emotion tags = better controllability
 - Tags prepended to Japanese text before Fish Audio API call
 - Emotion set at exact moment `playSyncedAudio` starts
 - **API params ("V3" config, adopted 2026-07-13 after the A/B listen test in `dev/voice_ab_test.py`; verified against `kurisu_fish_server.py:441-453` on 2026-08-16):**
   temperature **0.7**, top_p 0.8, repetition_penalty **1.2**, normalize **True**
-- **Speed: FIXED at 1.1** (`kurisu_fish_server.py:512`). `compute_speed()` is retained
-  in the file but no longer called — its turn-to-turn variance lost the A/B test.
+- **Speed: Fish's default 1.0 — no speed field is sent** (since 2026-09-30). She has always spoken at 1.0: the old
+  top-level `"speed": 1.1` was ignored by Fish, which reads only `prosody.speed` (backlog #225, bugs.md 98). Zani
+  kept 1.0 ("pace is fine"). `compute_speed()` is retained but uncalled (used only by `dev/voice_ab_test.py`).
 
 > ⚠️ **Do not "restore" the pre-V3 values.** Until 2026-08-16 this section documented
 > temperature 0.8, normalize False, and dynamic 1.2x speed via `compute_speed()` — that

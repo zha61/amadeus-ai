@@ -1,0 +1,62 @@
+{
+ "probe": {
+  "S1": {
+   "prosody": {
+    "volume": -1.0
+   },
+   "median_lufs": -22.5,
+   "error_lu": -0.5,
+   "max_true_peak": -8.5,
+   "dur_ratio": 1.024,
+   "candidate": true
+  },
+  "S2": {
+   "prosody": {
+    "volume": 3.0
+   },
+   "median_lufs": -18.85,
+   "error_lu": 3.15,
+   "max_true_peak": -3.9,
+   "dur_ratio": 0.972,
+   "candidate": false
+  },
+  "S3": {
+   "prosody": {
+    "normalize_loudness": false
+   },
+   "median_lufs": -12.8,
+   "error_lu": 9.2,
+   "max_true_peak": -0.7,
+   "dur_ratio": 0.975,
+   "candidate": false
+  },
+  "S4": {
+   "prosody": {
+    "normalize_loudness": false,
+    "volume": 3.5
+   },
+   "median_lufs": -18.3,
+   "error_lu": 3.7,
+   "max_true_peak": -4.6,
+   "dur_ratio": 1.011,
+   "candidate": false
+  }
+ },
+ "selected": "S1",
+ "prosody": {
+  "volume": -1.0
+ },
+ "target_lufs": -22.0,
+ "median_lufs_C": -22.6,
+ "level_error_lu": -0.6,
+ "max_true_peak_C": -9.4,
+ "dur_ratio_C_vs_M": 0.97,
+ "pitch_semitones_C_vs_M_leveled (reported only)": -0.0,
+ "checks": {
+  "level": true,
+  "peak": true,
+  "duration": true
+ },
+ "passed": true,
+ "rescored": "confirm_rows() fix \u2014 the pooled Step 0b clips removed; see step0c_result_bug_pooled.json"
+}

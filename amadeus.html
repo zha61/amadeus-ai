@@ -2681,7 +2681,7 @@ async function sendMsg(userText){
 // it straight from disk (no Fish Audio call, works offline, instant).
 // GREETING_TTS_VER is baked into the key — bump it whenever fish-server voice
 // settings change so stale-sounding audio is naturally abandoned, never replayed.
-const GREETING_TTS_VER='v3'
+const GREETING_TTS_VER='v4'   // v4 2026-10-04: s2.1-pro + volume -1.0 (#221b). dev/warm_greetings.js READS this line
 function greetingCacheKey(text,emo){
   let h=5381
   const s=text+'|'+(emo||'default')+'|'+GREETING_TTS_VER

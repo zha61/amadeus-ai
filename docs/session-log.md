@@ -1,16 +1,77 @@
-# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-09-30, after #206 closed)
+# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-10-01, #221b Stage 2b pre-registered)
 
 **Read CLAUDE.md first, then this block, then the newest entry below.**
 
 ## 🌐 2026-09-28 — Public snapshot: github.com/zha61/amadeus-ai
-Public snapshot of the private working repo. Third-party character assets and probe results that embed game
-script or private diary text are excluded.
+Public snapshot of the private working repo. Third-party character assets, probe results that embed game
+script or private diary text, and voice-test data files that hold real chat replies are excluded.
 
-## ⏭️ NEXT SESSION (fresh, Zani's choice 2026-09-30): #221 — her tsundere/flustered VOICE sounds too calm
-Read backlog #221 in full, then plan the blind A/B (fixed Japanese lines from `fish.log`; A current / B rule-15/32
-rewrite / C = B + per-sentence re-anchor; check V3's pause problem; tsundere AND flustered; state Fish credit first).
-CLAUDE.md 53 applies. Also open, not in his order: #222, #223 (hands-free stuck — needs the DevTools line when it
-happens), #224 (prewarm, record only). **Not pushed:** all 2026-09-30 commits — ask him before pushing.
+## ⏭️ 2026-09-30 (late) — #225 CLOSED with zero audio change (bugs.md 98). NEXT: her tsundere/flustered voice (#221)
+**#225:** Zani: *"pace is fine"* — no speed A/B. The dead top-level `speed`, `speed = 1.1` and the false `[TTS] Speed: 1.1x`
+log line are removed from `kurisu_fish_server.py`; `python3 dev/fish_payload_test.py` (16 checks, fails on the old server)
+guards the payload. `GREETING_TTS_VER` stays `v3` (Fish ignored the field, so the audio is the same). Relaunch only.
+Revert: `git checkout pre-225 -- kurisu_fish_server.py`. **Live check:** one reply; `fish.log` shows `[TTS] Synth:` (not
+`Speed:`) and her voice sounds the same.
+**✅ #221b CLOSED — KEPT (2026-10-04). Zani after the live trial: *"I like her voice now. It's good."*** Her voice is now
+Fish `s2.1-pro` + `{"volume": -1.0}`. Only follow-up: warm the 14 birthday greetings before 2027-06-10 (app CLOSED, start the server,
+`node dev/warm_greetings.js`). If her loudness ever jumps: `level_check.py` (CLAUDE.md 54). **Pushed 2026-10-04 with his yes:** `main` `44113ce..a65685e`
++ tags `221b2-prereg`, `pre-221b` (private `zha61/amadeus`; keys scanned: 0 hits). The PUBLIC repo is NOT synced.
+*(trial record:)* **#221b — SHIPPED FOR A LIVE TRIAL (2026-10-04), tag `pre-221b`.** Server: `s2.1-pro` + `{"volume": -1.0}`; `GREETING_TTS_VER` v4.
+WARMED 2026-10-04: 74/88 greetings at v4 (gemma4-translated, 0 failed); `level_check` on all 74: level −0.6 LU, pitch +1.46 st →
+PASS, but 8 greetings were > +4 st (a cached greeting repeats the SAME draw every boot). RE-DRAWN with Zani's yes: round 1 fixed 6,
+round 2 the last 2 (10 paid calls, ~$0.03); final `level_check` on 74: −0.65 LU, +1.42 st, **0 high**. Old draws kept in the scratchpad. Server stopped.
+Ollama read 0.35.0 on 2026-10-04 (was 0.34.4). NEXT: Zani's live trial (relaunch only). Listen for tsundere/flustered tone, high-pitch replies, loudness vs music, mouth movement,
+the +0.5s wait, `calm` greetings. `fish.log` `[TTS] Synth:` lines now end in `model=s2.1-pro`. Revert:
+`git checkout pre-221b -- kurisu_fish_server.py amadeus.html dev/warm_greetings.js dev/fish_payload_test.py`, then `git revert` the
+ship commit for the docs. Birthday greetings (14) are NOT warmed — warm before 2027-06-10. Level guard: `level_check.py MANIFEST`.
+*(previous state:)* **#221b — CURRENT STATE (2026-10-01). Everything is in `dev/voice_221b2/PREREG_221b2.md` (errata 1–3, addendum 2c) and backlog #221.**
+- Candidate C = `s2.1-pro` (same voice `c4d8`) + `"prosody": {"volume": -1.0}` → s2-pro's level (−22.6 LUFS). Fish `volume` is a
+  STEP, undocumented: 0/absent = loud (~−13), any non-zero = ~−21.6 + V (floor ~−25.5). Steps 0 and 0b FAILED; 0c PASSED.
+- 2b PASSED: targets 14-1-1 (p=0.00049), guard 16-0, 0 "not her", consistency 4/4. Stage 3 (paid) PASSED: 8/8 fine, equal to free.
+- Zani: one paid draw "too high" (+5.2 st; s2.1 pitch varies far more than s2-pro) → Stage 2c; +0.5s per reply is OK.
+- **Stage 2c Part 1 STOPPED (`t2c_part1.json`): no arm qualifies — a LOWER temperature makes pitch HIGHER, not steadier.** High clips
+  (> +4 st): 0.7 → 4/48, 0.6 → 8/48, 0.5 → 16/48; median +1.8 / +2.2 / +2.4 st; stray 0.61 / 0.55 / 0.68. Same config 0.7: 0/32 high in
+  2b (morning) vs 4/16 tonight (Fisher p=0.009) — the s2.1 high-draw rate is not stable over time. **Waiting for Zani's choice.**
+  (Old step list, if 2c is ever resumed:)
+  Then `t2c.py part1` → `screen1` (app CLOSED) → `decide1` → (if an arm qualifies, his yes to the $0.45 cap) `part2` → `screen2`
+  → `make2` → open `dev/voice_test/221b2/sheet2c/index.html` in Chrome → `score2 ANSWERS`.
+- Then the SHIP plan (his yes): `pre-221b` tag, one commit = C + the 2c temperature, `GREETING_TTS_VER` v4 in amadeus.html AND
+  dev/warm_greetings.js, `fish_payload_test` pins prosody/temperature, `level_check.py` (4 paid clips), warm 88 greetings offline
+  (state the exact cost), live trial, one-command revert. Real spend so far: 2b $0.0983 + Stage 3 $0.0377. Wallet $9.0837 before Stage 3.
+*(older)* **#221b — PILOT PASSED (2026-10-01).**
+**Zani APPROVED Stage 2b on 2026-10-01, to run in a fresh session.** The new session writes the plan, reviews it twice
+(incl. "is this world-class?"), writes PREREG_221b2 and commits it BEFORE any call, states the Fish cost from the real
+wallet, and waits for his yes to that cost before synthesis. Reuse `dev/voice_221b/` (arms_b, synth_b, screens_b, blind_b).
+Free model `s2.1-pro-free` stays approved for the M arm (he accepted the data-use terms).
+Stage 1: 18/18 "too calm" (both emotions). Stage 2a: **M = `s2.1-pro` with the SAME voice `c4d8` won 15-1 (p=0.00026)**,
+0 "not her"; MV (`s2.1` + `fb03`) 13-3, 2 "not her". He ticked "not her" on 9 CURRENT clips. Rule → M advances.
+2b must cover: the 8 unheard even lines, fresh draws, 8 other-emotion guard lines (fish.log), and LOUDNESS — s2.1 is
+~8.5 LU louder, so the ship must lower it server-side (test `prosody.volume` first; the renderer's audio path is frozen,
+CLAUDE.md 51). Then Stage 3: paid `s2.1-pro` equals free (8 clips), tag, one commit, GREETING_TTS_VER v4, live trial.
+Declined: a way around Fish's Professional Voice Clone verification (voice-owner consent).
+*(older, done:)* **#221b — sheets BUILT (2026-09-30).** He approved Stages 1 + 2a on the FREE model.
+1. He opens `dev/voice_test/221b/stage1/index.html` in a NORMAL browser (18 items), then sends the answers.
+   Score: `python3 dev/voice_221b/blind_b.py score1 ANSWERS.txt`. If neither emotion has ≥4/8 "too calm" → do NOT show 2a.
+2. Then `dev/voice_test/221b/sheet2a/index.html` (40 items). Score: `blind_b.py score2a ANSWERS.txt` → `result_2a.json`.
+   An advancing arm needs a NEW reviewed plan for 2b (even lines t2 t4 t6 t8 f2 f4 f6 f8, fresh draws, other-emotion
+   guard lines, loudness handling — s2.1 is ~8.5 LU louder) and his yes. Nothing ships from 2a.
+Wallet $9.2087 before the synthesis; re-read it (it lags) — expected drop ~$0.03 (6 paid clips); a bigger drop means
+the free model billed.
+**Next (Zani, same session):** "find ways to fix her voice on tsundere and flustered — I don't know which one, or both."
+Needs a reviewed plan + his yes + the Fish cost before any synthesis. H1 (re-anchor) and H2 (short tags) are measured and
+rejected (#221); H3 (speed) is closed. Open: which emotion is wrong, H6 (reference voice), H4 (Japanese wording).
+**Fish API credit $9.2087** (2026-09-30, read before any new synthesis) — $0.044 below the $9.2528 written after #221,
+so #221's real cost was ~$0.233 (billing lag), not $0.189. **Pushed 2026-10-01 with his yes:** `main` `f5f6e82..fcc829b` + tags `pre-225`, `221b-prereg` (private `zha61/amadeus`). The PUBLIC repo is NOT synced — see the 🌐 block.
+
+## 🔬 2026-09-30 (night) — #221 MEASURED: NO ARM PASSED, nothing shipped. New: backlog #225 (Fish ignores `speed`).
+Blind AUDIO A/B by Zani's ear on 16 fixed Japanese lines (`dev/voice_221/`, PREREG_221.md): B (short rule-32 tags)
+7-6-3 vs the current tags = no difference; C (B + re-anchor per sentence) 6-9-1 — worse, esp. tsundere 2-5, and it adds
+dead air at sentence boundaries. He chose a side on 4/4 A-vs-A′ pairs (same config), so one Fish draw is near the noise.
+`EMOTION_TAGS` and `kurisu_fish_server.py` are UNCHANGED. **#225:** the server's `"speed": 1.1` is a top-level field that
+Fish ignores (measured: 0.6 vs 1.8 → same length; `prosody.speed` works) — she has always spoken at 1.0. Not changed:
+it is a voice change → CLAUDE.md 53. **Next (his choice, each needs a reviewed plan):** #225 speed by ear (H3 was never
+heard), H4 Japanese wording (touches #196), H6 the reference voice. Fish API credit $9.2528 (2026-09-30, after $0.189).
+Also open: #222, #223, #224. *(pushed 2026-10-01 — see above.)*
 
 ## ✅ 2026-09-30 — #206 CLOSED, zero code (backlog #206, new #224)
 RAG readiness gate WORKS at 3/3 new cold boots (embed ~3s, ready in 4.5–6.3s; the 16.4s original did not recur).
@@ -624,6 +685,88 @@ this paragraph guessed the cause and guessed wrong.)
   been re-checked (backlog #169).
 - **No video AND no voice, but `/speak` works when tested directly = the audio DEVICE,
   not the code.** Check `system_profiler SPAudioDataType`. See the Aug 23 entry.
+
+---
+
+## October 1, 2026 — #221b Stage 2b pre-registered (no Fish call); the 2a results recorded
+- **2a results (scored 2026-10-01, commit `10bd53a`; this entry was missing):** Stage 1 18/18 "too calm". M (`s2.1-pro-free`,
+  `c4d8`) 15-1, p=0.00026, 0 "not her"; MV 13-3, 2 "not her". M advances. Wallet after 2a: $9.182010 — the drop from $9.2087
+  equals the 6 paid s2-pro clips exactly (1,779 bytes = $0.0267), so the free model billed nothing.
+- Plan reviewed three times (33 flaws fixed). New facts: Fish documents `prosody.volume` (dB) and `normalize_loudness` (default on);
+  s2.1-pro costs the same as s2-pro ($15/1M bytes). Loudness is a GATE: lip sync and BGM ducking are tuned to s2-pro's level.
+  `dev/warm_greetings.js` holds its own `GREETING_TTS_VER='v3'` — a ship must bump it too.
+- Built `dev/voice_221b2/` (arms, frozen lines, Step 0, synthesis, screens, sheets). Selftests: step0 8/8, screens 9/9,
+  blind 12/12, arms self-check OK. A 2b dry run: 54 calls (22 paid), real $0.0983, guard $0.369. Nothing sent.
+- No runtime file changed. `npm run check` and `fish_payload_test.py` re-run to show the shipped server is untouched.
+- **Step 0 run (Zani approved the cost): FAILED.** `volume -8.5` → −25.9 LUFS (effect 12.8 LU, non-linear; 3.9 LU too quiet);
+  pitch 1.8 st raw, 1.1 st on level-matched copies — the pitch gate was too tight for the estimator (A-vs-A noise ~3 st).
+  No correction allowed (two checks failed). Stopped by the PREREG; 12 free calls, wallet unchanged $9.1820.
+- **Step 0b (erratum 1): FAILED.** −8.5 / −6.0 / −4.5 dB → −25.9 / −25.3 / −25.4 LUFS: a step, not a slope. The linear fit
+  clamped to 0.0 dB, which equals no prosody (−12.6 LUFS). My erratum lacked a flat-response check. 18 free calls, $0 real.
+- **Step 0c (erratum 2): PASSED** with `{"volume": -1.0}` (−22.6 LUFS on 6 fresh clips). A first printout said FAIL: my confirm
+  filter pooled Step 0b's 6 clips (same `phase` label). Fixed (`confirm_rows`, mutant in selftest 7/7), re-scored the SAVED clips
+  with `--rescore`; the buggy result is kept as `step0c_result_bug_pooled.json`. 22 free calls; wallet still $9.1820.
+
+---
+
+## October 4, 2026 (later) — #221b KEPT: Zani, after the live trial: "I like her voice now. It's good."
+- 8 high greetings re-drawn (2 rounds); final level_check 74: −0.65 LU, +1.42 st, 0 high. Wallet $8.774550 (17:11Z): warm +
+  re-draw ~$0.27 real vs ~$0.22 estimated. #221 closed in backlog and roadmap ✅. Nothing pushed.
+
+---
+
+## October 4, 2026 — #221b shipped for a live trial: s2.1-pro + volume -1.0 (bugs.md 99, CLAUDE.md 54)
+- Zani chose "ship at 0.7" after 2c showed a lower temperature raises pitch. Plan reviewed twice; cost cut $0.27 → ~$0.19
+  (level check folded into the warm at $0; the 14 birthday greetings deferred to before 2027-06-10).
+- Tag `pre-221b` (`88c75e2`). One commit: server (`FISH_MODEL`, `FISH_PROSODY`, model in the Synth log line, `/health`, banner),
+  `GREETING_TTS_VER` v4, `warm_greetings.js` (reads the version from amadeus.html, stops on a non-gemma4 translator, `--limit`,
+  `--skip-birthday`, `--manifest`), `fish_payload_test.py` 21 (fails 6 on `pre-221b`), `level_check.py` (selftest: key port 176/176,
+  v3 files 88/88, shipped request == the Stage 3 request on all 8 clips).
+- After the ship, the #221b experiment scripts' arm "A" resolves to the NEW shipped config (it reads `fs.FISH_MODEL`);
+  their recorded results stand. To re-run them as they were, check out `pre-221b`.
+
+---
+
+## September 30, 2026 (late) — #221b: Stage 1 + 2a sheets built (free s2.1-pro model), waiting for Zani
+- Research: the shipped voice `c4d8` is Fish-auto-tagged "calm, measured, neutral-tone"; `fb03` "expressive, energetic"
+  (and "middle-aged"). `s2-pro` is legacy; `s2.1-pro-free` is $0 until 2026-11-30 and takes his `reference_id`.
+- PREREG_221b committed and tagged (`221b-prereg`) before any call. 38 calls, all OK (32 free, 6 paid A2 on s2-pro);
+  10 A clips reused from #221. Screens pass for M and MV (0 loop / bleed / pause flags).
+- **s2.1 output is ~8.5 LU louder** than s2-pro, so the 2a sheet is level-matched (every copy, A included, gain-only,
+  measured −22.4/−22.5 on both sides). Pages checked in the browser pane: answers record and export; no arm label.
+- `blind_b.py selftest` 9/9 (always-A rater untrusted, true preference advances, not-her and loop = loss, wrong-key
+  mutant, tie rule). Nothing in the app changed.
+
+---
+
+## September 30, 2026 (late) — #225 closed: the dead speed field removed, no audio change (bugs.md 98)
+- Plan for a speed A/B was written and reviewed; Zani asked what the fix was for. Answer: nothing he hears is broken —
+  she has always spoken at 1.0; only the code and a log line claimed 1.1. He said *"pace is fine"* → option (a).
+- Removed the top-level `speed`, `speed = 1.1` and the `[TTS] Speed:` log line (now `[TTS] Synth: emotion=…, jp_len=…`).
+  `compute_speed()` kept — `dev/voice_ab_test.py` imports it. `dev/voice_221/common.synth` lost its `speed` argument;
+  `step0_speed.py` now builds an explicit payload so it still reproduces its measurement.
+- New `dev/fish_payload_test.py` (16 checks, 3 mutants): the real `/speak` with mocks. Proven to fail on the old server.
+- Research kept for later: Fish's API has speed only in `prosody` (with `volume`, `normalize_loudness`); its docs now list
+  an `s2.1-pro` model. From the old Step 0 clips ($0): a `prosody` object changed loudness by ≤1 LU; speed 0.6 kept pitch.
+- `npm run check`, `check:selftest` 7/7, all 13 dev JS tests, `arms.py` and `blind_audio.py selftest` green. Fish $0.
+
+---
+
+## September 30, 2026 (night) — #221: blind voice A/B, no arm passed; Fish ignores `speed` (backlog #225)
+- Plan reviewed three times at Zani's request (32 flaws listed and fixed before any synthesis). Research first: Fish S2
+  applies a tag "until the next tag or end of the sentence"; cues work best at sentence start; keep descriptions short.
+- Step 0 (4 clips) found that the top-level `speed` is ignored → backlog #225. The Fish wallet did not move for minutes
+  after billing, so the planned wallet guard could never stop a run; replaced by a byte-count estimate ($15/1M x 1.5).
+- Lines chosen by a pre-registered rule; 11 E1 lines translated once by the shipped `translate_via_gemma` (app closed).
+- 52 clips; screens: B and C pass (0 English bleed; C adds long pauses at sentence boundaries).
+- Two tool bugs caught before results: the sheet lost every answer when browser storage was blocked (found by a browser
+  check; fixed), and the scorer's `passes` was a numpy bool that `json.dump` rejects (fixed; the selftest now asserts
+  the output serialises). The app's preview pane cannot play the sheet's MP3s — it shows a static copy; open the page in
+  a normal browser.
+- Zani's sheet: B 7-6-3, C 6-9-1, consistency 4/5, A vs A′ 4/4 non-tie. Item 18 unanswered — no fill changes the outcome.
+  No arm passed → stop by the pre-registered rule. My error: I dated PREREG "2026-10-01"; the erratum is appended.
+- Real cost $0.189 (guard estimated $0.35). No runtime file changed, so no relaunch and no `npm run check` was needed
+  for the app; the dev tools were run and self-tested.
 
 ---
 

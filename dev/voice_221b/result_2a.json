@@ -1,0 +1,48 @@
+{
+ "arms": {
+  "M": {
+   "wins": 15,
+   "losses": 1,
+   "ties": 0,
+   "lines_net_pos": 7,
+   "lines_net_neg": 0,
+   "not_her_clips": 0,
+   "screens_pass": true,
+   "tsundere": {
+    "wins": 7,
+    "losses": 1,
+    "ties": 0
+   },
+   "flustered": {
+    "wins": 8,
+    "losses": 0,
+    "ties": 0
+   },
+   "advances": true
+  },
+  "MV": {
+   "wins": 13,
+   "losses": 3,
+   "ties": 0,
+   "lines_net_pos": 5,
+   "lines_net_neg": 0,
+   "not_her_clips": 2,
+   "screens_pass": true,
+   "tsundere": {
+    "wins": 5,
+    "losses": 3,
+    "ties": 0
+   },
+   "flustered": {
+    "wins": 8,
+    "losses": 0,
+    "ties": 0
+   },
+   "advances": true
+  }
+ },
+ "consistency": "3/4",
+ "trusted": true,
+ "noise_non_tie": "4/4",
+ "advance": "M"
+}

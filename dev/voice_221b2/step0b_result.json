@@ -1,0 +1,33 @@
+{
+ "volume": 0.0,
+ "select_points": [
+  [
+   -8.5,
+   -25.9
+  ],
+  [
+   -6.0,
+   -25.3
+  ],
+  [
+   -4.5,
+   -25.4
+  ]
+ ],
+ "fit": {
+  "a": -24.667,
+  "b": 0.137
+ },
+ "target_lufs": -22.0,
+ "median_lufs_C": -12.6,
+ "level_error_lu": 9.4,
+ "max_true_peak_C": -0.7,
+ "dur_ratio_C_vs_M": 1.043,
+ "pitch_semitones_C_vs_M_leveled (reported only)": 1.28,
+ "checks": {
+  "level": false,
+  "peak": false,
+  "duration": true
+ },
+ "passed": false
+}

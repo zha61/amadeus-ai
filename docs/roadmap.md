@@ -45,7 +45,7 @@ not a feature list, and it is scoped as P1–P5 in improvements-backlog **#186�
 ### July 13, 2026 — voice V3, greeting cache, vision
 - **Vision — paste an image and she comments on it** (backlog #91, `3c9f1af`). gemma4's image input: paste → downscale ≤1024px JPEG → `images[]` on the Ollama call; history keeps a text marker to protect the KV cache; canon interception skipped when an image is attached.
 - **Greeting audio disk cache + prefetch during the boot video** (#32, #79, `5ff32ad`). ⚠️ Never hit until 2026-09-27 — the read path lacked `data/` (bugs.md 91).
-- **Voice "V3" config** — temp 0.7, normalize True, fixed speed 1.1 (A/B test `dev/voice_ab_test.py`). See `session-log.md` July 13 entry.
+- **Voice "V3" config** — temp 0.7, normalize True, "fixed speed 1.1" (**never applied** — Fish ignores the top-level field; the dead field was removed 2026-09-30 and she stays at 1.0, backlog #225) (A/B test `dev/voice_ab_test.py`). See `session-log.md` July 13 entry.
 
 ### July 18–19, 2026 — hands-free voice + two core swaps
 - **Hands-free voice Phase 2** (backlog #46 #49 #50 #51 #56, `3446f98` + `b5714d4`). Vendored **Silero VAD v5** + ONNX runtime (offline, lazy-loaded) with an RMS fallback; Whisper no-speech/avg-logprob gate; auto re-arm of the mic on her reply `ended`; auto-exit after ~10 min of silence.
@@ -113,7 +113,7 @@ Recorded in full in `bugs.md`; listed here only so the roadmap is not silent abo
 - Boot video → Live2D transition
 - Ollama gemma4:latest chat with streaming
 - DeepL EN→JP translation (header auth)
-- Fish Audio S2 Pro TTS with neutral baseline voice
+- Fish Audio TTS (s2.1-pro since 2026-10-04, #221b) with neutral baseline voice
 - 19-emotion system with rich voice actor direction tags
 - Emotion-conditional prosody (breath sounds, pauses, openers per emotion)
 - Dynamic speech speed via compute_speed() — 6 conditions
@@ -356,6 +356,11 @@ Use the 756-clip dataset to train a proper voice model rather than zero-shot clo
 - Check: https://docs.fish.audio and https://github.com/fishaudio/fish-speech
 
 ---
+
+## Voice — her tsundere/flustered voice (backlog #221 / #221b)
+- **Fish s2.1-pro + `prosody {"volume": -1.0}`** — ✅ KEPT 2026-10-04 (Zani: *"I like her voice now. It's good."*). Shipped for a live trial 2026-10-04 (tag `pre-221b`). Blind A/B by Zani:
+  Stage 1 18/18 current clips "too calm"; 2a 15-1; 2b 14-1-1 + guard 16-0; Stage 3 (paid) 8/8 fine. Costs: ~0.5s more per reply,
+  pitch ~2 st higher and more variable (a lower temperature made it worse, 2c). Mark ✅ only if Zani keeps it.
 
 ## Voice — opener variety (backlog #180)
 - **Opener variety, arm Q0** — ❌ TRIED AND REVERTED (shipped Sep 19, reverted Sep 22, 2026). Zani:

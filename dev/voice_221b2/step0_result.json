@@ -1,0 +1,39 @@
+{
+ "volume": -8.5,
+ "median_lufs_M": -13.1,
+ "median_lufs_C": -25.9,
+ "effect_lu": 12.8,
+ "level_error_lu": -3.9,
+ "max_true_peak_C": -12.7,
+ "dur_ratio_C_vs_M": 0.996,
+ "pitch_semitones_C_vs_M": 1.8,
+ "acts": true,
+ "checks": {
+  "level": false,
+  "peak": true,
+  "duration": true,
+  "pitch": false
+ },
+ "passed": false,
+ "tries": [
+  {
+   "volume": -8.5,
+   "median_lufs_M": -13.1,
+   "median_lufs_C": -25.9,
+   "effect_lu": 12.8,
+   "level_error_lu": -3.9,
+   "max_true_peak_C": -12.7,
+   "dur_ratio_C_vs_M": 0.996,
+   "pitch_semitones_C_vs_M": 1.8,
+   "acts": true,
+   "checks": {
+    "level": false,
+    "peak": true,
+    "duration": true,
+    "pitch": false
+   },
+   "passed": false
+  }
+ ],
+ "target_lufs": -22.0
+}

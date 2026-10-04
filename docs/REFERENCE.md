@@ -27,12 +27,12 @@
 | Fish Audio API key | → `config.json` → `fish_api_key` |
 | Fish Audio Voice ID (neutral baseline) | `c4d832799bf845ee86638a1bc0cd0d41` |
 | Fish Audio Voice ID (old expressive) | `fb03cde57e7740c38a9601459afaae42` |
-| Fish Audio Model | `s2-pro` |
+| Fish Audio Model | `s2.1-pro` (since 2026-10-04, #221b; was `s2-pro` — revert tag `pre-221b`) + `prosody {"volume": -1.0}` (CLAUDE.md 54) |
 | Fish Audio Plan | Plus ($11/month) — renew before resuming voice work |
 | DeepL API key | → `config.json` → `deepl_api_key` (the value formerly listed HERE, in this doc, was confirmed stale in the 2026-08-11 audit). **The `config.json` key is VALID:** `/v2/usage` → HTTP 200, 0/500000 chars, 2026-09-27 (backlog #207). |
 | DeepL endpoint | `api-free.deepl.com` (header auth: `Authorization: DeepL-Auth-Key ...`) |
 | Ollama model | `gemma4:latest` |
-| Ollama version | **0.34.4** (measured live `GET /api/version`, 2026-09-27; was 0.34.0 on 2026-09-12 — not benchmarked since). Was 0.21.0, then 0.32.15 on Aug 26, 0.33.2 on Aug 31, 0.33.3 on Sep 4 — **four self-upgrades in seventeen days.** 0.34.0 was benchmarked on arrival and is NOT slower: `dev/translate_probe.py` re-run on the same 30 inputs gave 1023ms vs 1022ms on 0.33.3, prefill 244 vs 243, decode 800 vs 786 (floor ±100ms). Backlog #196's numbers therefore still hold on this version.** Several claims in these docs still rest on 0.21.0 — see improvements-backlog #169. **Do not cite a version from memory; read `/api/version`.** |
+| Ollama version | **0.35.0** (read `GET /api/version` 2026-10-04; NOT benchmarked). Before: **0.34.4** (measured live `GET /api/version`, 2026-09-27; was 0.34.0 on 2026-09-12 — not benchmarked since). Was 0.21.0, then 0.32.15 on Aug 26, 0.33.2 on Aug 31, 0.33.3 on Sep 4 — **four self-upgrades in seventeen days.** 0.34.0 was benchmarked on arrival and is NOT slower: `dev/translate_probe.py` re-run on the same 30 inputs gave 1023ms vs 1022ms on 0.33.3, prefill 244 vs 243, decode 800 vs 786 (floor ±100ms). Backlog #196's numbers therefore still hold on this version.** Several claims in these docs still rest on 0.21.0 — see improvements-backlog #169. **Do not cite a version from memory; read `/api/version`.** |
 | ElevenLabs API key (backup) | → hardcoded in `kurisu_elevenlabs_server.py` (untracked, on disk only; NOT in `config.json`) |
 | ElevenLabs Voice ID (backup) | `lWqPzX7f0LZyU6AHcvDv` |
 
@@ -52,7 +52,7 @@
 ├── main.js                   ← Electron wrapper (requires npm run build)
 ├── package.json              ← Build config (requires rebuild)
 ├── preload.js                ← Electron preload — IPC bridge (15 channels; diary-on-close + facts-at-close + call/window/greeting-cache)
-├── kurisu_fish_server.py     ← Fish Audio S2 Pro TTS server (ACTIVE)
+├── kurisu_fish_server.py     ← Fish Audio TTS server, model s2.1-pro (ACTIVE)
 ├── kurisu_elevenlabs_server.py ← Old ElevenLabs server (backup)
 ├── launch_amadeus.sh         ← Backup launch script
 ├── amadeus_startup.mp4       ← Boot video
@@ -89,10 +89,13 @@ User message → Ollama (gemma4:latest) → English response
   1. Pre-process names: "Kurisu" → "クリス", "Makise Kurisu" → "牧瀬クリス", etc
   2. Translation EN→JP — **gemma4 is PRIMARY** (`translate_via_gemma()`, register-aware Kurisu prompt, temp 0.3, num_ctx 8192). DeepL is FALLBACK only. Toggle: `TRANSLATOR` at top of kurisu_fish_server.py
   3. Post-process: fix_japanese() repairs mangled names
-  4. add_prosody_tags(): inject emotion-conditional breath/pause tags
+  4. ~~add_prosody_tags()~~ BYPASSED since V3 (2026-07-13): no inline tags; function retained but uncalled
   5. Prepend emotion tag (voice actor direction) before Japanese text
-  6. ~~compute_speed()~~ BYPASSED since V3 (2026-07-13): speed is FIXED at 1.1. Function retained but unused
-  7. Fish Audio S2 Pro API call — V3 config: temperature 0.7, top_p 0.8, repetition_penalty 1.2, normalize True, speed 1.1
+  6. ~~compute_speed()~~ BYPASSED since V3 (2026-07-13). NO speed is sent (since 2026-09-30): she speaks at Fish's default 1.0.
+     The old top-level `speed = 1.1` was ignored by Fish (it reads only `prosody.speed`; measured 0.6 vs 1.8 → same length)
+     and was removed; Zani kept 1.0 ("pace is fine"). Backlog #225, bugs.md 98.
+  7. Fish Audio API call, model header `s2.1-pro` — V3 config: temperature 0.7, top_p 0.8, repetition_penalty 1.2, normalize True,
+     no speed field, `prosody: {"volume": -1.0}` (a loudness SWITCH — CLAUDE.md 54, bugs.md 99)
   8. Return: {"elevenlabs": true, "audio_b64": "...", "char_timings": null, "total_duration": 0,
               "timings": {"translate_ms": int, "fish_ms": int, "translator": "gemma4"|"deepl"}}
 
@@ -122,7 +125,8 @@ payload = {
     "top_p": 0.8,
     "repetition_penalty": 1.2,  # NEVER 1.1 — triggers the phoneme loop (bugs.md 54)
     "normalize": True,          # V3 (was False)
-    "speed": 1.1,               # V3: FIXED (compute_speed retained but bypassed)
+    "prosody": {"volume": -1.0},  # #221b: loudness switch, NOT a dial (CLAUDE.md 54). No "speed": Fish default 1.0 (#225)
+    # model header: "s2.1-pro". Test: python3 dev/fish_payload_test.py
     "chunk_length": 200,
     "mp3_bitrate": 128,
     "latency": "normal",
