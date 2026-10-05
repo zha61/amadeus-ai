@@ -600,9 +600,72 @@ function superviseChild(name, proc, respawnFn) {
   })
 }
 
+// ── STALE-SERVER KILL (backlog #150, bugs.md 100) ──
+// Before a spawn, free the port from an ORPHANED Amadeus server (a crash or force-quit left it).
+// The old `lsof -ti:PORT | xargs kill -9` killed EVERY process with a socket on the port: a
+// CLIENT too (measured 2026-10-05 — a held connection was listed beside the server), and any
+// other app on that port.  Now only the LISTENER, and only if it is OUR server: the same script
+// resolved against the process's own folder (so a hand-started `python3 kurisu_rag_server.py`
+// counts), or `http.server <port>` run from AMADEUS_DIR.  Anything else is NOT killed, and is
+// logged (CLAUDE.md 52).  The single-instance lock means no live Amadeus owns these servers, so
+// a match is an orphan.  Every call is bounded (2 s) and never throws into a spawn.
+const PORT_EXEC_OPTS = { timeout: 2000, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+const AMADEUS_DIRS = (() => {
+  const dirs = [path.resolve(AMADEUS_DIR)]
+  try { dirs.push(fs.realpathSync(AMADEUS_DIR)) } catch (e) {}
+  return dirs
+})()
+function listenerPids(port) {
+  try {
+    return execSync(`lsof -nP -t -iTCP:${port} -sTCP:LISTEN`, PORT_EXEC_OPTS)
+      .split('\n').map(Number).filter(n => n > 0)
+  } catch (e) {
+    if (e.status === 1 && !String(e.stdout || '').trim()) return []   // exit 1, no output = nobody listens
+    console.warn(`[main:ports] lsof failed for port ${port}: ${e.message} — nothing killed`)
+    return []
+  }
+}
+function procArgs(pid) {
+  try { return execSync(`ps -ww -o args= -p ${pid}`, PORT_EXEC_OPTS).trim() } catch (e) { return '' }
+}
+function procCwd(pid) {
+  try {
+    const line = execSync(`lsof -a -nP -p ${pid} -d cwd -Fn`, PORT_EXEC_OPTS)
+      .split('\n').find(l => l.startsWith('n'))
+    return line ? line.slice(1) : ''
+  } catch (e) { return '' }
+}
+// target: { script: 'kurisu_fish_server.py' } or { module: 'http.server' }.
+// An unreadable cwd or command line never matches — the safe default is "do not kill".
+function isOurServer(args, cwd, port, target) {
+  const argv = args.split(/\s+/).filter(Boolean)
+  if (target.script) {
+    if (!cwd) return false
+    const want = AMADEUS_DIRS.map(d => path.join(d, target.script))
+    return argv.slice(1).some(a => path.basename(a) === target.script && want.includes(path.resolve(cwd, a)))
+  }
+  const m = argv.indexOf('-m')
+  return m > 0 && argv[m + 1] === target.module && argv.includes(String(port)) && AMADEUS_DIRS.includes(cwd)
+}
+function killStaleServer(port, target) {
+  for (const pid of listenerPids(port)) {
+    if (pid === process.pid) continue
+    const args = procArgs(pid)
+    if (isOurServer(args, procCwd(pid), port, target)) {
+      try {
+        process.kill(pid, 'SIGKILL')
+        console.log(`[main:ports] killed a stale Amadeus server on port ${port} (pid ${pid})`)
+      } catch (e) { console.warn(`[main:ports] could not kill pid ${pid} on port ${port}: ${e.message}`) }
+    } else {
+      console.warn(`[main:ports] port ${port} is held by another program (pid ${pid}: ${args.slice(0, 160) || 'command unknown'}) — NOT killed; the Amadeus server cannot start on this port`)
+    }
+  }
+}
+// ── end STALE-SERVER KILL ──
+
 function spawnTtsServer() {
-  // Kill any stale fish server before spawning a fresh one (port 5002)
-  try { execSync('lsof -ti:5002 | xargs kill -9') } catch(e) {}
+  // Free port 5002 from a stale fish server only (#150) before spawning a fresh one
+  killStaleServer(5002, { script: 'kurisu_fish_server.py' })
   ttsProcess = spawnLogged('fish', [path.join(AMADEUS_DIR, 'kurisu_fish_server.py')])
   ttsProcess.on('error', (err) => {
     console.warn('[main:tts] spawn failed:', err.message, '- TTS unavailable this session')
@@ -611,8 +674,8 @@ function spawnTtsServer() {
 }
 
 function spawnHttpServer() {
-  // Kill stale http.server before spawning (quick relaunch can leave old process holding port 8765)
-  try { execSync('lsof -ti:8765 | xargs kill -9') } catch(e) {}
+  // Free port 8765 from a stale Amadeus http.server only (#150) — a crash can leave one holding it
+  killStaleServer(8765, { module: 'http.server' })
   serverProcess = spawnLogged('http', ['-m', 'http.server', '8765'])
   serverProcess.on('error', (err) => {
     console.warn('[main:http] spawn failed:', err.message, '- UI server unavailable this session')
@@ -624,7 +687,7 @@ function spawnHttpServer() {
 // background purely for logging. The boot path passes false because it awaits
 // waitForRagServer() itself as part of the pre-window gate.
 function spawnRagServer(poll = true) {
-  try { execSync('lsof -ti:5003 | xargs kill -9') } catch(e) {}
+  killStaleServer(5003, { script: 'kurisu_rag_server.py' })   // #150
   ragProcess = spawnLogged('rag', [path.join(AMADEUS_DIR, 'kurisu_rag_server.py')])
   ragProcess.on('error', (err) => {
     console.warn('[main:rag] spawn failed:', err.message, '- RAG unavailable this session')
@@ -635,7 +698,7 @@ function spawnRagServer(poll = true) {
 }
 
 function spawnWhisperServer() {
-  try { execSync('lsof -ti:5004 | xargs kill -9') } catch(e) {}
+  killStaleServer(5004, { script: 'kurisu_whisper_server.py' })   // #150
   whisperProcess = spawnLogged('whisper', [path.join(AMADEUS_DIR, 'kurisu_whisper_server.py')])
   whisperProcess.on('error', (err) => {
     console.warn('[main:whisper] spawn failed:', err.message, '- voice input unavailable this session')
@@ -644,8 +707,9 @@ function spawnWhisperServer() {
 }
 
 function startServices() {
-  // Enable Flash Attention for faster inference — must be set before Ollama starts
-  process.env.OLLAMA_FLASH_ATTENTION = '1'  // Safe with Ollama ≥0.20.4 — qwen3 FA bug was patched
+  // No OLLAMA_FLASH_ATTENTION here (backlog #169): Ollama runs from Ollama.app under launchd,
+  // so a variable set by main.js never reached it — the live llama-server shows
+  // `--flash-attn auto`.  Ollama decides flash attention itself in every start path.
 
   // Set OLLAMA_ORIGINS so Electron renderer can connect regardless of how Ollama started.
   // Fire-and-forget — directly-spawned Ollama gets env vars via spawn options below.
@@ -661,7 +725,7 @@ function startServices() {
   if (!ollamaRunning) {
     try {
       const ollamaProc = spawn(OLLAMA, ['serve'], {
-        env: { ...process.env, OLLAMA_ORIGINS: '*', OLLAMA_HOST: '127.0.0.1:11434', OLLAMA_FLASH_ATTENTION: '1' },
+        env: { ...process.env, OLLAMA_ORIGINS: '*', OLLAMA_HOST: '127.0.0.1:11434' },
         detached: true, stdio: 'ignore'
       })
       // Catch async spawn errors (e.g., binary not found) so they don't crash Electron with uncaught exception popup
@@ -743,8 +807,9 @@ async function prewarmOllamaMain(signal) {
         stream: false,
         think: false,
         // num_ctx MUST be 8192 — without it the model loads with a 4096 KV buffer
-        // and the renderer's 8192 prewarm forces a full 9.5GB RELOAD during the
-        // boot video (double disk I/O = video stutter). Extends bug 33 to this call.
+        // and the renderer's 8192 prewarm forces a full model reload from disk (a ~9.6 GB
+        // READ — the file size, not RAM; see backlog #172) during the boot video
+        // (double disk I/O = video stutter). Extends bug 33 to this call.
         options: { num_predict: 1, temperature: 0, num_ctx: 8192 },
         keep_alive: '30m'
       }),
@@ -889,17 +954,12 @@ if (gotTheLock) {
     // Open window immediately so boot video can start
     createWindow()
 
-    // RAG server spawned 20s after window open.
-    // kurisu_rag_server.py loads ChromaDB + runs a bge-m3 warm-up embed on startup —
-    // a CPU/disk-heavy operation (~10s). Spawning at T=0 competed directly with the
-    // boot video and initial greeting. At T+20s the boot video (9.78s) and greeting
-    // are fully done. amadeus.html's 4s RAG timeout + silent fallback means chat
-    // always works without RAG; the first user message rarely arrives before T+26s.
-    // (RAG server is now spawned in the pre-window phase above — bug 62.)
+    // The RAG server is spawned in the pre-window phase above (bug 62), not here.
 
-    // Whisper server spawned 30s after window open — 10s after RAG.
-    // Staggering prevents bge-m3 (~1 GB) and whisper-medium (~1.5 GB) from both
-    // hitting disk simultaneously. Voice input is not needed until the user clicks mic.
+    // Whisper server spawned 30s after window open, clear of the boot video (9.78s) and
+    // the greeting (CLAUDE.md 36).  Since backlog #226 the server does NOT load the model at
+    // start — the spawn costs only its Python/MLX imports; whisper-large-v3-turbo loads on
+    // the first mic press (#226b prewarm).  Until this timer fires the mic cannot work.
     setTimeout(spawnWhisperServer, 30000)
   })
 }

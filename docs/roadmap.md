@@ -124,7 +124,7 @@ Recorded in full in `bugs.md`; listed here only so the roadmap is not silent abo
 - Session diary (secret diary of conversations — faithful to the show)
 - BGM
 - Fish server auto-starts/stops with Electron app
-- Flash attention (OLLAMA_FLASH_ATTENTION=1)
+- Flash attention (OLLAMA_FLASH_ATTENTION=1) — *removed 2026-10-05: it never reached Ollama.app; Ollama uses `auto` (backlog #169)*
 - Auto cache clear on launch
 - Obsidian vault in docs/ for Claude Code memory
 - Time-aware greetings (morning/afternoon/evening/night arrays already in place)
@@ -136,7 +136,7 @@ Recorded in full in `bugs.md`; listed here only so the roadmap is not silent abo
 ## Hardware Reality Check (cross-reference — April 16, 2026)
 
 **Current stack constraints:** 16GB RAM MacBook Pro (Apple Silicon, MPS).
-Any task requiring >~12GB of resident memory beyond OS + Electron + Ollama cannot run locally. (gemma4's resident cost is **~4.1 GiB**, not the 9.6 GB once quoted here — that was the on-disk file size. Measured 2026-08-26, see REFERENCE.md HARDWARE CONSTRAINTS.)
+Any task requiring >~12GB of resident memory beyond OS + Electron + Ollama cannot run locally. (gemma4's real cost is **5.0–5.2 GiB phys_footprint**, and the whole stack peaks at **8.7 GiB** — measured 2026-10-04, see REFERENCE.md HARDWARE CONSTRAINTS. The 9.6 GB once quoted here was the on-disk file size; the 4.1 GiB of 2026-08-26 was RSS, which hides Metal memory.)
 
 Legend:
 - ✅ Feasible on current stack
@@ -334,7 +334,8 @@ Make Kurisu's text responses more authentically Kurisu using her VN dialogue lin
 > **⚠️ The analysis below is STALE in two ways (flagged 2026-08-26).** It was written against
 > **gemma3:12b**; the app has run **gemma4:8b (Q4_K_M)** since July. And its "16GB Mac" premise
 > used the old ~9.6GB anchor, which backlog #172 showed was the model's **disk** size — the real
-> resident cost is **4.10 GiB RSS**. An 8B QLoRA is a materially different proposition from a
+> cost is **5.0–5.2 GiB phys_footprint** (2026-10-04; the 4.10 GiB RSS of 2026-08-26 hid Metal memory),
+> inside a stack that peaks at **8.7 GiB**. An 8B QLoRA is a materially different proposition from a
 > 12B full fine-tune and may be locally feasible. **Re-cost it before quoting these numbers.**
 >
 > **Also read bugs.md 76 first.** Her most-repeated catchphrase, *"Don't get the wrong idea"*,

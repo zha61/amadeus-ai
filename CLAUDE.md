@@ -1,6 +1,6 @@
 # AMADEUS — Kurisu Makise AI (Steins;Gate 0)
 # Electron macOS app · Zani (zha61, he/him) · M5 MacBook Pro 16GB RAM
-# Last updated: October 4, 2026 (#221b KEPT: Fish s2.1-pro + prosody volume -1.0, GREETING_TTS_VER v4; pushed + public sync)
+# Last updated: October 5, 2026 (#150 safe stale-server kills + #169/#185 cleanup, bugs.md 100, rule 55; main.js rebuilt)
 
 ## ZANI'S STANDING INSTRUCTIONS — read these before anything else
 
@@ -77,7 +77,7 @@ three days: *"her tone sounds way too calm"*, *"I feel like I like her voice bef
   display layer that does not change how she sounds.
 
 ## Working principles
-- **World-class, machine-safe — standing order (July 18, 2026)**: every implementation must match best-in-class practice for the feature (research SOTA first) AND fit the M5/16GB resource budget. **The anchor is gemma4 = ~4.1 GiB RESIDENT** (`llama-server` RSS, measured 2026-08-26, stable under load, `num_ctx:8192`). The old "~9.6GB" figure was the **on-disk file size** (`ollama list` reports 9.6 GB = 8.95 GiB) being used as a RAM budget — the model is mmap'd, so disk size is not residency. State RAM/CPU cost of new components before building, and say WHICH number you mean.
+- **World-class, machine-safe — standing order (July 18, 2026)**: every implementation must match best-in-class practice for the feature (research SOTA first) AND fit the M5/16GB resource budget. **The anchor is the FULL STACK = 8.7 GiB phys_footprint at peak** (measured 2026-10-04, `dev/ram_stack.py`, backlog #172): gemma4 5.0–5.2, Whisper 2.45 when LOADED (since #226, 2026-10-04: loaded on first use, unloaded after 10 min idle — 0.13 GiB in a text-only session, so a text session peaks at ~6.4 GiB), Electron ~1.0, bge-m3 0.3, the other servers 0.2. With normal apps open, free memory fell to 20% and 3.27 GiB swapped out — headroom is ~7 GiB with NOTHING else open. **Budget in phys_footprint (`footprint`), never RSS:** RSS hides Metal memory (gemma4 read 0.23 GB RSS vs 5.45 GB footprint, same moment); the old "gemma4 = 4.1 GiB RESIDENT" (2026-08-26) was an RSS figure. gemma4 + bge-m3 keep 5.35 GiB for 30 min after close (`keep_alive`). The older "~9.6GB" figure was the **on-disk file size** (`ollama list` reports 9.6 GB = 8.95 GiB) being used as a RAM budget — the model is mmap'd, so disk size is not residency. State RAM/CPU cost of new components before building, and say WHICH number you mean.
 - **Think before coding** — state assumptions, surface concerns BEFORE writing code
 
 
@@ -151,6 +151,14 @@ three days: *"her tone sounds way too calm"*, *"I feel like I like her voice bef
   Run after touching `fish_tts` or `/speak`. Fails on `pre-221b` (6 failures).
 - `python3 dev/voice_221b2/level_check.py MANIFEST` — $0 ship guard (bugs.md 99): new greeting files vs the SAME greetings at
   v3 (s2-pro). FAILS outside ±1.5 LU or a pitch rise > +4 st. `selftest`: key port 176/176, shipped request == Stage 3.
+- `python3 dev/chroma_kill_test.py --work SCRATCH [--selftest]` — backlog #220: SIGTERMs during the diary upsert on COPIES
+  of ChromaDB (app CLOSED; no Ollama call; refuses the real `data/`). PASSED 2026-10-04 (541 kills, 0 damage). Re-run after
+  a ChromaDB upgrade. After a crash, never open `chroma.sqlite3` read-only first — Chroma must roll back the journal.
+- `python3 dev/ram_stack.py --out DIR [--ps-every 5 --fp-every 10]` — READ-ONLY memory sampler for the whole stack (backlog #172).
+  Writes procs/fp/sys CSVs to DIR (use the scratchpad); stops 120s after the app exits. **Never use `memory_pressure`
+  to read memory** — without `-S` it ALLOCATES memory. A background run is capped at its `--max`; set it above the session.
+- `node dev/stale_kill_test.js` — 18 checks + 4 mutants (bugs.md 100), ~17s, REAL processes on scratch ports 20000+ (no
+  Amadeus port touched). Run after touching `killStaleServer`, `isOurServer` or any spawn in main.js.
 - `node dev/greeting_cache_test.js` — 5 checks (bugs.md 91). Every greeting must be READ from the file the
   writer SAVES. Run it after touching `greetingCacheKey`, the `amadeus-asset` handler or the cache writer.
 - **Launch:** `open ~/Documents/Amadeus/dist/mac-arm64/Amadeus.app`
@@ -286,6 +294,17 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
 - RAG server Flask port 5003 (`kurisu_rag_server.py`) — spawned by main.js
 - Translator: **gemma4 is primary** (`TRANSLATOR='gemma4'` in kurisu_fish_server.py) — register-aware EN→JP via `translate_via_gemma()`. DeepL is FALLBACK only (header: `Authorization: DeepL-Auth-Key ...`). Set `TRANSLATOR='deepl'` to revert.
 - Whisper STT via Flask port 5004 (`kurisu_whisper_server.py`) — `mlx-community/whisper-large-v3-turbo`; returns `no_speech_prob`/`avg_logprob`/`compression_ratio` (max per segment) for the hands-free gate, which also drops a 2–6 word group repeated 4+ times (bugs.md 97)
+  **Loads on FIRST `/transcribe` and unloads after `IDLE_UNLOAD_S`=600 s idle (backlog #226, 2026-10-04)** — not at boot.
+  First call after a load +~0.8 s in the live app (1.17 s vs ~0.4 warm; P1 `stt` reads higher once per load — not a regression); idle 0.13 GiB vs 2.25 loaded.
+  Loads from the LOCAL snapshot folder (offline-safe). `/health` has `model_loaded`. **#226b: the mic PREWARMS it** — both
+  voice entry points (`startRecording`, `hfStart`) call `whisperPrewarm()` → `POST /warm` (fire-and-forget, never throws),
+  which loads with transcribe()'s own loader (`ModelHolder.get_model(path, float16)`) and decodes nothing.
+  ⚠️ **ALL MLX work runs on ONE worker thread (`_mlx`).** MLX streams belong to their thread: a model loaded in one Flask
+  thread made a transcription in another fail ("There is no Stream(gpu, 1) in current thread") — the stubbed unit tests
+  could not see it; only the real-model run did. Never call MLX outside `_mlx`.
+  Tests: `python3 dev/whisper_server_test.py [--mutants]` (19 checks, 9 mutants), `node dev/whisper_prewarm_test.js` (7 + 4).
+  Revert #226b only: `git checkout pre-226b -- kurisu_whisper_server.py amadeus.html dev/whisper_server_test.py` + delete
+  `dev/whisper_prewarm_test.js`. Revert all of #226: `git checkout pre-226 -- kurisu_whisper_server.py dev/whisper_server_test.py amadeus.html`.
 - Voice model reference_id: `c4d832799bf845ee86638a1bc0cd0d41`
 - bge-m3 (Ollama) — RAG embedding, 1024-dim multilingual
 - Silero VAD v5 (vendored vendor/vad/, lazy-loaded) — hands-free voice sessions; RMS fallback in amadeus.html
@@ -519,6 +538,10 @@ per-stage breakdown. Pure instrumentation — no model call, no GPU work, no beh
     are tuned to. **Never set it to 0, drop it, or "fine-tune" it from the docs** — re-measure (`level_check.py`). A level
     step is silent: the reply still plays, ~10 LU louder or quieter. Also: a LOWER Fish temperature makes s2.1's pitch
     HIGHER, not steadier (#221b 2c: high draws 4/8/16 of 48 at 0.7/0.6/0.5). (bugs.md 99)
+55. **Never kill by port alone.** `lsof -ti:PORT` lists BOTH ends of every connection — the server AND its clients
+    (measured 2026-10-05), and Electron is a client of 8765 and 5002. A port kill must take only the LISTENER
+    (`-sTCP:LISTEN`) and must check the process is OURS (script resolved against its cwd) before it kills. Use
+    `killStaleServer()` in `main.js`; never `lsof -ti:… | xargs kill`. A foreign holder is logged, never killed. (bugs.md 100)
 
 ## Key Architecture
 - **UI palette:** red — `--bg:#060404`, `--blue:#c0392b`, `--blue-bright:#e84040`. Background = CSS grid via `#app::before`.

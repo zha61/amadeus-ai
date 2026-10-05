@@ -187,7 +187,10 @@ Not reviewed in depth yet: `scheduler/` + call-window.html + preload_call.js (se
 147. Rotate both keys if the project is ever shared (they exist in source + logs today)
 148. (low) at-rest encryption for diary localStorage
 149. Electron hardening audit beyond webSecurity (#119)
-150. Replace lsof port-kills with process-name-scoped kills (could currently kill unrelated apps squatting those ports)
+150. ✅ **FIXED 2026-10-05 (tag `pre-150`, bugs.md 100).** `killStaleServer()` kills only the LISTENER and only if it is our
+     server (script resolved against its cwd, or `http.server 8765` from the Amadeus folder); anything else is logged, not
+     killed. Also found: the old form killed CLIENTS of the port too (measured). Test `node dev/stale_kill_test.js`.
+     *Original:* Replace lsof port-kills with process-name-scoped kills (could currently kill unrelated apps squatting those ports)
 
 ## L. From the #90 scheduler audit (151–152) — audit done July 13, 2026; subsystem healthy overall
 
@@ -618,7 +621,10 @@ servers. Numbers here were measured from source on that date, not estimated.
        is first person ("I keep finding myself...") where the frozen one said "the diarist", with no
        case-file vocabulary, and still recognisably her.
 
-169. ⚠️ **RESOLVED DIFFERENTLY 2026-09-12 — the flag was never in effect, so the safety
+169. ✅ **CLOSED 2026-10-05 — option (a): the dead lines are deleted from `main.js` (with #150, tag `pre-150`).** Ollama keeps
+     deciding itself (`--flash-attn auto`); the only path that changes is the rare one where main.js spawns Ollama (forced
+     on → auto, the same as the normal path). REFERENCE.md updated.
+     ⚠️ **RESOLVED DIFFERENTLY 2026-09-12 — the flag was never in effect, so the safety
      question was moot.** `main.js:512` sets `process.env.OLLAMA_FLASH_ATTENTION='1'` and `:528`
      passes it in the spawn env — **but main.js only spawns Ollama when it is not already
      running, and on this machine Ollama runs as `Ollama.app` under launchd
@@ -699,7 +705,12 @@ servers. Numbers here were measured from source on that date, not estimated.
      sentence. Deliberately excluded from the #165 commit to keep one variable in the live close
      test.
 
-172. ✅ **RESOLVED (Aug 26, 2026) — the anchor was a DISK size used as a RAM budget.**
+172. ✅ **FULLY RESOLVED 2026-10-04 — the whole stack peaks at 8.7 GiB phys_footprint** (`dev/ram_stack.py`,
+     table in REFERENCE.md HARDWARE CONSTRAINTS). gemma4 5.0–5.2, Whisper 2.45 (→ #226), Electron ~1.0, bge-m3 0.3,
+     the other servers 0.2. Free memory fell 77–84% → 20–26% and 3.27 GiB swapped out (normal apps open).
+     **The Aug 26 RSS figure below was too low:** RSS hides Metal memory (gemma4: RSS 0.23 GB vs footprint 5.45 GB,
+     same moment). Not measured: Whisper while transcribing. *(Aug 26 record below.)*
+     ✅ **RESOLVED (Aug 26, 2026) — the anchor was a DISK size used as a RAM budget.**
      `ollama list` reports gemma4 as **9.6 GB**, which is the model FILE (8.95 GiB on disk) —
      and that is exactly where CLAUDE.md's "~9.6GB anchor" came from. It was correctly
      transcribed and is simply not a memory figure: the model is mmap'd, so file-backed pages
@@ -1246,7 +1257,9 @@ servers. Numbers here were measured from source on that date, not estimated.
      that comparison and could be reused), NOT a broad register gate — see #182 for why that was
      dropped. Measure before building: n=1 is not yet evidence of a rate.
 
-185. **Nit: `main.js:610` says "a full 9.5GB RELOAD".** That figure is the model's DISK size, and
+185. ✅ **FIXED 2026-10-05 (with #150): the comment now says "a full model reload from disk (a ~9.6 GB READ — the file size,
+     not RAM)".** Same commit fixed the stale "whisper-medium" and "RAG at T+20s" spawn comments.
+     **Nit: `main.js:610` says "a full 9.5GB RELOAD".** That figure is the model's DISK size, and
      the comment is about disk I/O, so it is defensible — but it reads like a memory figure, which
      is what backlog #172 spent a session untangling. Reword to say "disk read" explicitly.
      Left alone on Sep 3 only to keep that session's deployment story clean (`main.js` needs a
@@ -1354,7 +1367,7 @@ only P1 is built.
      a cheap local approximation of this.
      SOTA is an end-of-utterance model: LiveKit's is a 135M-parameter transformer over the last
      four turns; Pipecat's reads prosody from audio with no transcript. **Cost this properly
-     against the 4.10 GiB anchor before proposing it** — it is the only presence item that
+     against the stack anchor (8.7 GiB phys_footprint, 2026-10-04 — #172) before proposing it** — it is the only presence item that
      moves resident memory.
 
 191. ⚠️ **Fish Audio API credit is EXHAUSTED — her voice is DOWN in the app right now.**
@@ -1425,10 +1438,10 @@ only P1 is built.
      **Three reasons this is NOT a drop-in replacement for the cloud TTS, all of which need
      stating before anyone gets excited:**
      1. **RAM is UNMEASURED. 10 GB is the DISK size.** Do not repeat #172's mistake in reverse:
-        gemma4 is 9.6 GB on disk and 4.10 GiB resident because it is quantised and mmap'd, but
+        gemma4 is 9.6 GB on disk and 5.0–5.2 GiB phys_footprint (2026-10-04) because it is quantised and mmap'd, but
         safetensors typically load far closer to 1:1. Estimated ~8–10 GiB resident against a
-        16 GB machine that already holds gemma4 at 4.10 GiB plus Electron and four python
-        servers. **Measure the real RSS before designing anything around it.**
+        16 GB machine whose Amadeus stack already peaks at 8.7 GiB (#172). **Measure the real
+        phys_footprint (not RSS — it hides Metal memory) before designing anything around it.**
      2. **The voice does not carry over.** `reference_id c4d832799bf845ee86638a1bc0cd0d41` is a
         Fish-HOSTED voice. Local inference clones from a reference WAV instead, so she would
         sound like `kurisu_00XX.wav`, not like the voice Zani has actually been listening to and
@@ -1712,7 +1725,18 @@ copies. **No app code, data or ChromaDB was changed.**
      `dev/log_sink_test.js` (its positional-shape check changes). (2) At unload the renderer logs
      `BGM track not found: music/believe_me.mp3` and `[BootVideo] error` — teardown clears `src`, which fires
      `error` events. They read like real failures in the log; they are not.
-220. **A quit during the boot diary index can SIGTERM the RAG server mid-`upsert` — effect UNTESTED.** Found while
+220. ✅ **CLOSED 2026-10-04 — TESTED, NO DAMAGE, NO FIX NEEDED** (`dev/chroma_kill_test.py`, commits `372cb42` pre-reg,
+     `2eb33b8` addendum). 541 SIGTERMs on COPIES of the real store (72 diary rows, ChromaDB 1.5.8), the server's exact
+     `/index-diary` steps, real bge-m3 vectors, K=1 (a normal boot) and K=50 (worst case): **0 failures** of every check —
+     opens, `integrity_check`, originals unchanged, every row has a vector, batch all-or-nothing, the next boot re-adds
+     correctly, recall no worse than uncut (K=50: 176/8540 vs 74/3660, p=0.48). **30 kills per K landed BEFORE the SQLite
+     commit** and rolled back cleanly (per-kill failure < 10% at 95%; the real guarantee is SQLite's atomic commit).
+     A kill leaves `chroma.sqlite3-journal`; Chroma rolls it back on the next open. **Never open the store read-only
+     first** after a crash — a read-only open cannot roll back and reports "readonly database" (my first pilot did this).
+     **Observation, not a defect yet:** Chroma 1.5.8 rebuilds the diary HNSW graph from its log on every open (the
+     segment files date from 2026-08-23; `sync_threshold` 1000), and self-recall varies between reopens of the SAME
+     copy: 0 missing at 73 rows, ~2% at 122 rows (full-k self-query). Re-check when the diary passes ~100 rows.
+     *Original entry:* **A quit during the boot diary index can SIGTERM the RAG server mid-`upsert` — effect UNTESTED.** Found while
      planning #218 (2026-09-29). `stopServices()` (`main.js`) calls `ragProcess.kill()` (SIGTERM; Python's default
      handler exits at once). #218 removed the CLOSE-time case; the boot-time case remains if Zani quits within ~25s of
      launch while `/index-diary` embeds. SQLite writes are atomic; what ChromaDB 1.5.8 does to its vector index on a
@@ -1823,3 +1847,45 @@ copies. **No app code, data or ChromaDB was changed.**
      change, so CLAUDE.md 53 applies (blind A/B by his ear, then a live trial). Options: (a) do nothing and delete the dead
      field; (b) A/B 1.0 vs 1.1 (and maybe a faster pace for tsundere/flustered only) via `prosody.speed`. Either way,
      bump `GREETING_TTS_VER` if the audio changes. Needs his decision.
+226. ✅ **SHIPPED 2026-10-04 (tag `pre-226`) — option (a): load on first use + unload after 10 min idle.** Zani approved.
+     Server-only (`kurisu_whisper_server.py`), no renderer change, no rebuild. Boot no longer loads Whisper on the GPU
+     (also removes boot GPU work, CLAUDE.md 36). Measured on the REAL server (app closed, idle shortened to 20 s in a
+     scratch runner): idle **0.13 GiB**, after first use 2.25, after unload 0.17, reload works; first call 0.54 s vs warm
+     0.40 s (+0.14 s; probe: +0.3–0.5 s). Loads from the local snapshot folder (`snapshot_download(local_files_only)`), so a
+     reload never needs the network. One lock serialises transcription and unload. Tests: `dev/whisper_server_test.py`
+     14 checks, `--mutants` 5/5. Prefetch on mic press NOT built (would touch the hands-free path for ~0.3 s).
+     ✅ **LIVE-VERIFIED 2026-10-04 21:15–21:26 (no speech):** after 2 text turns Whisper 0.13 GiB, `model_loaded:false`;
+     a direct POST of a synthetic recording → correct transcript, `Model loaded on first use (load + transcribe 1.17s)`,
+     2.25 GiB; `Model unloaded (idle 623s)` → 0.17 GiB. **In the live app the first call is 1.17 s, not 0.54 s** — about
+     +0.8 s once per load (cause not proven: shared GPU, or model files dropped from the disk cache under memory pressure).
+     Still open: one hands-free sentence when Zani's voice is back. Cold-disk load after a reboot NOT measured.
+     **#226b SHIPPED the same night (tag `pre-226b`), Zani's request: cut the first-spoken-turn wait, no new downside.**
+     The mic prewarms Whisper (`whisperPrewarm()` in BOTH `startRecording` and `hfStart` → `POST /warm`). Accepted by him:
+     a mic press with NO speech now holds 2.1 GiB for 10 min. **Bug found and fixed before shipping:** loading in one Flask
+     thread and transcribing in another fails in MLX ("no Stream(gpu, 1) in current thread"); a first version that loaded
+     by decoding silence avoided it but added a decode to the worst case. Fix: ONE worker thread owns all MLX work.
+     Real server, 3 runs each, all HTTP 200 + correct transcript: no prewarm 0.55–0.58 s; prewarm then speech after 0.1 s
+     (worst case) 0.48–0.49 s; after 3 s 0.49–0.50 s. With the files in the page cache the load is only 0.07 s, so the
+     saving here is ~0.08 s; the real target is the disk-read case (live 1.17 s; 2.4–5.2 s seen under memory pressure),
+     which these runs could not force (no sudo to drop the cache).
+     ✅ **LIVE-VERIFIED 2026-10-04 21:39–21:41:** Zani ran `whisperPrewarm()` in DevTools → `POST /warm` sent
+     (`amadeus.html:3312`), refused because main.js starts Whisper 30 s after the window (`setTimeout(spawnWhisperServer,
+     30000)`, pre-existing, by design) — caught, `undefined`, nothing broke. After the spawn: `/warm` → `Model loaded by mic
+     prewarm (0.55s)`, 0.13 → 1.64 GiB; a transcription 2 s later → HTTP 200, correct, **0.67 s** (the live first call
+     WITHOUT prewarm was 1.17 s; n=1 each). Note: in the first 30 s after launch the mic cannot work at all (pre-existing).
+     *Original entry:* **The Whisper server holds 2.45 GiB all session — for a text user.** Found 2026-10-04 by #172. `kurisu_whisper_server.py`
+     starts `_warmup()` at boot (`:109`), which loads whisper-large-v3-turbo with a silent transcription (`:23-45`). Its
+     phys_footprint is 2.44–2.49 GiB from the greeting to the close — 28% of the 8.7 GiB stack, the second-largest process
+     after gemma4. Zani is a text user (2026-10-04: 19 text turns vs 10 voice, all 10 from the #205 check). With normal apps
+     open the machine swapped 3.27 GiB in the same session. **Not fixed — needs a plan and his yes.** Options:
+     (a) load the model on first use (the first hands-free sentence waits for the load — measure how long);
+     (b) spawn the Whisper server only when Hands-Free or the mic is first used (`main.js:639`); (c) leave it.
+     Either fix touches the hands-free path (#223, bugs.md 83/97) and the warm-up exists to hide a load delay — measure the
+     cold-load time before choosing. No display change.
+227. **The `[Perf]` console line prints `rag —` on every TEXT turn — bugs.md 79's fix reached `latencyStatus()` only.** Found
+     2026-10-05 reading the #150 live check. `amadeus.html:2450` builds the line with `d('rag','stt')`, which needs an `stt`
+     mark; a typed turn has none, so it prints `—`. `latencyStatus()` (`:2478`) uses `dFirst()` and is correct, and the
+     stored ring rows are correct. Every text turn in the retained `renderer.log` shows it; voice turns show a number.
+     Effect: cosmetic — anyone reading the log line sees no RAG time and may think RAG did not run (it did: `/retrieve`
+     200 every turn). Fix sketch: use the same `dFirst` rule in the console line (one line, `amadeus.html` only, no
+     rebuild) + a check in `dev/perf_trace_test.js`. Instrumentation, below the display layer. Record only — needs his yes.

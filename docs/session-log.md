@@ -1,6 +1,43 @@
-# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-10-04, #221b KEPT, pushed, public synced; was: #221b Stage 2b pre-registered)
+# ⇢ START HERE — handoff for the next session (written 2026-09-07, last updated 2026-10-05, #150 bundle SHIPPED + LIVE-VERIFIED; new backlog #227)
 
 **Read CLAUDE.md first, then this block, then the newest entry below.**
+
+## 🔧 2026-10-05 — main.js bundle SHIPPED (#150 + #169 + #185 + stale comments; bugs.md 100, CLAUDE.md 55). Rebuilt.
+Zani was in a classroom: TEXT only, no hands-free check today (#226/#226b voice check stays OPEN for a day he can speak).
+Wallet **$8.750925** (2026-10-05; the $0.0236 drop since 2026-10-04 = her normal replies, 13 `Synth:` lines in fish.log).
+Tags `pre-226`, `pre-226b` PUSHED with his yes (both commits were already on origin). Public sync: he said LATER.
+**What shipped (tag `pre-150`):** a spawn now kills only the LISTENER on its port and only if it is our server
+(`killStaleServer`); the old `lsof -ti` also hit clients (measured). Flash-attention lines deleted (never reached Ollama).
+Signal stays SIGKILL (his choice). Revert: `git checkout pre-150 -- main.js && npm run build`.
+✅ **LIVE-VERIFIED 2026-10-05 13:19–13:23Z** (Zani, 7 text turns, normal close): fish/http/rag spawned within 60 ms
+(13:19:08.853–.913), whisper at 13:19:48 (~T+30 s after the window); http ready 13:19:08.953, RAG ready 13:19:18;
+0 `[main:ports]` lines (no stale or foreign holder); 7 `[Perf]` replies, 7 Fish `Synth:` lines; no WARNING/ERROR.
+**PUSHED 2026-10-05 with his yes:** `main` `fc5c84f..96761c5` + tag `pre-150` (diff key scan: 0 hits). This handoff commit is LOCAL only.
+**Public repo NOT synced** (still `262fe4a`; he said later) — follow the 🌐 block. `dev/stale_kill_test.js` holds no private data.
+**New, found while reading the check's logs — backlog #227:** the `[Perf]` CONSOLE line prints `rag —` on every TEXT turn
+(`amadeus.html:2450` uses `d('rag','stt')`, the delta bugs.md 79 fixed only in `latencyStatus()`). Stored data is correct;
+RAG works (`/retrieve` 200 each turn). Record only.
+**Next (Zani chose a FRESH session):** public sync (his yes) → #183+#161+#184 (his ~10 min review) → #227 + #200 → voice-only items
+(#222, #223 logging, #201) if he uses voice more. #216 check after ~2026-10-27. Birthday greetings before 2027-06-10.
+
+## 📏 2026-10-04 (evening) — #172 RESOLVED: the Amadeus stack peaks at 8.7 GiB phys_footprint. New: backlog #226.
+Zani's answers this session: **mostly TEXT, no Study Mode (#173 off the list), nothing has bothered him since 2026-10-04.**
+Menu shown; he asked for my recommendation and chose #172 (zero code, read-only). He has a sore throat — no speech tests for now.
+Result (`dev/ram_stack.py`, table in REFERENCE.md): gemma4 5.0–5.2, **Whisper 2.45 (loaded at boot, unused by a text user →
+#226)**, Electron ~1.0, bge-m3 0.3, rest 0.2. Free memory 77–84% → 20–26%; 3.27 GiB swapped out. **The CLAUDE.md anchor
+changed:** budget in phys_footprint, never RSS (RSS hid gemma4's Metal memory: 0.23 GB vs 5.45 GB). Not measured: Whisper
+while transcribing. Nothing pushed; public repo not synced (the new script has no private data — sync at the next public pass).
+**#220 CLOSED the same evening — 541 kills on copies, 0 damage, no fix needed** (backlog #220, `dev/chroma_kill_test.py`).
+**#226 SHIPPED the same night (tag `pre-226`, relaunch only): Whisper loads on first use, unloads after 10 min idle.**
+Frees ~2.1 GiB in a text session. ✅ **LIVE-VERIFIED 21:15–21:26 (no speech):** text session 0.13 GiB; a direct POST loaded
+it (1.17 s — ~0.8 s more than warm, once per load) to 2.25 GiB; `Model unloaded (idle 623s)` → 0.17 GiB. **Still open:** one
+hands-free sentence when Zani's voice is back (sore throat today). Revert in CLAUDE.md Stack (Whisper line).
+**#226b SHIPPED (tag `pre-226b`, relaunch only): the mic prewarms Whisper; ONE MLX worker thread** (an MLX per-thread
+stream bug was found on the real model and fixed — see backlog #226). ✅ LIVE-VERIFIED 21:39–21:41: prewarm 0.55 s,
+then a transcription 0.67 s (live first call without prewarm was 1.17 s). Still open: one hands-free sentence when his voice
+is back. **PUSHED 2026-10-04 with his yes: `main` `9d878d9..58cbde1` (8 commits; key values scanned: 0 hits). Tags `pre-226`, `pre-226b` NOT pushed. The PUBLIC repo is NOT synced (follow the 🌐 block; `dev/ram_stack.py`, `dev/chroma_kill_test.py`, `dev/whisper_prewarm_test.js` hold no private data).**
+**Remaining menu, my order:** main.js bundle #150+#169+#185 (one rebuild) → #184 →
+#161/#183 (his review) → #226 (needs his decision) → birthday greetings before 2027-06-10. #216 check after ~2026-10-27.
 
 ## 🌐 2026-09-28 — Public snapshot: github.com/zha61/amadeus-ai
 Public snapshot of the private working repo. Third-party character assets, probe results that embed game
@@ -597,11 +634,9 @@ this paragraph guessed the cause and guessed wrong.)
    back. Full nuke of the commit instead: `git reset --hard pre-165 && npm run build`
    (this also discards the #168-172 backlog commit). Return to the fix: `git checkout
    post-165 -- main.js && npm run build`. Tags: `pre-165`, `post-165`.
-1. **backlog #172, remaining half — measure the FULL stack.** gemma4 is settled at
-   **4.10 GiB resident** (not 9.6 GB, which was the disk file). Still unmeasured: Electron
-   plus the four Python servers. Trivial — launch the app, then
-   `ps -Ao rss,comm | grep -Ei 'llama-server|python3|Amadeus'`. Until that exists, there is
-   known headroom but no total.
+1. ✅ **backlog #172 — DONE 2026-10-04: the full stack peaks at 8.7 GiB phys_footprint**
+   (`dev/ram_stack.py`; gemma4 5.0–5.2, Whisper 2.45, Electron ~1.0). The 4.10 GiB of Aug 26 was RSS,
+   which hides Metal memory — do not use RSS or the `ps` one-liner that used to be here.
 2. **backlog #169 — the `OLLAMA_FLASH_ATTENTION='1'` safety claim rests on Ollama 0.21.0**
    and the machine now runs **0.33.2** (re-measured 2026-08-31; it was 0.32.15 on Aug 26 —
    Ollama updates itself). Re-run the check rather than updating the number, and read
@@ -622,9 +657,9 @@ this paragraph guessed the cause and guessed wrong.)
 
 ## Standing orders that bind you
 - **World-class + machine-safe** (CLAUDE.md): research SOTA first, state RAM/CPU cost
-  against the M5/16GB budget BEFORE building. **gemma4 = 4.10 GiB RESIDENT** (measured
-  Aug 26). The old "~9.6GB" was the on-disk file size, not memory. Say which number you
-  mean. The full-stack total is still unmeasured (#172).
+  against the M5/16GB budget BEFORE building. **The stack = 8.7 GiB phys_footprint at peak**
+  (measured 2026-10-04, #172; gemma4 5.0–5.2 of it). The old "~9.6GB" was the on-disk file size and
+  the old "4.10 GiB" was RSS, which hides Metal memory. Say which number you mean.
 - **Docs after EVERY implementation, not at session end** (CLAUDE.md, 2026-08-18).
   Reconcile rather than append; **grep the OLD value**; docs land in the SAME commit.
 - **Verification discipline**: grep the real signature; cite file:line; anything
@@ -657,7 +692,7 @@ this paragraph guessed the cause and guessed wrong.)
   (a 1/8→0/8 'fix' and an 8→6 'regression'). Use n≥30 per arm and report a p-value.
 - **Measure before you build.** Bug 68's premise was tested against real Ollama first,
   and the reply-quality scare was settled by A/B rather than argument. Both saved work.
-- **Two numbering schemes exist.** CLAUDE.md rules (1-54 on 2026-10-04) ≠ bugs.md entries (1-99 on 2026-10-04; was 1-82,
+- **Two numbering schemes exist.** CLAUDE.md rules (1-55 on 2026-10-05) ≠ bugs.md entries (1-100 on 2026-10-05; was 1-82,
   plus 55b and 77b), as of 2026-09-03. They collide. Always name the file. These counts drift every
   session — check them rather than quoting them.
 
@@ -685,6 +720,80 @@ this paragraph guessed the cause and guessed wrong.)
   been re-checked (backlog #169).
 - **No video AND no voice, but `/speak` works when tested directly = the audio DEVICE,
   not the code.** Check `system_profiler SPAudioDataType`. See the Aug 23 entry.
+
+---
+
+## October 5, 2026 — #150 bundle: safe stale-server kills, dead flash-attention lines, stale comments (bugs.md 100)
+- Session start: private `fc5c84f` = origin; public `262fe4a`; app was OPEN (the #226b check app); found CLOSED later in the session.
+  Wallet $8.750925 (−$0.0236 = 13 normal replies). He chose: tags yes, public sync later, the main.js bundle.
+- Plan reviewed twice; review 2 TESTED: (T1) `lsof -ti:PORT` lists a client holding a connection — the old kill would
+  hit it; `-sTCP:LISTEN` does not. (T2) both forms ~10 ms. (T3) `ps -ww -o args=` gives the full command; `lsof -d cwd`
+  gives the folder. Found in review: dev docs start servers with a RELATIVE path (`python3 kurisu_fish_server.py`), so
+  identity = script resolved against the process cwd, not a raw string match; `ps` needs `-ww`; `lsof` gets `-nP` + 2 s timeout.
+- `main.js` only. Tests: `dev/stale_kill_test.js` 18 + 4/4 mutants (exits 2 on `pre-150`: anchor missing). Real system
+  (app closed): hand-started real fish server + `http.server 8765` killed, client of 5002 alive, 4 ports 120 ms.
+  `npm run check`, selftest 7/7, fish_payload 21, whisper_server 19 + 9/9, all 15 JS tests green.
+- Rules checked: CLAUDE.md 27 (no `process.exit`, `stopServices` untouched), 36 (Whisper still T+30 s, no new boot work),
+  52 (a foreign holder is logged), 19 (PYTHON/OLLAMA paths unchanged), 51 (nothing on screen).
+- Live check PASSED 13:19–13:23Z (7 text turns): 3 spawns in 60 ms, whisper at T+30 s, 0 `[main:ports]` lines. Found #227.
+
+---
+
+## October 4, 2026 (night, later) — #226b: the mic prewarms Whisper; one MLX worker thread
+- Zani asked to cut the first-spoken-turn wait only with no new downside. Plan: prewarm on mic press (both entry points,
+  bugs.md 80). One small new case disclosed and accepted by him: a press with no speech holds 2.1 GiB for 10 min.
+- Version 1 loaded by decoding a silent clip; the real-server worst case measured slower. Version 2 used
+  `ModelHolder.get_model()` with no decode — unit tests 18/18 green, but the REAL model returned HTTP 500: MLX streams are
+  per-thread. Version 3: one `ThreadPoolExecutor(max_workers=1)` owns ALL MLX work; the lock is gone.
+- Real server: every call 200 + correct transcript; no prewarm 0.55–0.58 s, prewarm 0.48–0.50 s (files cached; the disk-read
+  case could not be forced). Tests: server 19/19 + 9/9 mutants (incl. "bypasses the worker"), `whisper_prewarm_test.js`
+  7/7 + 4/4; `npm run check`, selftest 7/7, fish_payload 21, all 15 JS tests green.
+- Rules checked: CLAUDE.md 48(a) (prewarm total, never awaited), bugs.md 80 (both entry points, tested), CLAUDE.md 51
+  (nothing on screen), CLAUDE.md 37 (load is user-triggered), bugs.md 97 (gate fields unchanged), CLAUDE.md 50 (the
+  OUTCOME — a 200 with the right transcript — was tested on the real model, which is how the 500 was found).
+
+---
+
+## October 4, 2026 (night) — #226: Whisper loads on first use and unloads when idle
+- Zani asked what the change was for; plain answer given (he types, Whisper held 2.45 GiB unused). He approved.
+- Measured first (app closed, 3 runs): load adds ~0.3–0.5 s once; unload frees 2.08 GiB. Plan reviewed three times; flaws
+  fixed: unload/transcribe race (one lock), fresh-install download kept (`snapshot_download`, disk only), reloads by
+  online name could hang offline (load from the local folder), the test stub lacked `ModelHolder`/`mlx.core`.
+- `kurisu_whisper_server.py` only. Tests 14/14, mutants 5/5 (incl. "boot warm-up restored"). Real server with a 20 s idle:
+  0.13 → 2.25 → 0.17 GiB, first call 0.54 s vs 0.40 s warm. `npm run check`, selftest 7/7, fish_payload 21, 14 JS tests green.
+- bugs.md rules checked: 97 (gate fields unchanged — first 4 checks), 27 (no exit path touched), 36/37 (less boot GPU work;
+  the load is user-triggered). Display untouched (CLAUDE.md 51).
+- Live check passed 21:15–21:26: 0.13 → 2.25 → 0.17 GiB, unload at 623 s idle. Live first call 1.17 s (offline 0.54 s);
+  docs corrected to ~+0.8 s once per load.
+
+---
+
+## October 4, 2026 (late evening) — #220 closed: a SIGTERM during the diary upsert does no damage
+- Plan reviewed at Zani's request; 5 flaws fixed before the run (server path is fixed → a tool runs the server's exact
+  steps on copies; real bge-m3 vectors; recall compared with an UNCUT arm; open Chroma FIRST; a mutant self-test, 4/4).
+- Pilot findings: random vectors gave ~20% unreachable rows even uncut (unrealistic); self-recall varies between reopens of
+  the same untouched copy (Chroma rebuilds HNSW from its log on open); one "failure" was my read-only open of a hot journal.
+- Pre-registered run (`372cb42`): 30 uncut + ≥30 kills before `upsert` returned, per K (1, 50) → PASS. But only 6 of 60
+  landed before the SQLite commit, so addendum 1 (`2eb33b8`, committed before its run) targeted that: 30 pre-commit kills
+  per K, all rolled back cleanly → PASS. Total 541 kills, 0 failures. No runtime file changed.
+
+---
+
+## October 4, 2026 (evening) — #172: the full stack measured (8.7 GiB); Whisper holds 2.45 GiB unused (backlog #226)
+- Session start: state matched (private `9d878d9` = origin, public `262fe4a`, app closed). Wallet **$8.774550** (unchanged).
+- Zani: mostly text, no Study Mode, nothing wrong since 2026-10-04. Menu shown; he took my first pick, #172.
+- Plan reviewed three times. Review 3 TESTED the tools and found: `memory_pressure` without `-S` ALLOCATES memory (dropped;
+  `sysctl kern.memorystatus_level` instead); RSS hides Metal memory (gemma4 RSS 0.23 GB vs `footprint` 5.45 GB). My first
+  claim that `footprint` also missed gemma4 was wrong — I had only read bge-m3's; corrected to him.
+- Built `dev/ram_stack.py` (read-only: ps, footprint, vm_stat, sysctl, /api/ps; re-discovers pids every tick; one
+  `footprint` call for all pids). Own cost measured: 7% of a core at ps/1s, so run at ps/5s + fp/10s (~2%).
+- Run: 27-min no-model baseline (free 77–84%), launch 19:09:51 BST, 2 text replies, idle, close ~19:12:45.
+  **The sampler hit its own 30-min `--max` at 19:12:16 (it started at 18:42, he launched later) — restarted at
+  19:12:33, 17s gap, before the close began.** Lesson in CLAUDE.md Commands: set `--max` above the session.
+- Result table → REFERENCE.md. Total 8.65–8.67 GiB; Whisper 2.45 is 28% of it. After close 5.35 GiB stays 30 min.
+  CLAUDE.md anchor, REFERENCE.md, roadmap.md, backlog #172 (+:1357, #194 note) and this handoff reconciled (grepped the
+  OLD values "4.1 GiB"/"4.10 GiB"/"unmeasured"); bugs.md:523 and older log entries left as dated records.
+- No runtime file changed, so no relaunch is needed; `npm run check` and the JS tests were run anyway (see commit).
 
 ---
 

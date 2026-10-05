@@ -3304,11 +3304,20 @@ function setMode(m){
 }
 
 // VOICE — MLX Whisper (port 5004)
+// Backlog #226b: Whisper loads on first use (#226), ~1 s. Ask it to load the moment the mic opens,
+// so the load runs while Zani speaks. Fire-and-forget and TOTAL: it never throws, is never awaited,
+// and a failure changes nothing (the transcription loads the model itself). BOTH voice entry
+// points call it — startRecording (Hands-Free OFF) and hfStart (ON) — bugs.md 80.
+function whisperPrewarm(){
+  try{ fetch('http://127.0.0.1:5004/warm',{method:'POST'}).catch(()=>{}) }catch(e){}
+}
+
 async function startRecording(){
   if(isRecording||isTranscribing||isLoading)return
   let stream
   try{ stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:false}}) }
   catch(e){ document.getElementById('v-status').textContent='Mic access denied'; return }
+  whisperPrewarm()   // #226b
   // getUserMedia switches macOS audio session to record+playback mode — can
   // pause bgmAudio and fire 'ended' prematurely. Guard + resume immediately.
   bgmInterrupted=true
@@ -3516,6 +3525,7 @@ async function hfStart(){
   const ov=document.getElementById('saving-overlay')
   if(ov&&ov.style.display==='flex')return
   hf.active=true
+  whisperPrewarm()   // #226b
   document.getElementById('mic-btn').classList.add('on')
   document.getElementById('v-send').style.display='none'
   document.getElementById('v-trans').textContent=''

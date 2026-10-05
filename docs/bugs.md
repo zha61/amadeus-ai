@@ -1070,3 +1070,22 @@ Zani asked for a review of the 77 implementation. The fix itself stands; the way
   assumed a slope and had no flat-response check (erratum 2); Step 0c's scorer pooled Step 0b's confirm clips and printed a false
   FAIL (fixed with a mutant, re-scored on the saved clips — `step0c_result_bug_pooled.json`).
 - **Rule:** CLAUDE.md 54. Revert of the whole ship: `git checkout pre-221b -- kurisu_fish_server.py amadeus.html dev/warm_greetings.js dev/fish_payload_test.py`.
+
+### 100. The stale-server port kill killed every process with a socket on the port — clients and other apps too
+- **Found:** backlog #150 (July 2026, "could kill unrelated apps"); the CLIENT half measured 2026-10-05.
+- **Trap:** each spawn in `main.js` ran `lsof -ti:PORT | xargs kill -9` (fish 5002, http 8765, rag 5003, whisper 5004).
+  `lsof -i:PORT` lists BOTH ends of every connection. Measured on a scratch port: a server and a client holding a
+  connection → `lsof -ti` returned both pids; `-sTCP:LISTEN` returned only the server. So the kill hit (a) any other
+  program on those ports, and (b) any CLIENT of them — Electron's own network process talks to 8765 and 5002, so a
+  watchdog respawn (`superviseChild`) mid-session could `kill -9` part of Electron. Not seen live; the risk was latent.
+- **Fix (2026-10-05, tag `pre-150`):** `killStaleServer(port, target)` in `main.js` (block `STALE-SERVER KILL`):
+  only the LISTENER (`lsof -nP -t -iTCP:PORT -sTCP:LISTEN`), and only if it is OUR server — the target script resolved
+  against the process's own cwd (so a hand-started `python3 kurisu_fish_server.py` from the Amadeus folder matches), or
+  `-m http.server <port>` with cwd = the Amadeus folder. Anything else is NOT killed and `main.log` gets a WARNING
+  (CLAUDE.md 52). Never `process.pid`. Each exec is bounded (2 s), never throws. Signal unchanged: SIGKILL (Zani's choice).
+- **Tests:** `node dev/stale_kill_test.js` — 18 checks on REAL processes on scratch ports + 4 mutants (LISTEN filter,
+  identity check, http.server folder check, relative-path resolution). Real-system run (app closed): a hand-started real
+  `kurisu_fish_server.py` and an `http.server 8765` were killed, a client of 5002 survived; 4 ports in 120 ms.
+- **Same commit:** #169 (dead `OLLAMA_FLASH_ATTENTION` lines removed), #185 and the stale Whisper/RAG spawn comments.
+- **Revert:** `git checkout pre-150 -- main.js && npm run build`.
+- **Rule:** CLAUDE.md 55.

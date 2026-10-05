@@ -77,9 +77,28 @@
 
   The model is memory-mapped, so the 8.95 GiB file is not resident; file-backed pages sit in
   the evictable page cache. RSS is the honest "must stay in RAM" figure at `num_ctx: 8192`.
-- **NOT yet measured: the full Amadeus stack.** The four Python servers (Fish TTS, RAG +
-  bge-m3, Whisper) plus Electron were not running when the above was taken. gemma4's 4.1 GiB
-  is one line of the budget, not the total. → improvements-backlog #172.
+  **⚠️ SUPERSEDED 2026-10-04: RSS is the WRONG number on Apple silicon.** It does not count Metal
+  memory. Same moment, gemma4 loaded: RSS 0.23 GB, `footprint` 5.45 GB. Budget in phys_footprint.
+- **The full Amadeus stack, measured 2026-10-04** (`python3 dev/ram_stack.py`, phys_footprint GiB,
+  27-min no-model baseline, boot → greeting → 2 text replies → idle → close; Ollama 0.35.0):
+
+  | process | during use | lifetime peak |
+  |---|---|---|
+  | gemma4 `llama-server` | 4.93–5.16 | **5.19** |
+  | Whisper server (model loaded at boot — CHANGED by #226, see below) | 2.44–2.45 | **2.49** |
+  | Electron (GPU + renderer + main + helper) | ~0.95 | 1.19 (peaks added) |
+  | bge-m3 `llama-server` | 0.25–0.30 | 0.30 |
+  | RAG server | 0.11–0.12 | 0.12 |
+  | Ollama app + serve, Fish server, http server | 0.10 together | — |
+  | **TOTAL** (one `footprint` call, shared memory once) | **8.65–8.67** | — |
+
+  System: free memory (`kern.memorystatus_level`) 77–84% → **20–26%**; **3.27 GiB swapped out**
+  during the session (other apps open: Claude, Chrome, Discord, Spotify); wired 2–3 → 7.5 GiB.
+  After the close gemma4 + bge-m3 keep **5.35 GiB for 30 min** (`keep_alive '30m'`).
+  **Not measured:** Whisper's extra memory WHILE transcribing (no speech in the run).
+  Whisper's 2.45 GiB was held all session for a text user → **#226 (2026-10-04): the model now loads on the
+  first `/transcribe` and unloads after 10 min idle.** Real server: idle 0.13 GiB, loaded 2.25, after unload 0.17.
+  A TEXT session therefore peaks at ~6.4 GiB, not 8.7 (by subtraction; re-measure live with `dev/ram_stack.py`).
 
 ## TTS PIPELINE (kurisu_fish_server.py) — current as of April 23
 
@@ -166,7 +185,8 @@ audio.addEventListener('loadedmetadata', () => {
   - `<|think|>...</|think|>` (pipe-style fallback)
   - `<think>...</think>` (standard fallback)
 - finalText guard: `cleanText.trim() || strippedRaw.trim() || streamedRaw.trim()`
-- OLLAMA_FLASH_ATTENTION=1 — safe with Ollama ≥0.20.4 (patched in 0.20.4)
+- Flash attention: the app sets NOTHING (removed 2026-10-05, backlog #169). Ollama.app runs under launchd and
+  decides itself — the live `llama-server` shows `--flash-attn auto`. The old `OLLAMA_FLASH_ATTENTION=1` never reached it.
 - num_ctx: 8192 — needed because system prompt is ~1278 tokens
 
 ## SYSTEM PROMPT (current — Variant B with April 30 additions)
@@ -293,7 +313,13 @@ IPC round-trips (≤8s) + headroom (8s) = 40s. `MEMORY_WINDOW_SIZE = 7` here mus
 - Kills TTS server on app close
 - Ollama: only starts if not already running. Spawn wrapped in try/catch + on('error') listener so ENOENT doesn't crash app
 - Window opens **immediately** (`createWindow()` is called directly in the ready handler). The old 8-second delay was removed by bugs.md 62 — it was part of the cold-start lag.
-- `OLLAMA_FLASH_ATTENTION = '1'` — ⚠️ **safety UNVERIFIED on the current Ollama.** This was confirmed safe on **0.21.0**; the machine now runs **0.34.0** (2026-09-12) — four upgrades past the checked version. The check has not been repeated. Do not simply update the version number here — re-run the check, then restate it with the new version and date (improvements-backlog #169).
+- **No `OLLAMA_FLASH_ATTENTION`** (removed 2026-10-05, backlog #169). main.js only spawns Ollama when it is not running,
+  and Ollama.app (launchd) is always running first, so the variable never reached it. Ollama decides (`--flash-attn auto`).
+- **Stale-server kill before each spawn (backlog #150, bugs.md 100, 2026-10-05):** `killStaleServer(port, target)` kills
+  only the process that LISTENS on the port, and only if it is our server — the same script resolved against the
+  process's own folder (fish 5002, rag 5003, whisper 5004), or `http.server 8765` run from the Amadeus folder.
+  Anything else is NOT killed; `main.log` gets a `[main:ports] … NOT killed` WARNING. The old `lsof -ti:PORT | xargs kill -9`
+  also killed CLIENTS of the port and any other app. Test: `node dev/stale_kill_test.js`.
 - Cache auto-clears: `session.defaultSession.clearCache()` on every launch
 - **Diary-on-close coordinator (April 28)** — see SESSION MEMORY section above
 
